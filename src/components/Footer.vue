@@ -62,7 +62,7 @@
             <div class="pb-10">
                 <h3 class="text-muted mb-5 mb-lg-7 font-size-4">Stay Connected</h3>
 
-                <div class="d-flex flex-column font-size-3 font-weight-bold">
+                <!-- <div class="d-flex flex-column font-size-3 font-weight-bold">
                                             <a href="" class="d-flex align-items-center text-center text-dark-60 text-hover-primary py-2 py-lg-3">
                             <img src="/Projects/assets/images/icons/social-media/facebook.svg" data-lazy-src="/Projects/assets/images/icons/social-media/facebook.svg" class="w-20px mr-4 loaded" alt="">
                             Facebook
@@ -83,7 +83,7 @@
                             <img src="/Projects/assets/images/icons/social-media/github.svg" class="w-20px mr-4 loaded"  data-lazy-src="/Projects/assets/images/icons/social-media/github.svg"  alt="">
                             Github
                         </a>
-                                    </div>
+                                    </div> -->
             </div>
         </div>
     </div>
@@ -96,7 +96,7 @@
         <div class="d-flex align-items-center mr-md-2 order-2 order-md-1">
 
             <a href="" class="mr-3 mr-md-6">
-                <img alt="logo" src="/Projects/assets/images/logo/developer6669.png" class="h-20px h-md-25px">
+                <img alt="logo" src="" class="h-20px h-md-25px">
             </a>
 
             <span class="font-size-2 font-weight-bold text-dark-60 pt-1" href="">
@@ -110,15 +110,7 @@
                 Secured Payment by <a href="" target="_blank" class="text-dark-50 text-hover-primary">2Checkout</a> with:
             </div>
 
-            <div class="ml-4">
-                <img src="/Projects/assets/images/icons/credit/paypal.svg" data-lazy-src="/Projects/assets/images/icons/credit/paypal.svg" alt="" class="h-20px mr-2 rounded-sm loaded">
-
-                <img src="/Projects/assets/images/icons/credit/visa.svg" data-lazy-src="https://keenthemes.com/images/payment-methods/light/visa.svg" alt="" class="h-20px mr-2 rounded-sm loaded">
-
-                <img src="/Projects/assets/images/icons/credit/mastercard.svg" data-lazy-src="/Projects/assets/images/icons/credit/mastercard.svg" alt="" class="h-20px mr-2 rounded-sm loaded">
-
-                <img src="/Projects/assets/images/icons/credit/americanexpress.svg" data-lazy-src="/Projects/assets/images/icons/credit/americanexpress.svg" alt="" class="h-20px rounded-sm loaded">
-            </div>
+           
         </div>
     </div>
 </div>
