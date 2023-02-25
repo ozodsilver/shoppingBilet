@@ -1,14 +1,17 @@
 <template>
-  <Carousel class="mt-4" :autoplay = "4000"  :wrap-around="true" >
-    <Slide v-for="slide in 10" :key="slide"  >
-      <div class="carousel__item">{{ slide }}</div>
+<div class="container-fluid rounded-2">
+  <Carousel class="mt-4 " :autoplay = "4000" :wrap-around="true">
+    <Slide v-for="slide in images" :key="slide.id"  >
+      <div class="carousel__item">
+        <img :src="slide.image" alt="" class="rounded-3 border-0">
+        </div>
     </Slide>
 
     <template #addons>
       <Navigation />
       <Pagination />
     </template>
-  </Carousel>
+  </Carousel></div>
 </template>
 
 <script>
@@ -25,14 +28,32 @@ export default defineComponent({
     Pagination,
     Navigation,
   },
+
+  setup(){
+    let images = [
+      {
+        id:0,
+        image: new URL('../assets/51uNA4RmHKrmfM3UxW14TFHGmAd15B79.png', import.meta.url).href
+      },
+      {
+        id:1,
+        image: new URL('../assets/fadFC2C0PNifwHU8JsYWcv7pJUVce5ej.png', import.meta.url).href
+      },
+      {
+        id:2,
+        image: new URL('../assets/kLnBxAyZJXIaGzrtm51a1JbTSGOn0zDI.png', import.meta.url).href
+      }
+    ]
+    return {images}
+  }
 })
 </script>
 
 <style>
 .carousel__item {
-  min-height: 250px;
+  min-height: 300px;
   width: 100%;
-  background-color: rgb(187, 179, 179);
+
   color: var(--vc-clr-white);
   font-size: 20px;
   border-radius: 8px;

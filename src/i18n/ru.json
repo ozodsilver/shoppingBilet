@@ -1,4 +1,7 @@
 {
     "title":"привет",
-    "select":"vibirat sektor"
+    "select":"Выбират сектор",
+    "navigation":{
+        "language":"Язык"
+            }
 }

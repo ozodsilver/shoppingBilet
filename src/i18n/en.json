@@ -1,4 +1,7 @@
 {
     "title":"Hello",
-    "select":"Select sector"
+    "select":"Select sector",
+    "navigation":{
+        "language":"Language"
+            }
 }

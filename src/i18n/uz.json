@@ -1,4 +1,7 @@
 {
     "title":"salom",
-    "select":"Sectorni tanlang"
+    "select":"Sectorni tanlang",
+    "navigation":{
+"language":"Til"
+    }
 }
