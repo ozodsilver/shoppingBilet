@@ -71,20 +71,22 @@
               <n-tab-pane name="Register">
                 <h3><n-gradient-text type="success"> Regestration </n-gradient-text></h3>
                 <span >Ism:</span>
-                <n-input maxlength="50" show-count clearable  placeholder = 'Ism' />
+                <n-input maxlength="60" show-count clearable  placeholder = 'Ism' />
                 <span class="mt-3 d-block">Familiya:</span>
-                <n-input maxlength="50" show-count clearable placeholder = 'Familiya' />
+                <n-input maxlength="60" show-count clearable placeholder = 'Familiya' />
 
                 <span class="mt-3 d-block">Tel:</span>
-                <n-input maxlength="50" show-count clearable  placeholder="99 999 99 99"/>
+                <n-input maxlength="50" show-count clearable  placeholder="+998 99 123 45 67"/>
 
 <button class="btn btn-primary w-25 mt-3 float-end d-flex  justify-content-center align-items-center gap-2 " style="clip-path: none;">Send info <i class="fas fa-upload"></i></button>
               </n-tab-pane>
               <n-tab-pane name="ROCKLIFE">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint
-                enim tempora, nihil blanditiis aliquid adipisci consequatur
-                deserunt culpa veniam expedita beatae architecto, odio pariatur
-                id rem veritatis suscipit illo nisi.
+                <n-data-table
+    :columns="columns"
+    :data="data"
+    :pagination="pagination"
+    :bordered="false"
+  />
               </n-tab-pane>
             </n-tabs>
           </n-card>

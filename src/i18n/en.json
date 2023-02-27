@@ -1,7 +1,8 @@
 {
     "title":"Hello",
-    "select":"Select sector",
+    "select":"Select the sector",
     "navigation":{
-        "language":"Language"
+        "language":"Language",
+        "home":"Home"
             }
 }

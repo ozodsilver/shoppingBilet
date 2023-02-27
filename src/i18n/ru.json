@@ -2,6 +2,8 @@
     "title":"привет",
     "select":"Выбират сектор",
     "navigation":{
-        "language":"Язык"
+        "language":"Язык",
+        "home":"Главная"
+
             }
 }

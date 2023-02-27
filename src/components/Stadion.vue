@@ -7,6 +7,7 @@
       <router-link
         to="/reg"
         href=""
+        @click="sendInfo"
         class="topSector d-flex justify-content-center align-items-center text-white"
         v-for="(topSector, index) in 7"
       >
@@ -14,7 +15,7 @@
       </router-link>
     </div>
 
-    <div class="centerStadium d-flex justify-content-between">
+    <!-- <div class="centerStadium d-flex justify-content-between">
       <div class="centerLeft d-flex flex-column-reverse justify-content-around">
         <router-link
           to=""
@@ -34,9 +35,9 @@
           <span>sector {{ index + 8 }}</span>
         </router-link>
       </div>
-    </div>
+    </div> -->
 
-    <div class="bottomStadium d-flex justify-content-between flex-row-reverse">
+    <!-- <div class="bottomStadium d-flex justify-content-between flex-row-reverse">
       <router-link
         to=""
         class="bottomSector d-flex justify-content-center align-items-center text-white"
@@ -44,11 +45,18 @@
       >
         <span>sector {{ index + 12 }}</span>
       </router-link>
-    </div>
+    </div> -->
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { ref, provide } from "vue";
+let val = ref(true);
+
+let sendInfo = () => {
+  provide("message", val);
+};
+</script>
 
 <style lang="scss" scoped>
 #stadion {
@@ -105,7 +113,6 @@
           transform: rotate(-40deg);
         }
       }
-
 
       &:nth-child(2) {
         // clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 0 100%, 0% 70%, 0 0);

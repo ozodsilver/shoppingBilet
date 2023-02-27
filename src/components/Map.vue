@@ -24,6 +24,16 @@
   <Footer></Footer>
 </template>
 
-<script setup></script>
+<script setup>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+
+let router = useRouter();
+
+
+
+
+
+</script>
 
 <style lang="scss" scoped></style>
