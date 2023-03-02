@@ -22,7 +22,7 @@ import { useRouter } from "vue-router";
 let router = useRouter();
 
 let takeStepBack = () => {
-  router.go(-1);
+  router.push({name:"Home"});
 };
 </script>
 

@@ -2,15 +2,13 @@
   <RouterView v-slot="{ Component }">
     <template v-if="Component">
       <Transition>
-        <KeepAlive>
-          <Suspense>
-            <component :is="Component"></component>
+        <Suspense>
+          <component :is="Component"></component>
 
-            <template #fallback>
-              <div class="spinner spinner-border"></div>
-            </template>
-          </Suspense>
-        </KeepAlive>
+          <template #fallback>
+            <div class="spinner spinner-border"></div>
+          </template>
+        </Suspense>
       </Transition>
     </template>
   </RouterView>

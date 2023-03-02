@@ -6,32 +6,50 @@
     <div class="container mt-4">
       <div class="row">
         <div class="col-8 p-3">
-          <div class="card mb-3">
+          <div class="card p-5 mb-3">
             <div class="row g-0">
               <div class="col-md-4">
+
+           
                 <img
-                  src="https://mdbcdn.b-cdn.net/wp-content/uploads/2020/06/vertical.webp"
-                  alt="Trendy Pants and Shoes"
-                  class="img-fluid rounded-start"
+                  :src="imgUrl"
+                  alt="Rasm yuklanishida xatolik"
+                  class="img-fluid rounded-start h-100"
+                  style="object-fit: cover; object-position: center;"
+
+
                 />
               </div>
               <div class="col-md-8">
                 <div class="card-body">
-                  <h5 class="card-title">Областной краеведческий музей</h5>
+                  <h5 class="card-title">{{ obj.name }}</h5>
                   <p class="card-text">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content. This content is a little bit
-                    longer.
+                    {{ obj.description }}
                   </p>
                   <p class="card-text">
-                    <small class="text-muted">Last updated 3 mins ago</small>
-                    <br />
+                 
+                 
                     <i class="fas fa-exclamation-circle"></i>
-                    <span> sotilgan maxsulot qaytarib olinmaydi</span>
+                    <span> Xarid qilinga bilet qaytarib olinmaydi!</span>
                   </p>
 
-                  <button class="btn btn-warning bg-gradient">
-                    <i class="fas fa-map"></i> joyni tanlash
+                  <button class="btn btn-warning bg-gradient ">
+                    <i class="fas fa-map"></i>    <small class="text-white"
+                      >O'yin vaqti &nbsp;
+                     </small
+                     
+                    >
+
+                    <abbr>
+                      <small class="fs-6 text-white">
+                      {{
+                        new Date(obj.startsAt).toLocaleDateString() + " " +
+                        new Date(obj.startsAt).getHours() +
+                        ":" +
+                        new Date(obj.startsAt).getMinutes()
+                      }}
+                    </small>
+                    </abbr>
                   </button>
                 </div>
 
@@ -90,7 +108,7 @@
       </div>
     </div>
 
-    <div class="container border p-3 mt-3 border-success">
+    <div class="container p-3 mt-3 border-success">
       <n-gradient-text type="success" class="fs-2">
         Sectorni tanlang
       </n-gradient-text>
@@ -149,14 +167,19 @@
           <g id="all">
             <!-- 1 -->
 
-            <router-link to="/">
+            <router-link to="/Registry">
               <path
                 class="cls-4"
                 id="p1"
                 d="M210.72,220.93A277.54,277.54,0,0,1,263,169.17a4.06,4.06,0,0,0,.87-5.59l-74.26-104a4.06,4.06,0,0,0-5.43-1.1A391.78,391.78,0,0,0,78,155.63a4,4,0,0,0,1.08,5.84l88.15,56.15a4,4,0,0,0,5.52-1.14l5.52-8.11a4.05,4.05,0,0,1,5.62-1.07l21.34,14.52A4.05,4.05,0,0,0,210.72,220.93Z"
               ></path>
 
-              <text style="font-size: 44px" x="5" text-anchor="center">
+              <text
+                style="font-size: 44px"
+                x="5"
+                text-anchor="center"
+                transform="translate(-30, -50)"
+              >
                 <textPath xlink:href="#p1" fill="blue">1</textPath>
               </text>
             </router-link>
@@ -166,7 +189,12 @@
               class="cls-4"
               d="M338.25,124.8,306.84,12.72a4.05,4.05,0,0,0-4.79-2.86A386.9,386.9,0,0,0,194.21,52.43,4,4,0,0,0,193,58.27l73.68,103.2a4,4,0,0,0,5.62.95A275.64,275.64,0,0,1,335.7,129.7,4.06,4.06,0,0,0,338.25,124.8Z"
             />
-            <text style="font-size: 44px" x="400" text-anchor="center">
+            <text
+              style="font-size: 44px"
+              x="400"
+              text-anchor="center"
+              transform="translate(-20, -40)"
+            >
               <textPath xlink:href="#p2" fill="red">2</textPath>
             </text>
             <!-- 3 -->
@@ -176,9 +204,12 @@
               d="M429.38,113.39h14.86a4,4,0,0,0,4-4.31L441.39,3.78a4,4,0,0,0-4-3.78H389.5a391.51,391.51,0,0,0-76,7.42,4,4,0,0,0-3.09,5.06l31,110.79a4.06,4.06,0,0,0,5.14,2.76A275.8,275.8,0,0,1,429.38,113.39Z"
             />
 
-
-
-            <text style="font-size: 44px" x="410" text-anchor="center">
+            <text
+              style="font-size: 44px"
+              x="410"
+              transform="translate(0, -40)"
+              text-anchor="center"
+            >
               <textPath xlink:href="#p3" fill="dark">3</textPath>
             </text>
             <!-- 4 -->
@@ -188,174 +219,276 @@
               d="M602.5,109.34V4.05a4,4,0,0,0-4-4H449a4.05,4.05,0,0,0-4,4.31l6.9,105.29a4,4,0,0,0,4,3.79H598.45A4,4,0,0,0,602.5,109.34Z"
             />
 
-            <text style="font-size: 44px" x="425" text-anchor="center">
+            <text
+              style="font-size: 44px"
+              x="425"
+              transform="translate(10, -40)"
+              text-anchor="center"
+            >
               <textPath xlink:href="#p4" fill="dark">4</textPath>
             </text>
             <!-- 5 -->
             <path
-            id="p5"
+              id="p5"
               class="cls-4"
               d="M694.05,81.5H723a4,4,0,0,1,4,4v23.79a4,4,0,0,0,4,4h76.4a4,4,0,0,0,4-4V4.05a4,4,0,0,0-4-4H610.05a4,4,0,0,0-4,4.05V109.34a4,4,0,0,0,4,4H686a4,4,0,0,0,4-4V85.55A4,4,0,0,1,694.05,81.5Z"
             />
-            <text style="font-size: 44px" x="15"  text-anchor="middle">
+            <text
+              style="font-size: 44px"
+              x="15"
+              transform="translate(0, -10)"
+              text-anchor="middle"
+            >
               <textPath xlink:href="#p5" fill="dark">5</textPath>
             </text>
             <!-- 6 -->
             <path
-            id="p6"
+              id="p6"
               class="cls-4"
               d="M950.58,0H819.05a4,4,0,0,0-4,4.05V109.34a4,4,0,0,0,4,4h128.2a4.05,4.05,0,0,0,4-3.92L954.63,4.18A4.05,4.05,0,0,0,950.58,0Z"
             />
-            <text style="font-size: 44px" x="315"  text-anchor="middle">
+            <text
+              style="font-size: 44px"
+              x="315"
+              transform="translate(0, -40)"
+              text-anchor="middle"
+            >
               <textPath xlink:href="#p6" fill="dark">6</textPath>
             </text>
 
             <!-- 7 -->
             <path
-            id="p7"
+              id="p7"
               class="cls-4"
               d="M1004.15,113.39a275.88,275.88,0,0,1,78,11.2,4,4,0,0,0,4.87-2.27l13.16-30.59a4.06,4.06,0,0,1,5.32-2.12l6.26,2.7a4,4,0,0,0,5.36-2.23l28-70.38a4,4,0,0,0-2.65-5.39A389.79,389.79,0,0,0,1037.5,0H962.18a4,4,0,0,0-4,3.92l-3.33,105.29a4,4,0,0,0,4,4.18Z"
             />
-            <text style="font-size: 44px" x="25"  text-anchor="middle">
+            <text
+              style="font-size: 44px"
+              x="25"
+              text-anchor="middle"
+              transform="translate(0, -40)"
+            >
               <textPath xlink:href="#p7" fill="dark">7</textPath>
             </text>
             <!-- 8 -->
             <path
-            id="p8"
+              id="p8"
               class="cls-4"
               d="M1121,139.3A277.22,277.22,0,0,1,1237.1,241.25a4.05,4.05,0,0,0,4.91,1.6l126.12-50.3a4,4,0,0,0,2-5.85A390.51,390.51,0,0,0,1153.7,17.63a4.05,4.05,0,0,0-5,2.38l-28.48,71.67a4,4,0,0,0,2.16,5.21l6.88,3a4,4,0,0,1,2.11,5.32L1119,134A4,4,0,0,0,1121,139.3Z"
             />
-            <text style="font-size: 44px" x="85"  text-anchor="middle">
+            <text
+              style="font-size: 44px"
+              x="85"
+              text-anchor="middle"
+              transform="translate(40, -30)"
+            >
               <textPath xlink:href="#p8" fill="dark">8</textPath>
             </text>
             <!-- 9 -->
             <path
-            id="p9"
+              id="p9"
               class="cls-4"
               d="M1371.09,195.14l-125.95,50.23a4,4,0,0,0-2,5.76,274.74,274.74,0,0,1,37.09,134,4.06,4.06,0,0,0,3.92,4l138.73,4.39a4,4,0,0,0,4.13-4v0h0a387.76,387.76,0,0,0-50.89-192.62A4.05,4.05,0,0,0,1371.09,195.14Z"
             />
-            <text style="font-size: 44px" x="215"  text-anchor="middle">
+            <text
+              style="font-size: 44px"
+              x="215"
+              text-anchor="middle"
+              transform="translate(40, -10)"
+            >
               <textPath xlink:href="#p9" fill="dark">9</textPath>
             </text>
             <!-- 10 -->
             <path
-            id="p10"
+              id="p10"
               class="cls-4"
               d="M1255.84,512l117,67.57a4,4,0,0,0,5.56-1.53,387.35,387.35,0,0,0,48.39-176.82,4,4,0,0,0-3.92-4.15l-138.58-4.38a4,4,0,0,0-4.17,4,274.87,274.87,0,0,1-25.94,110.1A4,4,0,0,0,1255.84,512Z"
             />
-            <text style="font-size: 44px" x="215"  text-anchor="middle">
+            <text
+              style="font-size: 44px"
+              x="215"
+              text-anchor="middle"
+              transform="translate(-45, -35)"
+            >
               <textPath xlink:href="#p10" fill="dark">10</textPath>
             </text>
             <!-- 11 -->
             <path
-            id="p11"
+              id="p11"
               class="cls-4"
               d="M1153.21,628l10.29,17.83a5.4,5.4,0,0,1-2,7.38l-2.35,1.36a5.4,5.4,0,0,0-2.11,7.15L1197,739.27a5.42,5.42,0,0,0,7.15,2.4,391.23,391.23,0,0,0,167.78-152.31,5.41,5.41,0,0,0-1.93-7.48l-114-65.83a5.39,5.39,0,0,0-7.47,2.15,277.4,277.4,0,0,1-93.55,102.63A5.39,5.39,0,0,0,1153.21,628Z"
             />
-            <text style="font-size: 44px" x="215"  text-anchor="middle">
+            <text
+              style="font-size: 44px"
+              x="215"
+              text-anchor="middle"
+              transform="translate(-5, -55)"
+            >
               <textPath xlink:href="#p11" fill="dark">11</textPath>
             </text>
             <!-- 12 -->
             <path
-            id="p12"
-
+              id="p12"
               class="cls-4"
               d="M1118.61,644.11a3.35,3.35,0,0,0-4.26-1.39,275,275,0,0,1-110.2,22.89h-2.56a3.36,3.36,0,0,0-3.34,3.75L1010.59,776a3.36,3.36,0,0,0,3.34,3h23.57a388.11,388.11,0,0,0,155.36-32.23,3.34,3.34,0,0,0,1.63-4.61l-41.2-80.09a3.37,3.37,0,0,0-4.67-1.37l-12.41,7.17a3.35,3.35,0,0,1-4.59-1.23Z"
             />
-            <text style="font-size: 44px" x="315"   text-anchor="middle">
+            <text
+              style="font-size: 44px"
+              x="315"
+              text-anchor="middle"
+              transform="translate(-5, -45)"
+            >
               <textPath xlink:href="#p12" fill="dark">12</textPath>
             </text>
             <!-- 13 -->
             <path
-            id="p13"
-
+              id="p13"
               class="cls-4"
               d="M884,669.66V775a4,4,0,0,0,4,4h114.82a4.05,4.05,0,0,0,4-4.51l-12.18-105.3a4,4,0,0,0-4-3.58H888.05A4,4,0,0,0,884,669.66Z"
             />
-            <text style="font-size: 44px" x="165"   text-anchor="middle">
+            <text
+              style="font-size: 44px"
+              x="165"
+              text-anchor="middle"
+              transform="translate(-5, -40)"
+            >
               <textPath xlink:href="#p13" fill="dark">13</textPath>
             </text>
             <!-- 14 -->
             <path
-            id="p14"
+              id="p14"
               class="cls-4"
               d="M764,713h-5.9a4,4,0,0,0-4,4V775a4,4,0,0,0,4,4h118.4a4,4,0,0,0,4-4V669.66a4,4,0,0,0-4-4H772.05a4,4,0,0,0-4,4V709A4,4,0,0,1,764,713Z"
             />
-            <text style="font-size: 44px" x="130"   text-anchor="middle">
+            <text
+              style="font-size: 44px"
+              x="130"
+              text-anchor="middle"
+              transform="translate(-5, -40)"
+            >
               <textPath xlink:href="#p14" fill="dark">14</textPath>
             </text>
             <!-- 15 -->
             <path
-            id="p15"
+              id="p15"
               class="cls-4"
               d="M731,665.61H567.05a4,4,0,0,0-4,4V775a4,4,0,0,0,4,4h179.4a4,4,0,0,0,4-4v-57.9a4,4,0,0,0-4-4h-7.4a4,4,0,0,1-4-4V669.66A4,4,0,0,0,731,665.61Z"
             />
-            <text style="font-size: 44px" x="370"   text-anchor="middle">
+            <text
+              style="font-size: 44px"
+              x="370"
+              text-anchor="middle"
+              transform="translate(-5, -40)"
+            >
               <textPath xlink:href="#p15" fill="dark">15</textPath>
             </text>
             <!-- 16 -->
             <path
-            id="p16"
+              id="p16"
               class="cls-4"
               d="M461.29,779h94.16a4,4,0,0,0,4-4V669.66a4,4,0,0,0-4-4H471.54a4,4,0,0,0-4,3.66L457.26,774.56A4,4,0,0,0,461.29,779Z"
             />
-            <text style="font-size: 44px" x="45" y="20"   text-anchor="middle">
+            <text
+              style="font-size: 44px"
+              x="45"
+              y="20"
+              text-anchor="middle"
+              transform="translate(-5, -40)"
+            >
               <textPath xlink:href="#p16" fill="dark">16</textPath>
             </text>
             <!-- 17 -->
             <path
-            id="p17"
+              id="p17"
               class="cls-4"
               d="M429.38,665.61a276.53,276.53,0,0,1-71.17-9.27,4,4,0,0,0-4.78,2.31L307.55,765.41a4,4,0,0,0,2.88,5.55,390.84,390.84,0,0,0,79.07,8h60.14a4,4,0,0,0,4-3.66l10.25-105.29a4,4,0,0,0-4-4.44Z"
             />
-            <text style="font-size: 44px" x="275" y="20"   text-anchor="middle">
+            <text
+              style="font-size: 44px"
+              x="275"
+              y="20"
+              text-anchor="middle"
+              transform="translate(-5, -40)"
+            >
               <textPath xlink:href="#p17" fill="dark">17</textPath>
             </text>
             <!-- 18 -->
             <path
-            id="p18"
+              id="p18"
               class="cls-4"
               d="M265.65,616.26,179.1,711.73a4,4,0,0,0,.8,6.12,387.21,387.21,0,0,0,118.92,50.53,4,4,0,0,0,4.65-2.34l46.18-107.45a4,4,0,0,0-2.5-5.45A274.94,274.94,0,0,1,271,615.68,4.06,4.06,0,0,0,265.65,616.26Z"
             />
-            <text style="font-size: 44px" x="200" y="20"   text-anchor="middle">
+            <text
+              style="font-size: 44px"
+              x="200"
+              y="20"
+              text-anchor="middle"
+              transform="translate(20, -35)"
+            >
               <textPath xlink:href="#p18" fill="dark">18</textPath>
             </text>
             <!-- 19 -->
             <path
-            id="p19"
+              id="p19"
               class="cls-4"
               d="M213.61,567.08l-30.29,17.49a4.05,4.05,0,0,1-5.53-1.48l-5.36-9.29a4,4,0,0,0-5.68-1.39l-82.1,52.36a4,4,0,0,0-1,5.91A392,392,0,0,0,170,711.33a4,4,0,0,0,5.28-.64l86.93-95.88a4,4,0,0,0-.52-5.92,277.44,277.44,0,0,1-43-40.9A4.05,4.05,0,0,0,213.61,567.08Z"
             />
-            <text style="font-size: 44px" x="215" y="20"   text-anchor="middle">
+            <text
+              style="font-size: 44px"
+              x="215"
+              y="20"
+              text-anchor="middle"
+              transform="translate(40, -20)"
+            >
               <textPath xlink:href="#p19" fill="dark">19</textPath>
             </text>
             <!-- 20 -->
             <path
-            id="p20"
+              id="p20"
               class="cls-4"
               d="M192.34,531.12a274.3,274.3,0,0,1-34.25-90,4,4,0,0,0-4-3.32L7.88,440.51A4,4,0,0,0,4,445.11,387.44,387.44,0,0,0,76.51,621.37a4,4,0,0,0,5.42,1l83.37-53.16a4.05,4.05,0,0,0,1.33-5.44L163,557.5A4,4,0,0,1,164.5,552l26.41-15.25A4.05,4.05,0,0,0,192.34,531.12Z"
             />
-            <text style="font-size: 44px" x="355" y="20"   text-anchor="middle">
+            <text
+              style="font-size: 44px"
+              x="355"
+              y="20"
+              text-anchor="middle"
+              transform="translate(40, -20)"
+            >
               <textPath xlink:href="#p20" fill="dark">20</textPath>
             </text>
             <!-- 21 -->
             <path
-            id="p21"
+              id="p21"
               class="cls-4"
               d="M153.27,389.5h0a279.46,279.46,0,0,1,2.6-38.07,4.06,4.06,0,0,0-3.49-4.6L8.78,328.36a4,4,0,0,0-4.52,3.4A392.59,392.59,0,0,0,0,389.5H0a393.77,393.77,0,0,0,2.46,43.95A4,4,0,0,0,6.56,437l145.71-2.68a4,4,0,0,0,3.93-4.6A278.27,278.27,0,0,1,153.27,389.5Z"
             />
-            <text style="font-size: 44px" x="255" y="20"   text-anchor="middle">
+            <text
+              style="font-size: 44px"
+              x="255"
+              y="20"
+              text-anchor="middle"
+              transform="translate(50, -10)"
+            >
               <textPath xlink:href="#p21" fill="dark">21</textPath>
             </text>
-          
-  <!-- 22 -->
+
+            <!-- 22 -->
             <path
-     
+              id="p22"
               class="cls-4"
               d="M185.61,252.11l-22-15a4,4,0,0,1-1.07-5.62l3.7-5.43a4.06,4.06,0,0,0-1.17-5.69L76.58,164a4,4,0,0,0-5.47,1.07,387.35,387.35,0,0,0-65,155.12,4,4,0,0,0,3.47,4.71L153.2,343.41a4.07,4.07,0,0,0,4.5-3.32,274.14,274.14,0,0,1,29.18-82.68A4.05,4.05,0,0,0,185.61,252.11Z"
             />
-          
-           
+
+            <text
+              style="font-size: 24px"
+              x="255"
+              y="20"
+              text-anchor="middle"
+              transform="translate(60, 10)"
+            >
+              <textPath xlink:href="#p22" fill="red">web</textPath>
+            </text>
 
             <rect
               class="cls-5"
@@ -415,6 +548,57 @@
 import Navigation from "../Navigation.vue";
 import insideNavigation from "../ForRegestration/insideNavigation.vue";
 import Footer from "../Footer.vue";
+import axios from "axios";
+import { useCounterStore } from "../../stores/counter.js";
+import { onMounted, reactive, ref } from "vue";
+let obj = reactive({});
+let store = useCounterStore();
+let imgUrl = ref('')
+onMounted(() => {
+  axios
+    .get(`https://bk.utickets.uz/api/Events/GetEvent/${store.id}`)
+    .then((el) => {
+      console.log(el);
+      Object.assign(obj, el.data);
+      imgUrl.value = `${window.base}api/Images/${obj.imageId}`
+    });
+
+  
+});
+
+
+let svgArray = [
+  {
+    path:`    <path
+                class="cls-4"
+                id="p1"
+                d="M210.72,220.93A277.54,277.54,0,0,1,263,169.17a4.06,4.06,0,0,0,.87-5.59l-74.26-104a4.06,4.06,0,0,0-5.43-1.1A391.78,391.78,0,0,0,78,155.63a4,4,0,0,0,1.08,5.84l88.15,56.15a4,4,0,0,0,5.52-1.14l5.52-8.11a4.05,4.05,0,0,1,5.62-1.07l21.34,14.52A4.05,4.05,0,0,0,210.72,220.93Z"
+              ></path>
+
+              <text
+                style="font-size: 44px"
+                x="5"
+                text-anchor="center"
+                transform="translate(-30, -50)"
+              >`
+  },
+  {
+    path:` <path
+              id="p2"
+              class="cls-4"
+              d="M338.25,124.8,306.84,12.72a4.05,4.05,0,0,0-4.79-2.86A386.9,386.9,0,0,0,194.21,52.43,4,4,0,0,0,193,58.27l73.68,103.2a4,4,0,0,0,5.62.95A275.64,275.64,0,0,1,335.7,129.7,4.06,4.06,0,0,0,338.25,124.8Z"
+            />
+            <text
+              style="font-size: 44px"
+              x="400"
+              text-anchor="center"
+              transform="translate(-20, -40)"
+            >
+              <textPath xlink:href="#p2" fill="red">2</textPath>
+            </text>`
+  }
+]
+
 </script>
 
 <style lang="scss" scoped>
@@ -425,9 +609,9 @@ import Footer from "../Footer.vue";
     83% 0,
     100% 0,
     100% 0,
-    92% 19%,
+    95% 19%,
     100% 46%,
-    92% 71%,
+    95% 71%,
     100% 93%,
     100% 100%,
     55% 100%
@@ -442,7 +626,7 @@ import Footer from "../Footer.vue";
   fill: none;
 }
 .cls-2 {
-  fill: #0b8c6e
+  fill: #0b8c6e;
 }
 .cls-3 {
   fill: #0f5677;

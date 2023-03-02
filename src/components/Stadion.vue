@@ -3,28 +3,36 @@
     <h2 class="mt-4">{{ $t("select") }}</h2>
   </div>
 
-
-<div class="d-flex justify-content-center align-items-center" style="height:50vh" v-if = 'load'>
-  <div class="spinner"></div>
-</div>
-
+  <div
+    class="d-flex justify-content-center align-items-center"
+    style="height: 50vh"
+    v-if="load"
+  >
+    <div class="spinner"></div>
+  </div>
 
   <div class="container mt-5">
     <div class="row">
       <div class="col-4 mt-3" v-for="info in infos">
-        <div class="card border p-3 pb-5 border-light shadow-lg position-relative">
+        <div
+          class="card border p-4 py-4  mt-3 pb-5 border-light shadow-lg position-relative"
+        >
           <div
             class="bg-image hover-overlay ripple"
             data-mdb-ripple-color="light"
           >
             <img
               v-bind:src="imageLink + info.imageId"
-class="m-auto d-block bg-gradient rounded-3"
-        
-             style="object-fit: fill; height:200px"
+              class="m-auto d-block bg-gradient rounded-3"
+              style="object-fit: fill; height: 200px"
             />
 
-<button class="btn btn-success bg-gradient border-0 d-flex justify-content-center align-items-center text-capitalize text-white position-absolute" style="top:0; left:0">{{new Date(info.startsAt).toDateString()}}</button>
+            <button
+              class="btn btn-dark bg-gradient border-0 d-flex justify-content-center align-items-center text-capitalize text-white position-absolute"
+              style="top: 0; left: 0"
+            >
+              {{ new Date(info.startsAt).toDateString() }}
+            </button>
 
             <a href="#!">
               <div
@@ -34,16 +42,40 @@ class="m-auto d-block bg-gradient rounded-3"
             </a>
           </div>
           <div class="card-body p-0">
-            <n-gradient-text :size="24" :gradient="{
-      from: 'rgb(85, 85, 85)',
-      to: 'rgb(170, 170, 170)'
-    }" class="my-3">
-{{info.name}}
-  </n-gradient-text>
-           
-            <router-link to="/reg"> 
-            <button class=" w-100 shadow bg-secondary text-white rounded  border-0 text-transform-lowercase"> Joy band qilish  <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" data-svg="cart"> <circle cx="7.3" cy="17.3" r="1.4"></circle> <circle cx="13.3" cy="17.3" r="1.4"></circle> <polyline fill="none" stroke="#fff" points="0 2 3.2 4 5.3 12.5 16 12.5 18 6.5 8 6.5"></polyline></svg>
-</button>  </router-link>
+            <n-gradient-text
+              :size="24"
+              :gradient="{
+                from: 'rgb(85, 85, 85)',
+                to: 'rgb(170, 170, 170)',
+              }"
+              class="my-3"
+            >
+              {{ info.name }}
+            </n-gradient-text>
+
+            <router-link to="/reg">
+              <button
+                class="w-100 m-auto d-block shadow bg-dark bg-gradient text-white rounded border-0 text-transform-lowercase"
+                @click="addId(info.id)"
+              >
+                Joy band qilish
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                  data-svg="cart"
+                >
+                  <circle fill="white" cx="7.3" cy="17.3" r="1.4"></circle>
+                  <circle fill="white" cx="13.3" cy="17.3" r="1.4"></circle>
+                  <polyline
+                    fill="white"
+                    stroke="#fff"
+                    points="0 2 3.2 4 5.3 12.5 16 12.5 18 6.5 8 6.5"
+                  ></polyline>
+                </svg>
+              </button>
+            </router-link>
           </div>
         </div>
       </div>
@@ -54,11 +86,18 @@ class="m-auto d-block bg-gradient rounded-3"
 <script setup>
 import axios from "axios";
 import { ref, provide, onMounted, reactive } from "vue";
-let val = ref(true);
-let infos = reactive([])
-let imageLink = ref(`${window.base}api/Images/`)
-let load = ref(true)
+import { useCounterStore } from "../stores/counter.js";
 
+let val = ref(true);
+let infos = reactive([]);
+let imageLink = ref(`${window.base}api/Images/`);
+let load = ref(true);
+let store = useCounterStore();
+
+// methods
+const addId = (id) => {
+  store.id = id;
+};
 
 onMounted(() => {
   axios
@@ -69,12 +108,12 @@ onMounted(() => {
     })
     .then((res) => {
       console.log(res);
+
+      res.data.forEach((el) => {
+        infos.push(el);
+      });
+
       load.value = false;
-      
-      res.data.forEach(el =>{
-        infos.push(el)
-        
-      })
     });
 });
 
@@ -92,60 +131,77 @@ let sendInfo = () => {
     rgba(69, 196, 252, 0.053658963585434205) 100%
   );
   font-family: "Mandali", sans-serif !important;
+
+
+}
+.card{
+  overflow: hidden;
 }
 
+
+
 button {
- height: 2em;
- -webkit-animation: jello-horizontal 0.9s both;
- animation: jello-horizontal 0.9s both;
- border: 2px solid #016DD9;
- outline: none;
- color: #016DD9;
- font-size: 17px;
- clip-path: polygon(100% 0, 98% 26%, 100% 51%, 98% 77%, 100% 100%, 0 99%, 0 100%, 2% 51%, 0 0);
+  height: 2em;
+  -webkit-animation: jello-horizontal 0.9s both;
+  animation: jello-horizontal 0.9s both;
+  border: 2px solid #016dd9;
+  outline: none;
+  color: #016dd9;
+  font-size: 17px;
+  clip-path: polygon(
+    100% 0,
+    98% 26%,
+    100% 51%,
+    98% 77%,
+    100% 100%,
+    0 99%,
+    0 100%,
+    2% 51%,
+    0 0
+  );
 }
 
 button:hover {
- background: #016DD9;
- color: #ffffff;
- animation: squeeze3124 0.9s both;
+  background: #016dd9;
+  color: #ffffff;
+  animation: squeeze3124 0.9s both;
 }
 
 @keyframes squeeze3124 {
- 0% {
-  -webkit-transform: scale3d(1, 1, 1);
-  transform: scale3d(1, 1, 1);
- }
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
 
- 30% {
-  -webkit-transform: scale3d(1.25, 0.75, 1);
-  transform: scale3d(1.25, 0.75, 1);
- }
+  30% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+    transform: scale3d(1.25, 0.75, 1);
+  }
 
- 40% {
-  -webkit-transform: scale3d(0.75, 1.25, 1);
-  transform: scale3d(0.75, 1.25, 1);
- }
+  40% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+    transform: scale3d(0.75, 1.25, 1);
+  }
 
- 50% {
-  -webkit-transform: scale3d(1.15, 0.85, 1);
-  transform: scale3d(1.15, 0.85, 1);
- }
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+    transform: scale3d(1.15, 0.85, 1);
+  }
 
- 65% {
-  -webkit-transform: scale3d(0.95, 1.05, 1);
-  transform: scale3d(0.95, 1.05, 1);
- }
+  65% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+    transform: scale3d(0.95, 1.05, 1);
+  }
 
- 75% {
-  -webkit-transform: scale3d(1.05, 0.95, 1);
-  transform: scale3d(1.05, 0.95, 1);
- }
+  75% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+    transform: scale3d(1.05, 0.95, 1);
+  }
 
- 100% {
-  -webkit-transform: scale3d(1, 1, 1);
-  transform: scale3d(1, 1, 1);
- }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
 }
 /* Normal Usage */
 .spinner:before {
@@ -161,7 +217,7 @@ button:hover {
 .spinner:before,
 .spinner:after {
   box-sizing: border-box;
-  content: '';
+  content: "";
   display: block;
   position: absolute;
   margin-top: -5em;
