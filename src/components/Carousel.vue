@@ -1,57 +1,96 @@
 <template>
-<div class="container-fluid rounded-2">
-  <Carousel class="mt-4 " :autoplay = "4000" :wrap-around="true">
-    <Slide v-for="slide in images" :key="slide.id"  >
-      <div class="carousel__item">
-        <img :src="slide.image" alt="" class="rounded-3 border-0">
+  <div class="rounded-2 np mt-4" >
+    <Carousel
+      id="gallery"
+      :items-to-show="2"
+      v-model="currentSlide"
+      :autoplay="2000"
+      :wrap-around="true"
+    >
+      <Slide v-for="image in images" :key="image">
+        <div class="carousel__item">
+          <img
+            :src="image.image"
+            alt=""
+            class="rounded-5 img-fluid"
+          
+          />
         </div>
-    </Slide>
+      </Slide>
+    </Carousel>
 
-    <template #addons>
-      <Navigation />
-      <Pagination />
-    </template>
-  </Carousel></div>
+    <div class="container-fluid">
+      <Carousel
+        id="thumbnails"
+        :items-to-show="4"
+        :wrap-around="true"
+        v-model="currentSlide"
+        ref="carousel"
+        class="mt-3"
+      >
+        <Slide v-for="(slide, index) in images" :key="slide">
+          <div class="carousel__item" @click="slideTo(index)">
+            <img class="w-75 rounded-4" :src="slide.image" alt="" />
+          </div>
+        </Slide>
+      </Carousel>
+    </div>
+  </div>
 </template>
 
 <script>
-import { defineComponent } from 'vue'
-import { Carousel, Navigation, Pagination, Slide } from 'vue3-carousel'
+import { defineComponent } from "vue";
+import { Carousel, Slide } from "vue3-carousel";
 
-import 'vue3-carousel/dist/carousel.css'
+import "vue3-carousel/dist/carousel.css";
 
 export default defineComponent({
-  name: 'Basic',
+  name: "Gallery",
   components: {
     Carousel,
     Slide,
-    Pagination,
     Navigation,
   },
+  data: () => ({
+    currentSlide: 0,
+  }),
+  methods: {
+    slideTo(val) {
+      this.currentSlide = val;
+    },
+  },
 
-  setup(){
+  setup() {
     let images = [
       {
-        id:0,
-        image: new URL('../assets/51uNA4RmHKrmfM3UxW14TFHGmAd15B79.png', import.meta.url).href
+        id: 0,
+        image: new URL(
+          "../assets/51uNA4RmHKrmfM3UxW14TFHGmAd15B79.png",
+          import.meta.url
+        ).href,
       },
       {
-        id:1,
-        image: new URL('../assets/fadFC2C0PNifwHU8JsYWcv7pJUVce5ej.png', import.meta.url).href
+        id: 1,
+        image: new URL(
+          "../assets/fadFC2C0PNifwHU8JsYWcv7pJUVce5ej.png",
+          import.meta.url
+        ).href,
       },
       {
-        id:2,
-        image: new URL('../assets/kLnBxAyZJXIaGzrtm51a1JbTSGOn0zDI.png', import.meta.url).href
-      }
-    ]
-    return {images}
-  }
-})
+        id: 2,
+        image: new URL(
+          "../assets/kLnBxAyZJXIaGzrtm51a1JbTSGOn0zDI.png",
+          import.meta.url
+        ).href,
+      },
+    ];
+    return { images };
+  },
+});
 </script>
 
 <style>
 .carousel__item {
-  min-height: 300px;
   width: 100%;
 
   color: var(--vc-clr-white);
@@ -69,7 +108,6 @@ export default defineComponent({
 .carousel__prev,
 .carousel__next {
   box-sizing: content-box;
-  color: white !important;
-  /* border: 5px solid white; */
+  color: rgb(0, 0, 0) !important;
 }
 </style>

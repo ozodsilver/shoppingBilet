@@ -24,40 +24,47 @@
         >
           <!-- Left links -->
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item d-flex justify-content-around" id="image">
+            <li class="nav-item d-md-flex justify-content-around d-none" id="image">
               <router-link
                 to="/"
                 class="nav-link text-dark fs-6 d-flex align-items-end gap-2"
                 aria-current="page"
-                >{{ $t("navigation.home") }}
+                >
+                
+                {{ $t('navigation.home') }}
                 <img src="../assets/home.png" alt="" style="width: 30px" />
               </router-link>
             </li>
 
-            <li v-show="info">
+            <!-- <li >
               <i class="fas fa-arrow-circle-left" @click="BackOneStep"></i>
-            </li>
+            </li> -->
           </ul>
           <li>
             <router-link to="/Map"
-              ><i
+           class="d-flex gap-3"   >
+              xarita
+              <i
                 class="fas fa-map-marked-alt fs-4"
                 style="color: indianred"
               ></i
-            ></router-link>
+             
+            >
+            </router-link>
           </li>
-          <li class="mx-4">
-            <span class="d-sm-none d-md-block">{{
+          <li class="mx-4 d-none d-md-block " >
+            <span class="d-sm-none d-md-block">
+            {{
               $t("navigation.language")
-            }}</span>
+            }}
+            </span>
           </li>
-          <li class="d-flex gap-4" style="height: 20px; margin-right: 30px">
+          <li class="d-flex gap-4 mt-3 mt-md-0" style="height: 20px; margin-right: 30px">
             <img
               :src="lang.image"
               alt=""
               class="rounded"
-              style="
-                transition: 0.4s;
+              style="transition: 0.4s;
                 cursor: pointer;
                 width: 28px;
                 height: 20px;

@@ -1,25 +1,33 @@
-
 <template>
+  <RouterView v-slot="{ Component }">
+    <template v-if="Component">
+      <Transition>
+        <KeepAlive>
+          <Suspense>
+            <component :is="Component"></component>
 
-<Suspense>
-   <template #default>
- <RouterView></RouterView>
+            <template #fallback>
+              <div class="spinner spinner-border"></div>
+            </template>
+          </Suspense>
+        </KeepAlive>
+      </Transition>
+    </template>
+  </RouterView>
+
+  <!-- <router-view></router-view> -->
 </template>
- <template #fallback>
-    Loading...
-  </template>
-</Suspense>
 
-</template>
-
-<script setup></script>
+<script setup>
+import { ref, onMounted } from "vue";
+</script>
 
 <style>
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 html,
@@ -27,7 +35,6 @@ body {
   height: 100%;
   /* background: rgb(58,180,148) !important;
 background: linear-gradient(215deg, rgba(58,180,148,0.06486344537815125) 0%, rgba(69,196,252,0.053658963585434205) 100%) !important; */
-
 }
 
 /* width */
@@ -51,5 +58,16 @@ background: linear-gradient(215deg, rgba(58,180,148,0.06486344537815125) 0%, rgb
   background: #555;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+/* we will explain what these classes do next! */
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
 </style>
