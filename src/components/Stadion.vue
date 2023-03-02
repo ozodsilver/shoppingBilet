@@ -4,7 +4,7 @@
   </div>
 
 
-<div class="d-flex jcjustify-content-center align-items-center">
+<div class="d-flex justify-content-center align-items-center" style="height:50vh" v-if = 'load'>
   <div class="spinner"></div>
 </div>
 
@@ -12,17 +12,20 @@
   <div class="container mt-5">
     <div class="row">
       <div class="col-4 mt-3" v-for="info in infos">
-        <div class="card border p-4 pb-5 border-light shadow-lg">
+        <div class="card border p-3 pb-5 border-light shadow-lg position-relative">
           <div
             class="bg-image hover-overlay ripple"
             data-mdb-ripple-color="light"
           >
             <img
               v-bind:src="imageLink + info.imageId"
-
-              class="img-fluid" 
-             
+class="m-auto d-block bg-gradient rounded-3"
+        
+             style="object-fit: fill; height:200px"
             />
+
+<button class="btn btn-success bg-gradient border-0 d-flex justify-content-center align-items-center text-capitalize text-white position-absolute" style="top:0; left:0">{{new Date(info.startsAt).toDateString()}}</button>
+
             <a href="#!">
               <div
                 class="mask"
@@ -54,6 +57,8 @@ import { ref, provide, onMounted, reactive } from "vue";
 let val = ref(true);
 let infos = reactive([])
 let imageLink = ref(`${window.base}api/Images/`)
+let load = ref(true)
+
 
 onMounted(() => {
   axios
@@ -64,6 +69,8 @@ onMounted(() => {
     })
     .then((res) => {
       console.log(res);
+      load.value = false;
+      
       res.data.forEach(el =>{
         infos.push(el)
         
