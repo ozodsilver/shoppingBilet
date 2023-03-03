@@ -23,6 +23,7 @@ component:Registration
 
   {
     path:'/Registry',
+    name:'register',
     component:insideRegestration
   }
   ]

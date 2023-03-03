@@ -67,5 +67,33 @@ background: linear-gradient(215deg, rgba(58,180,148,0.06486344537815125) 0%, rgb
   opacity: 0;
 }
 
+.cls-4 {
+  opacity: 0.6;
+  fill: rgb(154, 154, 154);
+  border: solid;
+  filter: drop-shadow(3px 5px 5px rgb(119, 119, 119));
+  stroke: rgb(0, 0, 0);
+}
+
+
+.cls-4:hover {
+  fill: blue;
+  transform: translate(0, -8px);
+}
+
+
+svg:hover path {
+  fill: rgb(35, 157, 244);
+  transition: 0.4s;
+}
+
+textPath {
+  fill: rgb(120, 113, 113);
+}
+
+svg:hover textPath {
+  fill: white;
+}
+
 @import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
 </style>
