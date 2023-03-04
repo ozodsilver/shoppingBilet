@@ -1,6 +1,6 @@
 <template>
   <Navigation></Navigation>
-  <div class="container">
+  <div class="container" style="height: 120vh">
     <h2 class="mt-5 text-muted">Ro'yxatdan o'tish</h2>
 
     <div class="row">
@@ -17,7 +17,7 @@
         <input
           type="text"
           class="form-control tel"
-          placeholder="phone number"
+          placeholder="+998 99 999 99 99"
           v-model="phone"
         />
 
@@ -43,20 +43,30 @@
               />
             </div>
           </div>
-
-          <div
-            class="col-12 mt-4 position-relative d-flex flex-column align-items-center justify-content-center"
+          <button
+            class="btn btn-success mt-3 w-75 d-flex justify-content-center align-items-center gap-3"
+            @click="postTicket"
           >
-           
-            <button class="btn btn-success mt-3 w-100" @click="postTicket">jo'natish</button>
-            <input
-              type="text"
-              class="form-control border w-50 mt-5"
-              placeholder="sms kodni kiriting"
-            />
+            jo'natish
+            <div class="spinner spinner-border fs-6" v-if="spin"></div>
+          </button>
 
-            <button class="btn btn-info mt-3 float-end">Tasdiqlash</button>
-          </div>
+          <Transition name="bounce">
+            <div
+              class="col-12 mt-4 position-relative d-flex flex-column align-items-center justify-content-center"
+              v-if="show"
+            >
+              <input
+                type="text"
+                class="form-control border w-50 mt-5"
+                placeholder="sms kodni kiriting"
+              />
+
+              <button class="btn btn-info mt-3 float-end" @click="postCode">
+                Tasdiqlash
+              </button>
+            </div>
+          </Transition>
         </div>
       </div>
     </div>
@@ -71,7 +81,7 @@ import axios from "axios";
 
 let store = useCounterStore();
 let cardNumber = ref("");
-
+let show = ref(false);
 store.increment().then((response) => {
   console.log(response);
 });
@@ -79,39 +89,86 @@ store.increment().then((response) => {
 const phone = ref("");
 let fullName = ref("");
 let expire = ref("");
+let spin = ref(false);
+
+let cardToken = ref("");
+let receiptId = ref("");
 
 let postTicket = () => {
-  axios
-    .post(`https://bk.utickets.uz/api/Events/BuyTicket/${store.id}`, {
-      fullName: fullName.value,
-      phoneNumber: phone.value,
-      sector: store.secId,
-      cardNumber: cardNumber.value,
-      expire: expire.value,
-    })
-    .then((res) => {
-      console.log(res);
-      if(res.data){
-        alert("telefon raqamingizga")
-      }
-    });
+  spin.value = true;
+
+  if (
+    phone.value !== "" ||
+    fullName.value !== "" ||
+    expire.value !== "" ||
+    cardNumber.value !== ""
+  ) {
+    axios
+      .post(`https://bk.utickets.uz/api/Events/BuyTicket/${store.id}`, {
+        fullName: fullName.value,
+        phoneNumber: phone.value,
+        sector: store.secId,
+        cardNumber: cardNumber.value,
+        expire: expire.value,
+      })
+      .then((res) => {
+        console.log(res);
+        if (res.data) {
+          show.value = true;
+          spin.value = false;
+          cardToken.value = res.data.cardToken;
+          receiptId.value = res.data.receiptId;
+        }
+      })
+      .catch((err) => {
+        alert("xatolik yuzaga keldi" + err);
+        spin.value = false;
+      });
+  } else {
+    alert("bo'sh ma'lumot maydoni mavjud");
+    spin.value = false;
+  }
 };
 
 console.log(store.secId);
+
+let postCode = () => {
+  axios
+    .post(`https://bk.utickets.uz/api/Events/Pay`, {
+      id: receiptId.value,
+      token: cardToken.value,
+      code: "666666",
+    })
+    .then((res) => {
+      console.log(res);
+    });
+};
 </script>
 
 <style lang="scss" scoped>
+h2,
+label,
+button {
+  font-family: "Varela Round", sans-serif;
+}
+
+input[placeholder="860031294576767"] {
+  letter-spacing: 3px;
+  font-family: "Varela Round", sans-serif;
+  font-weight: bold;
+  margin-left: 20px;
+}
 #paycard {
   background-image: url("../../assets/paycard.png");
   background-size: cover;
   background-position: center;
   padding-top: 140px;
   object-fit: cover;
-  font-family: "Righteous", cursive;
+  font-family: "Rampart One", cursive;
 }
 
 ::placeholder {
-  color: rgb(205, 201, 201);
+  color: rgb(168, 168, 168);
 }
 
 input::-webkit-outer-spin-button,
@@ -120,5 +177,24 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+.bounce-enter-active {
+  animation: bounce-in 0.5s;
+}
+.bounce-leave-active {
+  animation: bounce-in 0.5s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap");
 </style>
