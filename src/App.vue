@@ -66,34 +66,46 @@ background: linear-gradient(215deg, rgba(58,180,148,0.06486344537815125) 0%, rgb
 .v-leave-to {
   opacity: 0;
 }
+svg{
+  transition: 0.2s;
+}
+
+.cls-4:nth-child(5){
+fill:rgb(107, 107, 107) !important;
+}
+
+#p4{
+fill:rgb(244, 153, 62) !important;
+}
+#p6{
+  fill:rgb(244, 153, 62) !important;
+}
+
+#p8{
+  fill:rgb(244, 92, 62) !important;
+}
+
+
 
 .cls-4 {
   opacity: 0.6;
-  fill: rgb(154, 154, 154);
-  border: solid;
-  filter: drop-shadow(3px 5px 5px rgb(119, 119, 119));
-  stroke: rgb(0, 0, 0);
+  fill: rgb(79, 218, 167) !important;
+  filter: drop-shadow(3px 5px 15px rgb(148, 145, 145));
+  stroke: rgb(255, 255, 255);
+  transition: 0.2s;
 }
 
-
 .cls-4:hover {
-  fill: blue;
+  fill: rgb(75, 23, 166) !important;
   transform: translate(0, -8px);
 }
 
-
 svg:hover path {
-  fill: rgb(35, 157, 244);
-  transition: 0.4s;
+  transition: 0.2s;
+  stroke-width: 6;
 }
 
-textPath {
-  fill: rgb(120, 113, 113);
-}
 
-svg:hover textPath {
-  fill: white;
-}
 
 @import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
 </style>
