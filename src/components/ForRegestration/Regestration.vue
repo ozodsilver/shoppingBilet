@@ -107,6 +107,38 @@
 
       <div class="row">
         <div class="col-12">
+          <div class="row mt-4 justify-content-center">
+            <div class="col-4 d-flex justify-content-center">
+              <Transition name="bounce">
+                <button class="btn w-50 fs-6 btn-dark bg-gradient" v-if="showSector">
+                  {{ sectorName }}
+                </button>
+              </Transition>
+            </div>
+
+            <div class="col-4 d-flex justify-content-center">
+              <Transition name="bounce">
+                <button
+                  class="btn w-50 fs-6 btn-dark bg-gradient text-capitalize"
+                  v-if="showSector2"
+                >
+                  chipta narxi:{{ price }}
+                </button>
+              </Transition>
+            </div>
+
+            <div class="col-4 d-flex justify-content-center">
+              <Transition name="bounce">
+                <button
+                  class="btn w-75 fs-6 btn-dark bg-gradient text-capitalize"
+                  v-if="showSector3"
+                >
+                  Mavjud o'rinlar soni:{{ sigim }}
+                </button>
+              </Transition>
+            </div>
+          </div>
+
           <svg
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -135,30 +167,37 @@
                 ></router-link> -->
                 <router-link
                   :to="{ name: 'register', params: { id: store.id } }"
-                  @click = addSectorId(0)
+                  @click="addSectorId(0)"
                 >
                   <path
+                    @mouseenter="actionInfo('Sector 1')"
+                    @mouseleave="leaveInfo"
                     class="cls-4"
                     id="p1"
                     d="M210.72,220.93A277.54,277.54,0,0,1,263,169.17a4.06,4.06,0,0,0,.87-5.59l-74.26-104a4.06,4.06,0,0,0-5.43-1.1A391.78,391.78,0,0,0,78,155.63a4,4,0,0,0,1.08,5.84l88.15,56.15a4,4,0,0,0,5.52-1.14l5.52-8.11a4.05,4.05,0,0,1,5.62-1.07l21.34,14.52A4.05,4.05,0,0,0,210.72,220.93Z"
-                  >
-                    <title ref="title">{{ title }}</title>
-                  </path>
+                  ></path>
                   <!-- <rect x="100" y="100" transform="rotate(-4)" width="150" height="50" fill="rgba(0, 0, 0, 0.8)" />
   <text x="110" y="130" font-size="16" font-family="Arial" fill="#fff">Tooltip text</text> -->
                 </router-link>
 
-                <router-link :to="{ name: 'register', params: { id: store.id } }">
-                <path
-                  id="p2"
-                  class="cls-4"
-                  d="M338.25,124.8,306.84,12.72a4.05,4.05,0,0,0-4.79-2.86A386.9,386.9,0,0,0,194.21,52.43,4,4,0,0,0,193,58.27l73.68,103.2a4,4,0,0,0,5.62.95A275.64,275.64,0,0,1,335.7,129.7,4.06,4.06,0,0,0,338.25,124.8Z"
-                />
+                <router-link
+                  :to="{ name: 'register', params: { id: store.id } }"
+                  @click="addSectorId(1)"
+                >
+                  <path
+                    @mouseenter="actionInfo('Sector 2')"
+                    @mouseleave="leaveInfo"
+                    id="p2"
+                    class="cls-4"
+                    d="M338.25,124.8,306.84,12.72a4.05,4.05,0,0,0-4.79-2.86A386.9,386.9,0,0,0,194.21,52.43,4,4,0,0,0,193,58.27l73.68,103.2a4,4,0,0,0,5.62.95A275.64,275.64,0,0,1,335.7,129.7,4.06,4.06,0,0,0,338.25,124.8Z"
+                  ></path>
                 </router-link>
                 <router-link
                   :to="{ name: 'register', params: { id: store.id } }"
                 >
                   <path
+                    @mouseenter="actionInfo('Sector 3')"
+                    @mouseleave="leaveInfo"
                     class="cls-4"
                     id="p3"
                     d="M429.38,113.39h14.86a4,4,0,0,0,4-4.31L441.39,3.78a4,4,0,0,0-4-3.78H389.5a391.51,391.51,0,0,0-76,7.42,4,4,0,0,0-3.09,5.06l31,110.79a4.06,4.06,0,0,0,5.14,2.76A275.8,275.8,0,0,1,429.38,113.39Z"
@@ -169,7 +208,8 @@
                   :to="{ name: 'register', params: { id: store.id } }"
                 >
                   <path
-                  
+                    @mouseenter="actionInfo('Sector 4')"
+                    @mouseleave="leaveInfo"
                     id="p4"
                     class="cls-4"
                     d="M602.5,109.34V4.05a4,4,0,0,0-4-4H449a4.05,4.05,0,0,0-4,4.31l6.9,105.29a4,4,0,0,0,4,3.79H598.45A4,4,0,0,0,602.5,109.34Z"
@@ -183,6 +223,8 @@
                   :to="{ name: 'register', params: { id: store.id } }"
                 >
                   <path
+                    @mouseenter="actionInfo('Sector 5')"
+                    @mouseleave="leaveInfo"
                     id="p6"
                     class="cls-4"
                     d="M950.58,0H819.05a4,4,0,0,0-4,4.05V109.34a4,4,0,0,0,4,4h128.2a4.05,4.05,0,0,0,4-3.92L954.63,4.18A4.05,4.05,0,0,0,950.58,0Z"
@@ -193,6 +235,8 @@
                   :to="{ name: 'register', params: { id: store.id } }"
                 >
                   <path
+                    @mouseenter="actionInfo('Sector 6')"
+                    @mouseleave="leaveInfo"
                     id="p7"
                     class="cls-4"
                     d="M1004.15,113.39a275.88,275.88,0,0,1,78,11.2,4,4,0,0,0,4.87-2.27l13.16-30.59a4.06,4.06,0,0,1,5.32-2.12l6.26,2.7a4,4,0,0,0,5.36-2.23l28-70.38a4,4,0,0,0-2.65-5.39A389.79,389.79,0,0,0,1037.5,0H962.18a4,4,0,0,0-4,3.92l-3.33,105.29a4,4,0,0,0,4,4.18Z"
@@ -203,6 +247,8 @@
                   :to="{ name: 'register', params: { id: store.id } }"
                 >
                   <path
+                    @mouseenter="actionInfo('Sector 7')"
+                    @mouseleave="leaveInfo"
                     id="p8"
                     class="cls-4"
                     d="M1121,139.3A277.22,277.22,0,0,1,1237.1,241.25a4.05,4.05,0,0,0,4.91,1.6l126.12-50.3a4,4,0,0,0,2-5.85A390.51,390.51,0,0,0,1153.7,17.63a4.05,4.05,0,0,0-5,2.38l-28.48,71.67a4,4,0,0,0,2.16,5.21l6.88,3a4,4,0,0,1,2.11,5.32L1119,134A4,4,0,0,0,1121,139.3Z"
@@ -213,6 +259,8 @@
                   :to="{ name: 'register', params: { id: store.id } }"
                 >
                   <path
+                    @mouseenter="actionInfo('Sector 8')"
+                    @mouseleave="leaveInfo"
                     id="p9"
                     class="cls-4"
                     d="M1371.09,195.14l-125.95,50.23a4,4,0,0,0-2,5.76,274.74,274.74,0,0,1,37.09,134,4.06,4.06,0,0,0,3.92,4l138.73,4.39a4,4,0,0,0,4.13-4v0h0a387.76,387.76,0,0,0-50.89-192.62A4.05,4.05,0,0,0,1371.09,195.14Z"
@@ -222,101 +270,151 @@
                 <router-link
                   :to="{ name: 'register', params: { id: store.id } }"
                 >
-
-       
                   <path
+                    @mouseenter="actionInfo('Sector 9')"
+                    @mouseleave="leaveInfo"
                     id="p10"
                     class="cls-4"
                     d="M1255.84,512l117,67.57a4,4,0,0,0,5.56-1.53,387.35,387.35,0,0,0,48.39-176.82,4,4,0,0,0-3.92-4.15l-138.58-4.38a4,4,0,0,0-4.17,4,274.87,274.87,0,0,1-25.94,110.1A4,4,0,0,0,1255.84,512Z"
                   />
                 </router-link>
 
-                <router-link :to="{ name: 'register', params: { id: store.id } }">
-                
-                <path
-                  id="p11"
-                  class="cls-4"
-                  d="M1153.21,628l10.29,17.83a5.4,5.4,0,0,1-2,7.38l-2.35,1.36a5.4,5.4,0,0,0-2.11,7.15L1197,739.27a5.42,5.42,0,0,0,7.15,2.4,391.23,391.23,0,0,0,167.78-152.31,5.41,5.41,0,0,0-1.93-7.48l-114-65.83a5.39,5.39,0,0,0-7.47,2.15,277.4,277.4,0,0,1-93.55,102.63A5.39,5.39,0,0,0,1153.21,628Z"
-                />
-              </router-link>
-<router-link :to="{ name: 'register', params: { id: store.id } }">
-                <path
-                  id="p12"
-                  class="cls-4"
-                  d="M1118.61,644.11a3.35,3.35,0,0,0-4.26-1.39,275,275,0,0,1-110.2,22.89h-2.56a3.36,3.36,0,0,0-3.34,3.75L1010.59,776a3.36,3.36,0,0,0,3.34,3h23.57a388.11,388.11,0,0,0,155.36-32.23,3.34,3.34,0,0,0,1.63-4.61l-41.2-80.09a3.37,3.37,0,0,0-4.67-1.37l-12.41,7.17a3.35,3.35,0,0,1-4.59-1.23Z"
-                />
-</router-link>
+                <router-link
+                  :to="{ name: 'register', params: { id: store.id } }"
+                >
+                  <path
+                    @mouseenter="actionInfo('Sector 10')"
+                    @mouseleave="leaveInfo"
+                    id="p11"
+                    class="cls-4"
+                    d="M1153.21,628l10.29,17.83a5.4,5.4,0,0,1-2,7.38l-2.35,1.36a5.4,5.4,0,0,0-2.11,7.15L1197,739.27a5.42,5.42,0,0,0,7.15,2.4,391.23,391.23,0,0,0,167.78-152.31,5.41,5.41,0,0,0-1.93-7.48l-114-65.83a5.39,5.39,0,0,0-7.47,2.15,277.4,277.4,0,0,1-93.55,102.63A5.39,5.39,0,0,0,1153.21,628Z"
+                  />
+                </router-link>
+                <router-link
+                  :to="{ name: 'register', params: { id: store.id } }"
+                >
+                  <path
+                    @mouseenter="actionInfo('Sector 11')"
+                    @mouseleave="leaveInfo"
+                    id="p12"
+                    class="cls-4"
+                    d="M1118.61,644.11a3.35,3.35,0,0,0-4.26-1.39,275,275,0,0,1-110.2,22.89h-2.56a3.36,3.36,0,0,0-3.34,3.75L1010.59,776a3.36,3.36,0,0,0,3.34,3h23.57a388.11,388.11,0,0,0,155.36-32.23,3.34,3.34,0,0,0,1.63-4.61l-41.2-80.09a3.37,3.37,0,0,0-4.67-1.37l-12.41,7.17a3.35,3.35,0,0,1-4.59-1.23Z"
+                  />
+                </router-link>
 
-<router-link :to="{ name: 'register', params: { id: store.id } }">
+                <router-link
+                  :to="{ name: 'register', params: { id: store.id } }"
+                >
+                  <path
+                    @mouseenter="actionInfo('Sector 12')"
+                    @mouseleave="leaveInfo"
+                    id="p13"
+                    class="cls-4"
+                    d="M884,669.66V775a4,4,0,0,0,4,4h114.82a4.05,4.05,0,0,0,4-4.51l-12.18-105.3a4,4,0,0,0-4-3.58H888.05A4,4,0,0,0,884,669.66Z"
+                  />
+                </router-link>
 
-                <path
-                  id="p13"
-                  class="cls-4"
-                  d="M884,669.66V775a4,4,0,0,0,4,4h114.82a4.05,4.05,0,0,0,4-4.51l-12.18-105.3a4,4,0,0,0-4-3.58H888.05A4,4,0,0,0,884,669.66Z"
-                />
-</router-link>
+                <router-link
+                  :to="{ name: 'register', params: { id: store.id } }"
+                >
+                  <path
+                    @mouseenter="actionInfo('Sector 13')"
+                    @mouseleave="leaveInfo"
+                    id="p14"
+                    class="cls-4"
+                    d="M764,713h-5.9a4,4,0,0,0-4,4V775a4,4,0,0,0,4,4h118.4a4,4,0,0,0,4-4V669.66a4,4,0,0,0-4-4H772.05a4,4,0,0,0-4,4V709A4,4,0,0,1,764,713Z"
+                  />
+                </router-link>
 
-<router-link :to="{ name: 'register', params: { id: store.id } }">
+                <router-link
+                  :to="{ name: 'register', params: { id: store.id } }"
+                >
+                  <path
+                    @mouseenter="actionInfo('Sector 14')"
+                    @mouseleave="leaveInfo"
+                    id="p15"
+                    class="cls-4"
+                    d="M731,665.61H567.05a4,4,0,0,0-4,4V775a4,4,0,0,0,4,4h179.4a4,4,0,0,0,4-4v-57.9a4,4,0,0,0-4-4h-7.4a4,4,0,0,1-4-4V669.66A4,4,0,0,0,731,665.61Z"
+                  />
+                </router-link>
 
-                <path
-                  id="p14"
-                  class="cls-4"
-                  d="M764,713h-5.9a4,4,0,0,0-4,4V775a4,4,0,0,0,4,4h118.4a4,4,0,0,0,4-4V669.66a4,4,0,0,0-4-4H772.05a4,4,0,0,0-4,4V709A4,4,0,0,1,764,713Z"
-                />
-</router-link>
-
-<router-link :to="{ name: 'register', params: { id: store.id } }">
-
-                <path
-                  id="p15"
-                  class="cls-4"
-                  d="M731,665.61H567.05a4,4,0,0,0-4,4V775a4,4,0,0,0,4,4h179.4a4,4,0,0,0,4-4v-57.9a4,4,0,0,0-4-4h-7.4a4,4,0,0,1-4-4V669.66A4,4,0,0,0,731,665.61Z"
-                />
-</router-link>
-
-<router-link :to="{ name: 'register', params: { id: store.id } }">
-
-                <path
-                  id="p16"
-                  class="cls-4"
-                  d="M461.29,779h94.16a4,4,0,0,0,4-4V669.66a4,4,0,0,0-4-4H471.54a4,4,0,0,0-4,3.66L457.26,774.56A4,4,0,0,0,461.29,779Z"
-                />
-</router-link>
-
-                <path
-                  id="p17"
-                  class="cls-4"
-                  d="M429.38,665.61a276.53,276.53,0,0,1-71.17-9.27,4,4,0,0,0-4.78,2.31L307.55,765.41a4,4,0,0,0,2.88,5.55,390.84,390.84,0,0,0,79.07,8h60.14a4,4,0,0,0,4-3.66l10.25-105.29a4,4,0,0,0-4-4.44Z"
-                />
-                <path
-                  id="p18"
-                  class="cls-4"
-                  d="M265.65,616.26,179.1,711.73a4,4,0,0,0,.8,6.12,387.21,387.21,0,0,0,118.92,50.53,4,4,0,0,0,4.65-2.34l46.18-107.45a4,4,0,0,0-2.5-5.45A274.94,274.94,0,0,1,271,615.68,4.06,4.06,0,0,0,265.65,616.26Z"
-                />
-                <path
-                  id="p19"
-                  class="cls-4"
-                  d="M213.61,567.08l-30.29,17.49a4.05,4.05,0,0,1-5.53-1.48l-5.36-9.29a4,4,0,0,0-5.68-1.39l-82.1,52.36a4,4,0,0,0-1,5.91A392,392,0,0,0,170,711.33a4,4,0,0,0,5.28-.64l86.93-95.88a4,4,0,0,0-.52-5.92,277.44,277.44,0,0,1-43-40.9A4.05,4.05,0,0,0,213.61,567.08Z"
-                />
-
-                <path
-                  id="p20"
-                  class="cls-4"
-                  d="M192.34,531.12a274.3,274.3,0,0,1-34.25-90,4,4,0,0,0-4-3.32L7.88,440.51A4,4,0,0,0,4,445.11,387.44,387.44,0,0,0,76.51,621.37a4,4,0,0,0,5.42,1l83.37-53.16a4.05,4.05,0,0,0,1.33-5.44L163,557.5A4,4,0,0,1,164.5,552l26.41-15.25A4.05,4.05,0,0,0,192.34,531.12Z"
-                />
-
-                <path
-                  id="p21"
-                  class="cls-4"
-                  d="M153.27,389.5h0a279.46,279.46,0,0,1,2.6-38.07,4.06,4.06,0,0,0-3.49-4.6L8.78,328.36a4,4,0,0,0-4.52,3.4A392.59,392.59,0,0,0,0,389.5H0a393.77,393.77,0,0,0,2.46,43.95A4,4,0,0,0,6.56,437l145.71-2.68a4,4,0,0,0,3.93-4.6A278.27,278.27,0,0,1,153.27,389.5Z"
-                />
-
-                <path
-                  id="p22"
-                  class="cls-4"
-                  d="M185.61,252.11l-22-15a4,4,0,0,1-1.07-5.62l3.7-5.43a4.06,4.06,0,0,0-1.17-5.69L76.58,164a4,4,0,0,0-5.47,1.07,387.35,387.35,0,0,0-65,155.12,4,4,0,0,0,3.47,4.71L153.2,343.41a4.07,4.07,0,0,0,4.5-3.32,274.14,274.14,0,0,1,29.18-82.68A4.05,4.05,0,0,0,185.61,252.11Z"
-                />
-
+                <router-link
+                  :to="{ name: 'register', params: { id: store.id } }"
+                >
+                  <path
+                    @mouseenter="actionInfo('Sector 15')"
+                    @mouseleave="leaveInfo"
+                    id="p16"
+                    class="cls-4"
+                    d="M461.29,779h94.16a4,4,0,0,0,4-4V669.66a4,4,0,0,0-4-4H471.54a4,4,0,0,0-4,3.66L457.26,774.56A4,4,0,0,0,461.29,779Z"
+                  />
+                </router-link>
+                <router-link
+                  :to="{ name: 'register', params: { id: store.id } }"
+                >
+                  <path
+                    @mouseenter="actionInfo('Sector 16')"
+                    @mouseleave="leaveInfo"
+                    id="p17"
+                    class="cls-4"
+                    d="M429.38,665.61a276.53,276.53,0,0,1-71.17-9.27,4,4,0,0,0-4.78,2.31L307.55,765.41a4,4,0,0,0,2.88,5.55,390.84,390.84,0,0,0,79.07,8h60.14a4,4,0,0,0,4-3.66l10.25-105.29a4,4,0,0,0-4-4.44Z"
+                  />
+                </router-link>
+                <router-link
+                  :to="{ name: 'register', params: { id: store.id } }"
+                >
+                  <path
+                    @mouseenter="actionInfo('Sector 17')"
+                    @mouseleave="leaveInfo"
+                    id="p18"
+                    class="cls-4"
+                    d="M265.65,616.26,179.1,711.73a4,4,0,0,0,.8,6.12,387.21,387.21,0,0,0,118.92,50.53,4,4,0,0,0,4.65-2.34l46.18-107.45a4,4,0,0,0-2.5-5.45A274.94,274.94,0,0,1,271,615.68,4.06,4.06,0,0,0,265.65,616.26Z"
+                  />
+                </router-link>
+                <router-link
+                  :to="{ name: 'register', params: { id: store.id } }"
+                >
+                  <path
+                    @mouseenter="actionInfo('Sector 18')"
+                    @mouseleave="leaveInfo"
+                    id="p19"
+                    class="cls-4"
+                    d="M213.61,567.08l-30.29,17.49a4.05,4.05,0,0,1-5.53-1.48l-5.36-9.29a4,4,0,0,0-5.68-1.39l-82.1,52.36a4,4,0,0,0-1,5.91A392,392,0,0,0,170,711.33a4,4,0,0,0,5.28-.64l86.93-95.88a4,4,0,0,0-.52-5.92,277.44,277.44,0,0,1-43-40.9A4.05,4.05,0,0,0,213.61,567.08Z"
+                  />
+                </router-link>
+                <router-link
+                  :to="{ name: 'register', params: { id: store.id } }"
+                >
+                  <path
+                    @mouseenter="actionInfo('Sector 19')"
+                    @mouseleave="leaveInfo"
+                    id="p20"
+                    class="cls-4"
+                    d="M192.34,531.12a274.3,274.3,0,0,1-34.25-90,4,4,0,0,0-4-3.32L7.88,440.51A4,4,0,0,0,4,445.11,387.44,387.44,0,0,0,76.51,621.37a4,4,0,0,0,5.42,1l83.37-53.16a4.05,4.05,0,0,0,1.33-5.44L163,557.5A4,4,0,0,1,164.5,552l26.41-15.25A4.05,4.05,0,0,0,192.34,531.12Z"
+                  />
+                </router-link>
+                <router-link
+                  :to="{ name: 'register', params: { id: store.id } }"
+                >
+                  <path
+                    @mouseenter="actionInfo('Sector 20')"
+                    @mouseleave="leaveInfo"
+                    id="p21"
+                    class="cls-4"
+                    d="M153.27,389.5h0a279.46,279.46,0,0,1,2.6-38.07,4.06,4.06,0,0,0-3.49-4.6L8.78,328.36a4,4,0,0,0-4.52,3.4A392.59,392.59,0,0,0,0,389.5H0a393.77,393.77,0,0,0,2.46,43.95A4,4,0,0,0,6.56,437l145.71-2.68a4,4,0,0,0,3.93-4.6A278.27,278.27,0,0,1,153.27,389.5Z"
+                  />
+                </router-link>
+                <router-link
+                  :to="{ name: 'register', params: { id: store.id } }"
+                >
+                  <path
+                    @mouseenter="actionInfo('Sector 21')"
+                    @mouseleave="leaveInfo"
+                    id="p22"
+                    class="cls-4"
+                    d="M185.61,252.11l-22-15a4,4,0,0,1-1.07-5.62l3.7-5.43a4.06,4.06,0,0,0-1.17-5.69L76.58,164a4,4,0,0,0-5.47,1.07,387.35,387.35,0,0,0-65,155.12,4,4,0,0,0,3.47,4.71L153.2,343.41a4.07,4.07,0,0,0,4.5-3.32,274.14,274.14,0,0,1,29.18-82.68A4.05,4.05,0,0,0,185.61,252.11Z"
+                  />
+                </router-link>
                 <rect
                   class="cls-5"
                   x="521.31"
@@ -384,8 +482,13 @@ let obj = reactive({});
 let store = useCounterStore();
 let imgUrl = ref("");
 let places = ref([]);
-let title = ref('')
-
+let sectorName = ref("");
+let price = ref("");
+let sigim = ref("");
+let sectors = ref([]);
+let showSector = ref(false);
+let showSector2 = ref(false);
+let showSector3 = ref(false);
 
 onMounted(() => {
   axios
@@ -405,21 +508,40 @@ onMounted(() => {
       });
     });
 
-  
-    store.increment().then(response =>{
-console.log(response);
-title.value.innerHTML =  response.data[14].sectorName + " \n" + "Mavjud joy: " + response.data[14].available + " o'rin"+"\n" + "narxi: " + response.data[14].price +' Sum'
-
+  store.increment().then((response) => {
+    console.log(response);
+    response.data.forEach((el) => {
+      sectors.value.push(el);
     });
-    console.log(title.value);
+  });
 });
 
-let addSectorId = (id)=>{
-      store.secId = id
+let addSectorId = (id) => {
+  store.secId = id;
+};
+
+let actionInfo = (secName) => {
+  sectors.value.forEach((el) => {
+    if (el.sectorName == secName) {
+      showSector.value = true;
+      setTimeout(() => {
+        showSector2.value = true;
+      }, 200);
+      setTimeout(() => {
+        showSector3.value = true;
+      }, 500);
+      sectorName.value = el.sectorName;
+      price.value = el.price;
+      sigim.value = el.available;
     }
+  });
+};
 
-
-
+let leaveInfo = () => {
+  showSector.value = false;
+  showSector2.value = false;
+  showSector3.value = false;
+};
 </script>
 
 <style lang="scss" scoped>
@@ -439,6 +561,10 @@ let addSectorId = (id)=>{
   );
 }
 
+.row .col-4 {
+  transition: 1s;
+}
+
 .n-card {
   max-width: 100%;
 }
@@ -454,7 +580,6 @@ let addSectorId = (id)=>{
   opacity: 0.4;
 }
 
-
 .cls-5 {
   fill: #13975b;
   opacity: 0.39;
@@ -468,9 +593,29 @@ let addSectorId = (id)=>{
   filter: drop-shadow(0 0 10pc black);
 }
 
-
-
 path:hover {
   color: red;
+}
+
+.row .col-4 button {
+  clip-path: none;
+}
+
+.bounce-enter-active {
+  animation: bounce-in 0.5s;
+}
+.bounce-leave-active {
+  animation: bounce-in 0.5s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 </style>
