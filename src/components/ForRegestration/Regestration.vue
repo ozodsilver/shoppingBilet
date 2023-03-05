@@ -142,7 +142,7 @@
                     id="p1"
                     d="M210.72,220.93A277.54,277.54,0,0,1,263,169.17a4.06,4.06,0,0,0,.87-5.59l-74.26-104a4.06,4.06,0,0,0-5.43-1.1A391.78,391.78,0,0,0,78,155.63a4,4,0,0,0,1.08,5.84l88.15,56.15a4,4,0,0,0,5.52-1.14l5.52-8.11a4.05,4.05,0,0,1,5.62-1.07l21.34,14.52A4.05,4.05,0,0,0,210.72,220.93Z"
                   >
-                    <title>{{ store.id }}</title>
+                    <title ref="title">{{ title }}</title>
                   </path>
                   <!-- <rect x="100" y="100" transform="rotate(-4)" width="150" height="50" fill="rgba(0, 0, 0, 0.8)" />
   <text x="110" y="130" font-size="16" font-family="Arial" fill="#fff">Tooltip text</text> -->
@@ -384,6 +384,8 @@ let obj = reactive({});
 let store = useCounterStore();
 let imgUrl = ref("");
 let places = ref([]);
+let title = ref('')
+
 
 onMounted(() => {
   axios
@@ -404,9 +406,12 @@ onMounted(() => {
     });
 
   
-//     store.increment().then(response =>{
-// console.log(response);
-//     });
+    store.increment().then(response =>{
+console.log(response);
+title.value.innerHTML =  response.data[14].sectorName + " \n" + "Mavjud joy: " + response.data[14].available + " o'rin"+"\n" + "narxi: " + response.data[14].price +' Sum'
+
+    });
+    console.log(title.value);
 });
 
 let addSectorId = (id)=>{
