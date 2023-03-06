@@ -13,7 +13,7 @@
 
   <div class="container mt-5">
     <div class="row">
-      <div class="col-4 mt-3" v-for="info in infos">
+      <div class="col-12 col-md-4 mt-0" v-for="info in infos">
         <div
           class="card border p-4 py-4  mt-3 pb-5 border-light shadow-lg position-relative"
         >

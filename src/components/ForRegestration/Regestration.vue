@@ -5,7 +5,7 @@
 
     <div class="container mt-4">
       <div class="row">
-        <div class="col-8 p-3">
+        <div class="col-12 col-sm-8 p-3">
           <div class="card p-5 mb-3">
             <div class="row g-0">
               <div class="col-md-4">
@@ -72,20 +72,20 @@
             </div>
           </div>
         </div>
-        <div class="col-4">
+        <div class="col-sm-4 col-12">
           <div class="w-100 p-3 bg-dark text-white">МЕСТО ПРОВЕДЕНИЯ</div>
           <n-card hoverable>
             <img
-              src="../../assets/fadFC2C0PNifwHU8JsYWcv7pJUVce5ej.png"
+              src="https://static-maps.yandex.ru/1.x/?l=map&ll=66.954349%2C39.652154&pt=66.954349%2C39.652154%2Cflag&bbox=66.953558%2C39.645779~66.96043%2C39.660952&size=650%2C450"
               alt=""
               class="img-fluid"
             />
             <p class="fw-bold mt-3 m-0">Adress</p>
-            <span> Абдурахман Жомий улица, Samarkand, Узбекистан</span>
+            <span> Abduraxmon jomiy ko'chasi, Samarkand, O'zbekiston</span>
           </n-card>
 
           <div class="w-100 p-3 mt-5 bg-dark text-white">
-            ПОЛЕЗНАЯ ИНФОРМАЦИЯ
+          Foydali Ma'lumotlar
           </div>
           <n-card hoverable>
             <img
@@ -94,7 +94,7 @@
               class="img-fluid"
             />
             <p class="fw-bold mt-3 m-0">Adress</p>
-            <span> Абдурахман Жомий улица, Samarkand, Узбекистан</span>
+            <span> Abduraxmon jomiy ko'chasi, Samarkand, O'zbekiston</span>
           </n-card>
         </div>
       </div>
@@ -102,24 +102,24 @@
 
     <div class="container p-3 my-5 border-success">
       <n-gradient-text type="success" class="fs-2">
-        Ticket sotib olish
+       Sectorni tanlang
       </n-gradient-text>
 
       <div class="row">
         <div class="col-12">
           <div class="row mt-4 justify-content-center">
-            <div class="col-4 d-flex justify-content-center">
+            <div class="col-md-4  col-12 d-flex justify-content-center">
               <Transition name="bounce">
-                <button class="btn w-50 fs-6 btn-dark bg-gradient" v-if="showSector">
+                <button class="btn w-50  btn-dark bg-gradient text-capitalize" v-if="showSector">
                   {{ sectorName }}
                 </button>
               </Transition>
             </div>
 
-            <div class="col-4 d-flex justify-content-center">
+            <div class="col-6 col-md-4 mt-3 d-flex justify-content-center">
               <Transition name="bounce">
                 <button
-                  class="btn w-50 fs-6 btn-dark bg-gradient text-capitalize"
+                  class="btn w-50  btn-dark bg-gradient text-capitalize"
                   v-if="showSector2"
                 >
                   chipta narxi:{{ price }}
@@ -127,10 +127,10 @@
               </Transition>
             </div>
 
-            <div class="col-4 d-flex justify-content-center">
+            <div class="col-6 col-md-4 mt-3 d-flex justify-content-center">
               <Transition name="bounce">
                 <button
-                  class="btn w-75 fs-6 btn-dark bg-gradient text-capitalize"
+                  class="btn w-75  btn-dark bg-gradient text-capitalize"
                   v-if="showSector3"
                 >
                   Mavjud o'rinlar soni:{{ sigim }}
@@ -142,7 +142,7 @@
           <svg
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
-            viewBox="-20 -50 1527 899"
+            viewBox="-150 -70 1727 899"
           >
             <defs>
               <!-- <pattern
@@ -523,13 +523,15 @@ let addSectorId = (id) => {
 let actionInfo = (secName) => {
   sectors.value.forEach((el) => {
     if (el.sectorName == secName) {
+    setTimeout(() => {
       showSector.value = true;
+    }, 200);
       setTimeout(() => {
         showSector2.value = true;
-      }, 200);
+      }, 400);
       setTimeout(() => {
         showSector3.value = true;
-      }, 500);
+      }, 600);
       sectorName.value = el.sectorName;
       price.value = el.price;
       sigim.value = el.available;

@@ -67,6 +67,10 @@
               </button>
             </div>
           </Transition>
+
+<img src="" ref="qrCode" alt="">
+<a href="" ref="downlad"></a>
+
         </div>
       </div>
     </div>
@@ -75,7 +79,7 @@
 
 <script setup>
 import { useCounterStore } from "../../stores/counter.js";
-import { ref } from "vue";
+import { ref, onMounted} from "vue";
 import Navigation from "../Navigation.vue";
 import axios from "axios";
 
@@ -93,7 +97,9 @@ let spin = ref(false);
 
 let cardToken = ref("");
 let receiptId = ref("");
-
+let qrCodeId = ref('')
+let qrCode = ref('')
+let downlad = ref()
 let postTicket = () => {
   spin.value = true;
 
@@ -140,9 +146,21 @@ let postCode = () => {
       code: "666666",
     })
     .then((res) => {
-      console.log(res);
+    if(res.data){
+      qrCodeId.value = res.data.id
+      qrCode.value.src = `https://bk.utickets.uz/api/Events/GenQr/${qrCodeId.value}`
+      downlad.value.innerHTML = 'Yuklab olish'
+      downlad.value.href = `https://bk.utickets.uz/api/Events/GenQr/${qrCodeId.value}`
+      downlad.value.downlad = `https://bk.utickets.uz/api/Events/GenQr/${qrCodeId.value}`
+    }
     });
+
+
+
+
 };
+
+
 </script>
 
 <style lang="scss" scoped>

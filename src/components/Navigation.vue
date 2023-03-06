@@ -43,7 +43,7 @@
           <li>
             <router-link to="/Map"
            class="d-flex gap-3"   >
-              xarita
+              Joylashuv
               <i
                 class="fas fa-map-marked-alt fs-4"
                 style="color: indianred"

@@ -2,9 +2,9 @@
   <div class="rounded-2 np mt-4" >
     <Carousel
       id="gallery"
-      :items-to-show="2"
+      :items-to-show="1"
       v-model="currentSlide"
-      :autoplay="2000"
+      :autoplay="4000"
       :wrap-around="true"
     >
       <Slide v-for="image in images" :key="image">
@@ -62,20 +62,8 @@ export default defineComponent({
 
   setup() {
     let images = [
-      {
-        id: 0,
-        image: new URL(
-          "../assets/51uNA4RmHKrmfM3UxW14TFHGmAd15B79.png",
-          import.meta.url
-        ).href,
-      },
-      {
-        id: 1,
-        image: new URL(
-          "../assets/fadFC2C0PNifwHU8JsYWcv7pJUVce5ej.png",
-          import.meta.url
-        ).href,
-      },
+    
+  
       {
         id: 2,
         image: new URL(
