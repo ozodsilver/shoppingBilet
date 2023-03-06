@@ -52,14 +52,14 @@
             >
             </router-link>
           </li>
-          <li class="mx-4 d-none d-md-block " >
+          <!-- <li class="mx-4 d-none d-md-block " >
             <span class="d-sm-none d-md-block">
             {{
               $t("navigation.language")
             }}
             </span>
-          </li>
-          <li class="d-flex gap-4 mt-3 mt-md-0" style="height: 20px; margin-right: 30px">
+          </li> -->
+          <!-- <li class="d-flex gap-4 mt-3 mt-md-0" style="height: 20px; margin-right: 30px">
             <img
               :src="lang.image"
               alt=""
@@ -73,7 +73,7 @@
               @click="ru(lang.lan, lang.id)"
               v-for="lang in languages"
             />
-          </li>
+          </li> -->
           <!-- Left links -->
         </div>
         <!-- Collapsible wrapper -->

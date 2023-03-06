@@ -73,7 +73,7 @@
           </div>
         </div>
         <div class="col-sm-4 col-12">
-          <div class="w-100 p-3 bg-dark text-white">МЕСТО ПРОВЕДЕНИЯ</div>
+          <div class="w-100 p-3 bg-dark text-white">Joylashuv hududi</div>
           <n-card hoverable>
             <img
               src="https://static-maps.yandex.ru/1.x/?l=map&ll=66.954349%2C39.652154&pt=66.954349%2C39.652154%2Cflag&bbox=66.953558%2C39.645779~66.96043%2C39.660952&size=650%2C450"
@@ -110,7 +110,7 @@
           <div class="row mt-4 justify-content-center">
             <div class="col-md-4  col-12 d-flex justify-content-center">
               <Transition name="bounce">
-                <button class="btn w-50  btn-dark bg-gradient text-capitalize" v-if="showSector">
+                <button class="btn w-50 clip  btn-info bg-gradient text-capitalize" v-if="showSector">
                   {{ sectorName }}
                 </button>
               </Transition>
@@ -119,7 +119,7 @@
             <div class="col-6 col-md-4 mt-3 d-flex justify-content-center">
               <Transition name="bounce">
                 <button
-                  class="btn w-50  btn-dark bg-gradient text-capitalize"
+                  class="btn w-50  clip btn-info bg-gradient text-capitalize"
                   v-if="showSector2"
                 >
                   chipta narxi:{{ price }}
@@ -130,7 +130,7 @@
             <div class="col-6 col-md-4 mt-3 d-flex justify-content-center">
               <Transition name="bounce">
                 <button
-                  class="btn w-75  btn-dark bg-gradient text-capitalize"
+                  class="btn w-75 clip  btn-info bg-gradient text-capitalize"
                   v-if="showSector3"
                 >
                   Mavjud o'rinlar soni:{{ sigim }}
@@ -638,5 +638,9 @@ path:hover {
   100% {
     transform: scale(1);
   }
+}
+
+.clip{
+  clip-path: none;
 }
 </style>

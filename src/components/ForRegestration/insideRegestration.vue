@@ -23,14 +23,14 @@
 
         <div class="row justify-content-md-center">
           <div
-            class="col-10 col-md-12 border mt-5 rounded-3"
+            class="col-10 col-md-12 border mx-auto mt-5 rounded-3"
             id="paycard"
-            style="height: 270px; width: 450px"
+            style="height: 260px; width: 440px"
           >
             <input
               type="text"
               v-model="cardNumber"
-              class="form-control shadow-none p-1 bg-transparent border-0 text-white fs-2"
+              class="form-control shadow-none p-1 bg-transparent border-0 text-white fs-3"
               placeholder="860031294576767"
             />
 
@@ -38,13 +38,14 @@
               <input
                 type="text"
                 placeholder="expire date"
-                class="form-control w-25 rounded-3"
+                class="form-control w-50 rounded-3"
                 v-model="expire"
+                ref="expires"
               />
             </div>
           </div>
           <button
-            class="btn btn-success mt-3 w-75 d-flex justify-content-center align-items-center gap-3"
+            class="btn btn-success mx-auto mt-3 w-75 d-flex justify-content-center align-items-center gap-3"
             @click="postTicket"
           >
             jo'natish
@@ -62,15 +63,34 @@
                 placeholder="sms kodni kiriting"
               />
 
-              <button class="btn btn-info mt-3 float-end" @click="postCode">
+              <a href="hello.txt" download ref="down" class="btn btn-info mt-3 float-end d-flex align-items-center gap-2" @click.prevent="postCode">
                 Tasdiqlash
-              </button>
+                <div class="spinner spinner-border text-white" v-if = "loadAccess"></div>
+              </a>
             </div>
           </Transition>
-
-<img src="" ref="qrCode" alt="">
-<a href="" ref="downlad"></a>
-
+          <n-modal v-model:show="showModal">
+            <n-card
+              style="
+                width: 600px;
+                background-color: #20b2aa;
+                color: white !important;
+              "
+              title=" "
+              :bordered="false"
+              size="huge"
+              role="dialog"
+              aria-modal="true"
+            >
+              <template #header-extra>
+                <span class="text-white fs-4">
+                  Kiritilgan telefon raqamiga sms kod yuborildi! </span
+                ><i class="fas fa-check-double text-white"></i>
+              </template>
+            </n-card>
+          </n-modal>
+          <img src="" ref="qrCode" alt="" />
+        
         </div>
       </div>
     </div>
@@ -79,10 +99,12 @@
 
 <script setup>
 import { useCounterStore } from "../../stores/counter.js";
-import { ref, onMounted} from "vue";
+import { ref, onMounted, watch } from "vue";
 import Navigation from "../Navigation.vue";
 import axios from "axios";
-import { usePDF } from 'vue3-pdfmake';
+import { usePDF } from "vue3-pdfmake";
+
+
 
 const pdf = usePDF();
 let store = useCounterStore();
@@ -91,17 +113,21 @@ let show = ref(false);
 store.increment().then((response) => {
   console.log(response);
 });
+let expires = ref("");
 
 const phone = ref("");
 let fullName = ref("");
 let expire = ref("");
 let spin = ref(false);
+let loadAccess = ref(false);
 
 let cardToken = ref("");
 let receiptId = ref("");
-let qrCodeId = ref('')
-let qrCode = ref('')
-let downlad = ref()
+let qrCodeId = ref("");
+let qrCode = ref("");
+let down = ref('')
+
+let showModal = ref(false);
 let postTicket = () => {
   spin.value = true;
 
@@ -126,6 +152,13 @@ let postTicket = () => {
           spin.value = false;
           cardToken.value = res.data.cardToken;
           receiptId.value = res.data.receiptId;
+          setTimeout(() => {
+            showModal.value = true;
+          }, 20);
+
+          setTimeout(() => {
+            showModal.value = false;
+          }, 2000);
         }
       })
       .catch((err) => {
@@ -141,6 +174,8 @@ let postTicket = () => {
 console.log(store.secId);
 
 let postCode = () => {
+
+  loadAccess.value = true
   axios
     .post(`https://bk.utickets.uz/api/Events/Pay`, {
       id: receiptId.value,
@@ -148,24 +183,24 @@ let postCode = () => {
       code: "666666",
     })
     .then((res) => {
-    if(res.data){
-      qrCodeId.value = res.data.id
-      qrCode.value.src = `https://bk.utickets.uz/api/Events/GenQr/${qrCodeId.value}`
-      downlad.value.innerHTML = 'QR codeni Yuklab olish'
-      downlad.value.href = `https://bk.utickets.uz/api/Events/GenQr/${qrCodeId.value}`
-      downlad.value.downlad = `https://bk.utickets.uz/api/Events/GenQr/${qrCodeId.value}`
-      pdf.createPdf({}).download(`https://bk.utickets.uz/api/Events/GenQr/${qrCodeId.value}`)
-    }
+      if (res.data) {
+        loadAccess.value = false
+        qrCodeId.value = res.data.id;
+        qrCode.value.src = `https://bk.utickets.uz/api/Events/GenQr/${qrCodeId.value}`;
+        down.value.download = 'hello.txt';
+        let blob = new Blob(['Hello, world!'], {type: 'text/plain'});
+        down.value.href = URL.createObjectURL(blob);
+        down.value.click();
+        URL.revokeObjectURL(down.value.href );
+      }
     });
-
-
-
 };
 
-onMounted(()=>{
-console.log(  pdf.createPdf({}))
-})
-
+watch(cardNumber, (newVal) => {
+  if (cardNumber.value.length == 16) {
+    expires.value.focus();
+  }
+});
 </script>
 
 <style lang="scss" scoped>
@@ -187,7 +222,7 @@ input[placeholder="860031294576767"] {
   background-position: center;
   padding-top: 140px;
   object-fit: cover;
-  font-family: "Rampart One", cursive;
+  font-family: "Righteous", cursive;
 }
 
 ::placeholder {
@@ -217,6 +252,8 @@ input::-webkit-inner-spin-button {
     transform: scale(1);
   }
 }
+
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
 
 @import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap");

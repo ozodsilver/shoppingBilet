@@ -6,7 +6,7 @@
           <span class="circle" aria-hidden="true">
             <span class="icon arrow"></span>
           </span>
-          <span class="button-text" @click="takeStepBack">Back to Home </span>
+          <span class="button-text" @click="takeStepBack">Asosiy sahifa </span>
         </button>
       </div>
     </nav>
