@@ -194,6 +194,7 @@
                 </router-link>
                 <router-link
                   :to="{ name: 'register', params: { id: store.id } }"
+                  @click="addSectorId(2)"
                 >
                   <path
                     @mouseenter="actionInfo('Sector 3')"
@@ -206,6 +207,7 @@
 
                 <router-link
                   :to="{ name: 'register', params: { id: store.id } }"
+                  @click="addSectorId(3)"
                 >
                   <path
                     @mouseenter="actionInfo('Sector 4')"
@@ -221,6 +223,7 @@
                 />
                 <router-link
                   :to="{ name: 'register', params: { id: store.id } }"
+                  @click="addSectorId(4)"
                 >
                   <path
                     @mouseenter="actionInfo('Sector 5')"
@@ -233,6 +236,7 @@
 
                 <router-link
                   :to="{ name: 'register', params: { id: store.id } }"
+                  @click="addSectorId(5)"
                 >
                   <path
                     @mouseenter="actionInfo('Sector 6')"
@@ -245,6 +249,7 @@
 
                 <router-link
                   :to="{ name: 'register', params: { id: store.id } }"
+                  @click="addSectorId(6)"
                 >
                   <path
                     @mouseenter="actionInfo('Sector 7')"
@@ -257,6 +262,7 @@
 
                 <router-link
                   :to="{ name: 'register', params: { id: store.id } }"
+                  @click="addSectorId(7)"
                 >
                   <path
                     @mouseenter="actionInfo('Sector 8')"
@@ -269,6 +275,7 @@
 
                 <router-link
                   :to="{ name: 'register', params: { id: store.id } }"
+                  @click="addSectorId(8)"
                 >
                   <path
                     @mouseenter="actionInfo('Sector 9')"
@@ -281,6 +288,7 @@
 
                 <router-link
                   :to="{ name: 'register', params: { id: store.id } }"
+                  @click="addSectorId(9)"
                 >
                   <path
                     @mouseenter="actionInfo('Sector 10')"
@@ -292,6 +300,7 @@
                 </router-link>
                 <router-link
                   :to="{ name: 'register', params: { id: store.id } }"
+                  @click="addSectorId(10)"
                 >
                   <path
                     @mouseenter="actionInfo('Sector 11')"
@@ -304,6 +313,7 @@
 
                 <router-link
                   :to="{ name: 'register', params: { id: store.id } }"
+                  @click="addSectorId(11)"
                 >
                   <path
                     @mouseenter="actionInfo('Sector 12')"
@@ -316,6 +326,7 @@
 
                 <router-link
                   :to="{ name: 'register', params: { id: store.id } }"
+                  @click="addSectorId(12)"
                 >
                   <path
                     @mouseenter="actionInfo('Sector 13')"
@@ -328,6 +339,7 @@
 
                 <router-link
                   :to="{ name: 'register', params: { id: store.id } }"
+                  @click="addSectorId(13)"
                 >
                   <path
                     @mouseenter="actionInfo('Sector 14')"
@@ -340,6 +352,7 @@
 
                 <router-link
                   :to="{ name: 'register', params: { id: store.id } }"
+                  @click="addSectorId(14)"
                 >
                   <path
                     @mouseenter="actionInfo('Sector 15')"
@@ -351,6 +364,7 @@
                 </router-link>
                 <router-link
                   :to="{ name: 'register', params: { id: store.id } }"
+                  @click="addSectorId(15)"
                 >
                   <path
                     @mouseenter="actionInfo('Sector 16')"
@@ -362,6 +376,7 @@
                 </router-link>
                 <router-link
                   :to="{ name: 'register', params: { id: store.id } }"
+                  @click="addSectorId(16)"
                 >
                   <path
                     @mouseenter="actionInfo('Sector 17')"
@@ -373,6 +388,7 @@
                 </router-link>
                 <router-link
                   :to="{ name: 'register', params: { id: store.id } }"
+                  @click="addSectorId(17)"
                 >
                   <path
                     @mouseenter="actionInfo('Sector 18')"
@@ -384,6 +400,7 @@
                 </router-link>
                 <router-link
                   :to="{ name: 'register', params: { id: store.id } }"
+                  @click="addSectorId(18)"
                 >
                   <path
                     @mouseenter="actionInfo('Sector 19')"
@@ -395,6 +412,7 @@
                 </router-link>
                 <router-link
                   :to="{ name: 'register', params: { id: store.id } }"
+                  @click="addSectorId(19)"
                 >
                   <path
                     @mouseenter="actionInfo('Sector 20')"
@@ -406,6 +424,7 @@
                 </router-link>
                 <router-link
                   :to="{ name: 'register', params: { id: store.id } }"
+                  @click="addSectorId(20)"
                 >
                   <path
                     @mouseenter="actionInfo('Sector 21')"
