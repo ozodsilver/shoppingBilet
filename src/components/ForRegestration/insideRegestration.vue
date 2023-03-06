@@ -82,7 +82,9 @@ import { useCounterStore } from "../../stores/counter.js";
 import { ref, onMounted} from "vue";
 import Navigation from "../Navigation.vue";
 import axios from "axios";
+import { usePDF } from 'vue3-pdfmake';
 
+const pdf = usePDF();
 let store = useCounterStore();
 let cardNumber = ref("");
 let show = ref(false);
@@ -149,17 +151,20 @@ let postCode = () => {
     if(res.data){
       qrCodeId.value = res.data.id
       qrCode.value.src = `https://bk.utickets.uz/api/Events/GenQr/${qrCodeId.value}`
-      downlad.value.innerHTML = 'Yuklab olish'
+      downlad.value.innerHTML = 'QR codeni Yuklab olish'
       downlad.value.href = `https://bk.utickets.uz/api/Events/GenQr/${qrCodeId.value}`
       downlad.value.downlad = `https://bk.utickets.uz/api/Events/GenQr/${qrCodeId.value}`
+      pdf.createPdf({}).download(`https://bk.utickets.uz/api/Events/GenQr/${qrCodeId.value}`)
     }
     });
 
 
 
-
 };
 
+onMounted(()=>{
+console.log(  pdf.createPdf({}))
+})
 
 </script>
 

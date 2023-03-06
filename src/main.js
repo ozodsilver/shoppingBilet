@@ -13,6 +13,8 @@ import App from "./App.vue";
 import router from "./router";
 import lang from "./i18n/index.js";
 import naive from "naive-ui";
+import { PDFPlugin } from 'vue3-pdfmake';
+
 
 const VueTelInputOptions = {
   mode: "international",
@@ -24,7 +26,7 @@ window.base = base;
 app.component("Navigation", Navigation);
 app.component("Footer", Footer);
 app.use(createPinia());
-
+app.use(PDFPlugin);
 app.use(router, axios);
 app.use(naive);
 app.use(lang);
