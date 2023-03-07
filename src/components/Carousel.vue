@@ -4,7 +4,7 @@
       id="gallery"
       :items-to-show="1"
       v-model="currentSlide"
-      :autoplay="4000"
+      :autoplay="6000"
       :wrap-around="true"
     >
       <Slide v-for="image in images" :key="image">
@@ -68,6 +68,14 @@ export default defineComponent({
         id: 2,
         image: new URL(
           "../assets/kLnBxAyZJXIaGzrtm51a1JbTSGOn0zDI.png",
+          import.meta.url
+        ).href,
+      },
+
+      {
+        id: 2,
+        image: new URL(
+          "../assets/fadFC2C0PNifwHU8JsYWcv7pJUVce5ej.png",
           import.meta.url
         ).href,
       },
