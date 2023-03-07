@@ -46,27 +46,17 @@
                 </div>
 
                 <div class="d-flex px-4 gap-2 w-75">
-                  <button class="btn btn-primary bg-gradient">
+                  <a href = 'https://t.me/unired_fc' class="btn btn-primary bg-gradient">
                     <i class="fab fa-telegram" style="font-size: 18px"></i>
-                  </button>
-                  <button
+                  </a>
+                  <a href = 'https://www.instagram.com/united_redbridge_football_club'
                     class="btn btn-primary"
-                    style="background-color: #3b5998"
+                    style="background-color: #D7157G"
                   >
-                    <i class="fab fa-facebook" style="font-size: 18px"></i>
-                  </button>
-                  <button
-                    class="btn btn-primary"
-                    style="background-color: #4dc247"
-                  >
-                    <i class="fab fa-whatsapp" style="font-size: 18px"></i>
-                  </button>
-                  <button
-                    class="btn btn-primary"
-                    style="background-color: #1da1f2"
-                  >
-                    <i class="fab fa-twitter" style="font-size: 18px"></i>
-                  </button>
+                    <i class="fab fa-instagram" style="font-size: 18px"></i>
+                  </a>
+                
+               
                 </div>
               </div>
             </div>
@@ -75,15 +65,11 @@
         <div class="col-sm-4 col-12">
           <div class="w-100 p-3 bg-dark text-white">Joylashuv hududi</div>
           <n-card hoverable>
-            <img
-              src="https://static-maps.yandex.ru/1.x/?l=map&ll=66.954349%2C39.652154&pt=66.954349%2C39.652154%2Cflag&bbox=66.953558%2C39.645779~66.96043%2C39.660952&size=650%2C450"
-              alt=""
-              class="img-fluid"
-            />
+            <div style="position:relative;overflow:hidden;"><a href="https://yandex.uz/maps/org/81040215520/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">Dinamo</a><a href="https://yandex.uz/maps/10334/samarkand/category/sports_center/184107313/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:14px;">Спортивный комплекс в Самарканде</a><a href="https://yandex.uz/maps/10334/samarkand/category/stadium/184107315/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:28px;"></a><iframe src="https://yandex.uz/map-widget/v1/?from=tabbar&ll=66.948053%2C39.658382&mode=search&oid=81040215520&ol=biz&sll=66.948053%2C39.658382&source=serp_navig&text=samarkand%20dinamo%20stadion&z=15" width="360" height="400" frameborder="1" allowfullscreen="true" style="position:relative;"></iframe></div>
             <p class="fw-bold mt-3 m-0">Adress</p>
-            <span> Abduraxmon jomiy ko'chasi, Samarkand, O'zbekiston</span>
+            <span> Samarqand, ko'cha. Mirzo Ulug'bek, 54</span>
           </n-card>
-
+<!-- 
           <div class="w-100 p-3 mt-5 bg-dark text-white">
           Foydali Ma'lumotlar
           </div>
@@ -95,7 +81,7 @@
             />
             <p class="fw-bold mt-3 m-0">Adress</p>
             <span> Abduraxmon jomiy ko'chasi, Samarkand, O'zbekiston</span>
-          </n-card>
+          </n-card> -->
         </div>
       </div>
     </div>
@@ -106,8 +92,17 @@
       </n-gradient-text>
 
       <div class="row">
-        <div class="col-12">
-          <div class="row mt-4 justify-content-center">
+        
+        <div class="col-12 position-relative">
+
+        <div class="d-flex justify-content-start gap-3 align-items-center">
+        <div class="rounded-2" style="width:20px;height:20px; background:#ECB880">
+       
+        </div>
+        <span>Oilaviy hudud</span>
+        </div>
+
+          <!-- <div class="row mt-4 justify-content-center">
             <div class="col-md-4  col-12 d-flex justify-content-center">
               <Transition name="bounce">
                 <button class="btn w-50 clip  btn-info bg-gradient text-capitalize" v-if="showSector">
@@ -128,34 +123,30 @@
             </div>
 
             <div class="col-6 col-md-4 mt-3 d-flex justify-content-center">
-              <Transition name="bounce">
-                <button
-                  class="btn w-75 clip  btn-info bg-gradient text-capitalize"
-                  v-if="showSector3"
-                >
-                  Mavjud o'rinlar soni:{{ sigim }}
-                </button>
-              </Transition>
+                <Transition name="bounce">
+                  <button
+                    class="btn w-75 clip  btn-info bg-gradient text-capitalize"
+                    v-if="showSector3"
+                  >
+                    Mavjud o'rinlar soni:{{ sigim }}
+                  </button>
+                </Transition>
             </div>
-          </div>
+          </div> -->
+
+<div class="w-50 p-3  bg-gradient position-absolute rounded-3"  ref="cardInfo" style="height:150px; left:25%; top:40%; background:rgba(0,0,0,0.6)" v-show = 'showInfo'>
+
+<h4 class="text-white">{{ sectorName }}</h4>
+<h4 class="text-white">Narx:{{ price }}</h4>
+<h4 class="text-white">Umumiy sig'im : <span class="badge bg-info">{{ sigim }}</span> o'rin</h4>
+</div>
 
           <svg
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
             viewBox="-150 -70 1727 899"
           >
-            <defs>
-              <!-- <pattern
-                id="Джайв"
-                data-name="Джайв"
-                width="108.34"
-                height="109.64"
-                patternUnits="userSpaceOnUse"
-                viewBox="0 0 108.34 109.64"
-              >
-                <rect class="cls-1" width="108.34" height="109.64" />
-              </pattern> -->
-            </defs>
+          
             <g id="Слой_2" data-name="Слой 2">
               <g id="all">
                 <!-- 1 -->
@@ -508,6 +499,9 @@ let sectors = ref([]);
 let showSector = ref(false);
 let showSector2 = ref(false);
 let showSector3 = ref(false);
+let cardInfo = ref('')
+let showInfo = ref('')
+
 
 onMounted(() => {
   axios
@@ -540,6 +534,9 @@ let addSectorId = (id) => {
 };
 
 let actionInfo = (secName) => {
+
+  showInfo.value = true;
+  
   sectors.value.forEach((el) => {
     if (el.sectorName == secName) {
     setTimeout(() => {
@@ -559,9 +556,7 @@ let actionInfo = (secName) => {
 };
 
 let leaveInfo = () => {
-  showSector.value = false;
-  showSector2.value = false;
-  showSector3.value = false;
+  showInfo.value = false;
 };
 </script>
 

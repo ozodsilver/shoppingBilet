@@ -81,9 +81,7 @@ fill:rgb(244, 153, 62) !important;
   fill:rgb(244, 153, 62) !important;
 }
 
-#p8{
-  fill:rgb(244, 92, 62) !important;
-}
+
 
 
 

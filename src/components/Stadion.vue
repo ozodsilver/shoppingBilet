@@ -1,6 +1,8 @@
 <template id="stadion">
   <div class="container">
+    <video src="../assets/unired_fc.mp4" controls class="w-75 m-auto d-block rounded-3 mt-5"></video>
     <h2 class="mt-4">{{ $t("select") }}</h2>
+  
   </div>
 
   <div

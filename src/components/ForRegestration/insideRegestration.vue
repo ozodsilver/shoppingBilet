@@ -4,7 +4,7 @@
     <h2 class="mt-5 text-muted">Ro'yxatdan o'tish</h2>
 
     <div class="row">
-      <div class="col-12 col-md-8 offset-md-2">
+      <div class="col-12 col-md-8 offset-md-2" v-if = '!show'>
         <label for="form1" class="mt-3">Ism va Familiya</label>
         <input
           type="text"
@@ -37,7 +37,7 @@
             <div class="d-flex">
               <input
                 type="text"
-                placeholder="expire date"
+                placeholder="Kartaning muddati 03/99"
                 class="form-control w-50 rounded-3"
                 v-model="expire"
                 ref="expires"
@@ -52,23 +52,7 @@
             <div class="spinner spinner-border fs-6" v-if="spin"></div>
           </button>
 
-          <Transition name="bounce">
-            <div
-              class="col-12 mt-4 position-relative d-flex flex-column align-items-center justify-content-center"
-              v-if="show"
-            >
-              <input
-                type="text"
-                class="form-control border w-50 mt-5"
-                placeholder="sms kodni kiriting"
-              />
-
-              <a href="hello.txt" download ref="down" class="btn btn-info mt-3 float-end d-flex align-items-center gap-2" @click.prevent="postCode">
-                Tasdiqlash
-                <div class="spinner spinner-border text-white" v-if = "loadAccess"></div>
-              </a>
-            </div>
-          </Transition>
+         
           <n-modal v-model:show="showModal">
             <n-card
               style="
@@ -89,10 +73,32 @@
               </template>
             </n-card>
           </n-modal>
-          <img src="" ref="qrCode" alt="" />
+     
         
         </div>
       </div>
+
+      <Transition name="bounce">
+            <div
+              class="col-12 mt-4 position-relative d-flex flex-column align-items-center justify-content-center"
+              v-if="show"
+            >
+              <input
+                type="text"
+                class="form-control border w-50 mt-5"
+                placeholder="sms kodni kiriting"
+              />
+
+              <a href="hello.txt" download ref="down" class="btn btn-info mt-3 float-end d-flex align-items-center gap-2" @click.prevent="postCode">
+                Tasdiqlash
+                <div class="spinner spinner-border text-white" v-if = "loadAccess"></div>
+              </a>
+            </div>
+          </Transition>
+
+          <div ref = 'qr'>
+       <img src="" ref="qrCode" alt="">
+       </div>
     </div>
   </div>
 </template>
@@ -120,12 +126,14 @@ let fullName = ref("");
 let expire = ref("");
 let spin = ref(false);
 let loadAccess = ref(false);
+let hideCards = ref(true);
 
 let cardToken = ref("");
 let receiptId = ref("");
 let qrCodeId = ref("");
 let qrCode = ref("");
 let down = ref('')
+let qr = ref('')
 
 let showModal = ref(false);
 let postTicket = () => {
@@ -184,16 +192,25 @@ let postCode = () => {
     })
     .then((res) => {
       if (res.data) {
+        hideCards.value = false
         loadAccess.value = false
         qrCodeId.value = res.data.id;
         qrCode.value.src = `https://bk.utickets.uz/api/Events/GenQr/${qrCodeId.value}`;
-        down.value.download = 'hello.txt';
-        let blob = new Blob(['Hello, world!'], {type: 'text/plain'});
-        down.value.href = URL.createObjectURL(blob);
-        down.value.click();
-        URL.revokeObjectURL(down.value.href );
+
+        let a = document.createElement("a");
+a.setAttribute("href", `https://bk.utickets.uz/api/Events/GenQr/${qrCodeId.value}`);
+a.setAttribute("download",'');
+          qr.value.appendChild(a);
+          a.appendChild(qrCode.value)
       }
-    });
+    }).catch(err =>{
+      console.log(err);
+      alert("yaroqsiz Kod");
+      loadAccess.value = false;
+    })
+
+
+
 };
 
 watch(cardNumber, (newVal) => {
@@ -252,6 +269,8 @@ input::-webkit-inner-spin-button {
     transform: scale(1);
   }
 }
+
+
 
 @import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
 

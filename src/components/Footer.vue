@@ -6,21 +6,16 @@
       <div class="footer-logo">
        
       </div>
-      <div class="footer-links">
-        <a href="#">Home</a>
-        <a href="#">About Us</a>
-        <a href="#">Services</a>
-        <a href="#">Contact Us</a>
-      </div>
+     
       <div class="footer-social-media">
-        <a href="#"><i class="fab fa-facebook-f"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-linkedin"></i></a>
+     
+        <a href="https://t.me/unired_fc"><i class="fab fa-telegram"></i></a>
+        <a href="https://www.instagram.com/united_redbridge_football_club"><i class="fab fa-instagram"></i></a>
+        
       </div>
     </div>
     <div class="footer-bottom">
-      <p>Copyright © 2023.
+      <p>utickets.uz © 2023.
         All Rights Reserved.</p>
     </div>
   </div>
