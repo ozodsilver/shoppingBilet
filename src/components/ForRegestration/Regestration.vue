@@ -27,12 +27,12 @@
                     <span> Xarid qilinga bilet qaytarib olinmaydi!</span>
                   </p>
 
-                  <button class="btn btn-warning bg-gradient">
-                    <i class="fas fa-map"></i>
+                  <button class="btn w-100 btn-warning bg-gradient">
+                    <i class="fas fa-map"></i> &nbsp;
                     <small class="text-white">O'yin vaqti &nbsp; </small>
-
+<br>
                     <abbr>
-                      <small class="fs-6 text-white">
+                      <small class=" text-white">
                         {{
                           new Date(obj.startsAt).toLocaleDateString() +
                           " " +
@@ -65,7 +65,7 @@
         <div class="col-sm-4 col-12">
           <div class="w-100 p-3 bg-dark text-white">Joylashuv hududi</div>
           <n-card hoverable>
-            <div style="position:relative;overflow:hidden;"><a href="https://yandex.uz/maps/org/81040215520/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">Динамо</a><a href="https://yandex.uz/maps/10334/samarkand/category/sports_center/184107313/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:14px;">Спортивный комплекс в Самарканде</a><a href="https://yandex.uz/maps/10334/samarkand/category/stadium/184107315/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:28px;">Стадион в Самарканде</a><iframe src="https://yandex.uz/map-widget/v1/?from=mapframe&ll=66.917077%2C39.660968&mode=search&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D81040215520&sctx=ZAAAAAgCEAAaKAoSCUNwXMZNvFBAETrmPGNf1ENAEhIJAb9KECjfrT8RIq629DL%2Fpj8iBgABAgMEBSgKOABA3lBIAWI2cmVhcnI9c2NoZW1lX0xvY2FsL0dlby9TdWJ0aXRsZXMvTmV3U3VidGl0bGVzRW5hYmxlZD0xYjVyZWFycj1zY2hlbWVfTG9jYWwvR2VvL1N1YnRpdGxlcy9SYW5kb21QaW5TdWJ0aXRsZXM9MWoCdXqdAc3MTD2gAQCoAQC9AT6QLhXCAQzgm%2F7yrQKUmLXdqQTqAQDyAQD4AQCCAhhzYW1hcmthbmQgZGluYW1vIHN0YWRpb26KAgCSAgUxMDMzNJoCDGRlc2t0b3AtbWFwcw%3D%3D&sll=66.917077%2C39.660968&source=mapframe&sspn=0.110084%2C0.060007&text=samarkand%20dinamo%20stadion&utm_source=mapframe&z=12.83" width="560" height="400" frameborder="1" allowfullscreen="true" style="position:relative;"></iframe></div>
+            <div style="position:relative;overflow:hidden;"><a href="https://yandex.uz/maps/org/81040215520/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">Динамо</a><a href="https://yandex.uz/maps/10334/samarkand/category/sports_center/184107313/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:14px;">Спортивный комплекс в Самарканде</a><a href="https://yandex.uz/maps/10334/samarkand/category/stadium/184107315/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:28px;">Стадион в Самарканде</a><iframe src="https://yandex.uz/map-widget/v1/?from=mapframe&ll=67.200400%2C39.649367&mode=search&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D81040215520&sctx=ZAAAAAgCEAAaKAoSCUNwXMZNvFBAETrmPGNf1ENAEhIJAb9KECjfrT8RIq629DL%2Fpj8iBgABAgMEBSgKOABA3lBIAWI2cmVhcnI9c2NoZW1lX0xvY2FsL0dlby9TdWJ0aXRsZXMvTmV3U3VidGl0bGVzRW5hYmxlZD0xYjVyZWFycj1zY2hlbWVfTG9jYWwvR2VvL1N1YnRpdGxlcy9SYW5kb21QaW5TdWJ0aXRsZXM9MWoCdXqdAc3MTD2gAQCoAQC9AT6QLhXCAQzgm%2F7yrQKUmLXdqQTqAQDyAQD4AQCCAhhzYW1hcmthbmQgZGluYW1vIHN0YWRpb26KAgCSAgUxMDMzNJoCDGRlc2t0b3AtbWFwcw%3D%3D&sll=66.917077%2C39.660968&source=mapframe&sspn=0.110084%2C0.060007&text=samarkand%20dinamo%20stadion&utm_source=mapframe&z=10.88" width="560" height="400" frameborder="1" allowfullscreen="true" style="position:relative;"></iframe></div>
             <p class="fw-bold mt-3 m-0">Adress</p>
             <span> Samarqand, ko'cha. Mirzo Ulug'bek, 54</span>
           </n-card>
@@ -134,11 +134,11 @@
             </div>
           </div> -->
 
-<div class="w-50 p-3  bg-gradient position-absolute rounded-3"  ref="cardInfo" style="height:150px; left:25%; top:40%; background:rgba(0,0,0,0.6)" v-show = 'showInfo'>
+<div class="w-25 p-3 d-sm-flex flex-column align-items-center justify-content-center d-none  bg-gradient position-absolute rounded-3 "  ref="cardInfo" style="height:200px; left:38%; top:30%; background:rgba(0,0,0,0.6); clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);" v-if = 'showInfo' >
 
-<h4 class="text-white">{{ sectorName }}</h4>
-<h4 class="text-white">Narx:{{ price }}</h4>
-<h4 class="text-white">Umumiy sig'im : <span class="badge bg-info">{{ sigim }}</span> o'rin</h4>
+<h6 class="text-white "><span class="badge bg-danger">{{ sectorName }}</span></h6>
+<h6 class="text-white">Narx: <span class="badge bg-info">{{ price }} </span> so'm</h6>
+<h6 class="text-white">Umumiy sig'im : <span class="badge bg-info">{{ sigim }}</span> o'rin</h6>
 </div>
 
           <svg
@@ -538,7 +538,7 @@ let actionInfo = (secName) => {
   showInfo.value = true;
   
   sectors.value.forEach((el) => {
-    if (el.sectorName == secName) {
+    if (el.sectorName == secName && el.available !== 0) {
     setTimeout(() => {
       showSector.value = true;
     }, 200);
@@ -551,6 +551,7 @@ let actionInfo = (secName) => {
       sectorName.value = el.sectorName;
       price.value = el.price;
       sigim.value = el.available;
+     
     }
   });
 };

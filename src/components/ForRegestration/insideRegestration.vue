@@ -97,7 +97,7 @@
           </Transition>
 
           <div ref = 'qr'>
-       <img src="" ref="qrCode" alt="">
+       <img src="" ref="qrCode" alt="" class="img-fluid d-block m-auto">
        </div>
     </div>
   </div>
@@ -185,11 +185,13 @@ let postCode = () => {
 
   loadAccess.value = true
   axios
-    .post(`https://bk.utickets.uz/api/Events/Pay`, {
+    .post(`https://bk.utickets.uz/api/Events/Pay`,  {
       id: receiptId.value,
       token: cardToken.value,
       code: "666666",
-    })
+    },
+    { responseType: 'blob' }
+    )
     .then((res) => {
       if (res.data) {
         hideCards.value = false
@@ -197,11 +199,14 @@ let postCode = () => {
         qrCodeId.value = res.data.id;
         qrCode.value.src = `https://bk.utickets.uz/api/Events/GenQr/${qrCodeId.value}`;
 
-        let a = document.createElement("a");
-a.setAttribute("href", `https://bk.utickets.uz/api/Events/GenQr/${qrCodeId.value}`);
-a.setAttribute("download",'');
-          qr.value.appendChild(a);
-          a.appendChild(qrCode.value)
+        const blob = new Blob([ qrCode.value.src], { type: 'image/png' })
+        const link = document.createElement('a')
+        link.href = URL.createObjectURL(blob)
+        link.download = 'download'
+        link.click()
+        URL.revokeObjectURL(link.href)
+        window.print('salom')
+
       }
     }).catch(err =>{
       console.log(err);
