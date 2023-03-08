@@ -134,7 +134,7 @@
             </div>
           </div> -->
 
-<div class="w-25 p-3 d-sm-flex flex-column align-items-center justify-content-center d-none  bg-gradient position-absolute rounded-3 "  ref="cardInfo" style="height:200px; left:38%; top:30%; background:rgba(0,0,0,0.6); clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);" v-if = 'showInfo' >
+<div class="w-25 p-3 d-sm-flex flex-column align-items-center justify-content-center d-none  bg-gradient position-absolute rounded-3 "  ref="cardInfo" style="height:200px; left:38%; top:35%; background:rgba(0,0,0,0.6);" v-if = 'showInfo' >
 
 <h6 class="text-white "><span class="badge bg-danger">{{ sectorName }}</span></h6>
 <h6 class="text-white">Narx: <span class="badge bg-info">{{ price }} </span> so'm</h6>
@@ -512,6 +512,7 @@ onMounted(() => {
       imgUrl.value = `${window.base}api/Images/${obj.imageId}`;
     });
 
+    console.log(store.id);
   axios
     .get(`https://bk.utickets.uz/api/Events/GetSectors/${store.id}`)
     .then((javob) => {
@@ -521,6 +522,7 @@ onMounted(() => {
       });
     });
 
+    console.log(store.id);
   store.increment().then((response) => {
     console.log(response);
     response.data.forEach((el) => {
@@ -531,6 +533,7 @@ onMounted(() => {
 
 let addSectorId = (id) => {
   store.secId = id;
+  console.log(id);
 };
 
 let actionInfo = (secName) => {

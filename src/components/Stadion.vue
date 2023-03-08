@@ -59,6 +59,7 @@
                 class="w-100 m-auto d-block shadow bg-dark bg-gradient text-white rounded border-0 text-transform-lowercase"
                 @click="addId(info.id)"
               >
+              
                 Joy band qilish
                 <svg
                   width="20"

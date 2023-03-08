@@ -203,9 +203,9 @@ let postCode = () => {
         const link = document.createElement('a')
         link.href = URL.createObjectURL(blob)
         link.download = 'download'
-        link.click()
+        // link.click()
         URL.revokeObjectURL(link.href)
-        window.print('salom')
+        window.open(`https://bk.utickets.uz/api/Events/GenQr/${qrCodeId.value}`)
 
       }
     }).catch(err =>{

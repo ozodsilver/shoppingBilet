@@ -12,7 +12,7 @@ export const useCounterStore = defineStore('counter', {
 
   actions: {
     increment() {
-  let res = axios.get(`https://bk.utickets.uz/api/Events/GetSectors/232dd89e-90c6-4c53-802d-fd93094dbdba`)
+  let res = axios.get(`https://bk.utickets.uz/api/Events/GetSectors/${this.id}`)
     return res
     }
   },
