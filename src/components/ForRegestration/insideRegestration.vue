@@ -98,7 +98,7 @@
           </Transition>
 
           <div ref = 'qr'>
-       <img src="" ref="qrCode" alt="" class="img-fluid d-block m-auto">
+       <!-- <img src="" ref="qrCode" alt="" class="img-fluid d-block m-auto"> -->
        </div>
     </div>
   </div>
@@ -200,16 +200,32 @@ let postCode = () => {
         hideCards.value = false
         loadAccess.value = false
         qrCodeId.value = res.data.id;
-        qrCode.value.src = `https://bk.utickets.uz/api/Events/GenQr/${res.data.id}`;
+        // qrCode.value.src = `https://bk.utickets.uz/api/Events/GenQr/${res.data.id}`;
 
-        const blob = new Blob([ qrCode.value.src], { type: 'image/png' })
-        const link = document.createElement('a')
-        link.href = URL.createObjectURL(blob)
-        link.download = 'download'
+        // const blob = new Blob([`https://bk.utickets.uz/api/Events/GenQr/${res.data.id}`], { type: 'image/png' })
+        // const link = document.createElement('a')
+        // link.href = URL.createObjectURL(blob)
+        // link.download = 'download'
         // link.click()
-        URL.revokeObjectURL(link.href)
-        console.log(res.data);
-        window.open(`https://bk.utickets.uz/api/Events/GenQr/${res.data.id}`)
+        // URL.revokeObjectURL(link.href)
+        // console.log(res.data);
+        // window.open(`https://bk.utickets.uz/api/Events/GenQr/${res.data.id}`, "Download")
+        console.log(res.data.id);
+let img = document.createElement('img')
+img.src = `https://bk.utickets.uz/api/Events/GenQr/${res.data.id}`
+img.setAttribute('class', 'd-block')
+img.setAttribute('class', 'm-auto')
+img.setAttribute('class', 'w-100')
+var url = `https://bk.utickets.uz/api/Events/GenQr/${res.data.id}.png`;
+var elem = document.createElement('a');
+elem.setAttribute('download', 'download');
+elem.appendChild(img)
+qr.value.appendChild(elem)
+    elem.href = url;
+    setTimeout(() => {
+      elem.click();
+    }, 600);
+
 
       }
     }).catch(err =>{
