@@ -193,14 +193,14 @@ let postCode = () => {
       token: cardToken.value,
       code: codes.value,
     },
-    { responseType: 'blob' }
+   
     )
     .then((res) => {
       if (res.data) {
         hideCards.value = false
         loadAccess.value = false
         qrCodeId.value = res.data.id;
-        qrCode.value.src = `https://bk.utickets.uz/api/Events/GenQr/${qrCodeId.value}`;
+        qrCode.value.src = `https://bk.utickets.uz/api/Events/GenQr/${res.data.id}`;
 
         const blob = new Blob([ qrCode.value.src], { type: 'image/png' })
         const link = document.createElement('a')
@@ -208,7 +208,8 @@ let postCode = () => {
         link.download = 'download'
         // link.click()
         URL.revokeObjectURL(link.href)
-        window.open(`https://bk.utickets.uz/api/Events/GenQr/${qrCodeId.value}`)
+        console.log(res.data);
+        window.open(`https://bk.utickets.uz/api/Events/GenQr/${res.data.id}`)
 
       }
     }).catch(err =>{
