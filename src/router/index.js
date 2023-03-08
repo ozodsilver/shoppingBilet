@@ -31,7 +31,7 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from) => {
-  if(to.fullPath === '/last/'){
+  if(to.fullPath === '/last'){
     return { name: "Home" };
   }
 

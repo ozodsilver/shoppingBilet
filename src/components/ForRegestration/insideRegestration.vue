@@ -84,6 +84,7 @@
               v-if="show"
             >
               <input
+              v-model="codes"
                 type="text"
                 class="form-control border w-50 mt-5"
                 placeholder="sms kodni kiriting"
@@ -134,6 +135,8 @@ let qrCodeId = ref("");
 let qrCode = ref("");
 let down = ref('')
 let qr = ref('')
+let codes = ref('')
+
 
 let showModal = ref(false);
 let postTicket = () => {
@@ -188,7 +191,7 @@ let postCode = () => {
     .post(`https://bk.utickets.uz/api/Events/Pay`,  {
       id: receiptId.value,
       token: cardToken.value,
-      code: "666666",
+      code: codes.value,
     },
     { responseType: 'blob' }
     )
