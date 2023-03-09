@@ -1,7 +1,7 @@
 <template>
   <Navigation></Navigation>
   <a href="#"></a>
-  <div class="container" style="height: 100vh">
+  <div class="container" >
   
 <button @click='oneStepBack' class="btn mt-2 btn-dark bg-gradient">
 
@@ -51,10 +51,10 @@
             </div>
           </div>
 
-          <div class="col-md-7 col-12">
+          <div class="col-md-6 offset-sm-1 offset-0 col-12">
             <div class="row  justify-content-md-center">
              
-<div class="w-75 bg-dark  bg-gradient rounded-3 d-flex align-items-center m-auto" style="height:250px">
+<div class="w-100 bg-dark  bg-gradient rounded-3 mt-3 d-flex align-items-center m-auto" style="height:250px">
 <div class="d-flex flex-column  justify-content-between" style="height: 160px;">
   <input
                   type="text"
