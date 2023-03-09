@@ -65,7 +65,7 @@
               role="dialog"
               aria-modal="true"
             >
-              <template #header-extra>
+              <template #header-extra v-show = "showQrCode">
                 <span class="text-white fs-4">
                   Kiritilgan telefon raqamiga sms kod yuborildi! </span
                 ><i class="fas fa-check-double text-white"></i>
@@ -104,7 +104,7 @@
       </Transition>
 
      
-       <img :src="imgLink" alt="" >
+       <img :src="imgLink" alt=""  class="img-fluid w-75 m-auto d-block">
    
        <div ref = 'qr'>
        
@@ -150,7 +150,7 @@ let qr = ref("");
 let codes = ref("");
 let imgLink = ref("");
 
-let pdfs = ref('')
+let showQrCode = ref(true)
 
 
 
@@ -225,8 +225,9 @@ let postCode = async () => {
         link.setAttribute("download", "file.png"); //or any other extension
         qr.value.appendChild(link);
        setTimeout(() => {
-        
+
         link.click();
+        showQrCode.value = false
         window.print(resUrl)
        }, 3000);
       }

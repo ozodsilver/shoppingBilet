@@ -1,8 +1,8 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg position-relative">
+    <nav class="navbar bg-dark bg-gradient navbar-expand-lg   position-relative">
       <!-- Container wrapper -->
-      <div class="container-fluid">
+      <div class="container-fluid  ">
         <!-- Toggle button -->
         <button
           class="navbar-toggler"
@@ -13,26 +13,26 @@
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <i class="fas fa-bars"></i>
+          <i class="fas fa-bars text-white"></i>
         </button>
 
         <!-- Collapsible wrapper -->
         <div
-          class="collapse navbar-collapse position-relative bg-white"
+          class="collapse navbar-collapse  position-relative"
           style="z-index: 9999; left: 0"
           id="navbarLeftAlignExample"
         >
           <!-- Left links -->
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item d-md-flex justify-content-around d-none" id="image">
+          <ul class="navbar-nav    me-auto mb-2 mb-lg-0">
+            <li class="nav-item d-md-flex justify-content-start align-items-center d-none" id="image">
               <router-link
                 to="/"
-                class="nav-link text-dark fs-6 d-flex align-items-end gap-2"
+                class="nav-link text-white fs-6 d-flex align-items-center gap-2"
                 aria-current="page"
                 >
                 
                 {{ $t('navigation.home') }}
-                <img src="../assets/home.png" alt="" style="width: 30px" />
+                <i class="fas fa-home"></i>
               </router-link>
             </li>
 
@@ -40,9 +40,9 @@
               <i class="fas fa-arrow-circle-left" @click="BackOneStep"></i>
             </li> -->
           </ul>
-          <li>
+          <!-- <li>
             <router-link to="/Map"
-           class="d-flex gap-3"   >
+           class="d-flex gap-3 "   >
               Joylashuv
               <i
                 class="fas fa-map-marked-alt fs-4"
@@ -51,7 +51,7 @@
              
             >
             </router-link>
-          </li>
+          </li> -->
           <!-- <li class="mx-4 d-none d-md-block " >
             <span class="d-sm-none d-md-block">
             {{
@@ -154,17 +154,9 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 nav {
-  border-bottom: 1px solid rgb(255, 255, 255);
+background-color: #2E2F3A !important;
   list-style: none;
-  -webkit-box-shadow: 0px 5px 10px 1px rgba(34, 60, 80, 0.1);
-  -moz-box-shadow: 0px 5px 10px 1px rgba(34, 60, 80, 0.2);
-  box-shadow: 0px 5px 10px 1px rgba(34, 60, 80, 0.2);
-  background: rgb(230, 226, 226);
-  background: linear-gradient(
-    215deg,
-    rgba(255, 253, 253, 0.837) 0%,
-    rgba(247, 244, 244, 0.3) 61%
-  );
+  
   font-family: "Josefin Sans", sans-serif !important;
   span {
     font-family: "Josefin Sans", sans-serif !important;
@@ -179,16 +171,11 @@ nav {
 
 #image {
   width: 200px;
-  border: 1px solid rgba(255, 255, 255, 0.857);
+
   border-radius: 3px !important;
-  clip-path: polygon(0 0, 80% 0, 100% 100%, 20% 100%);
   transition: 0.4s;
 
-  &:hover {
-    background-color: rgb(241, 243, 245);
-    color: white !important;
-    color: black;
-  }
+
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@600&display=swap");
