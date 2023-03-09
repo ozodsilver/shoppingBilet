@@ -1,77 +1,114 @@
 <template>
   <Navigation></Navigation>
+  <a href="#"></a>
   <div class="container" style="height: 120vh">
+  
+<button @click='oneStepBack' class="btn mt-2 btn-dark bg-gradient">
+  <i class="fas fa-arrow-circle-left"></i>
+</button>
     <h2 class="mt-5 text-muted">Ro'yxatdan o'tish</h2>
 
-    <div class="row">
-      <div class="col-12 col-md-8 offset-md-2" v-if="!show">
-        <label for="form1" class="mt-3">Ism va Familiya</label>
-        <input
-          type="text"
-          class="form-control"
-          id="form1"
-          placeholder="ism va familiya"
-          v-model="fullName"
-        />
-        <label for="form2" class="mt-3">Tel</label>
-        <input
-          type="text"
-          class="form-control tel"
-          placeholder="+998 99 999 99 99"
-          v-model="phone"
-        />
 
-        <div class="row justify-content-md-center">
-          <div
-            class="col-10 col-md-12 border mx-auto mt-5 rounded-3"
-            id="paycard"
-            style="height: 260px; width: 440px"
-          >
+    <div class="row">
+      <div class="col-12 col-md-12" v-if="!show">
+        <div class="row">
+          <div class="col-sm-5 col-12">
+            <label for="form1" class="mt-3">Ism va Familiya</label>
             <input
+            required
               type="text"
-              v-model="cardNumber"
-              class="form-control shadow-none p-1 bg-transparent border-0 text-white fs-3"
-              placeholder="860031294576767"
+              class="form-control border border-secondary rounded-pill"
+              id="form1"
+              v-model="fullName"
+              ref="Fname"
             />
 
-            <div class="d-flex">
+            <div class="mt-3">
+              <label for="form12">Karta raqamingizni kiriting</label>
               <input
+              required
                 type="text"
-                placeholder="Kartaning muddati 03/99"
-                class="form-control w-50 rounded-3"
-                v-model="expire"
+                id="form12"
+                class="form-control border-secondary border rounded-pill"
+                v-model="cardNumber"
+              />
+            </div>
+
+            <div class="mt-3">
+              <label for="form12">Amal qilish muddatini kiriting</label>
+              <input
+              required
+                type="text"
+                id="form12"
+                class="form-control w-50 border-secondary border rounded-pill"
+                maxlength="5"
                 ref="expires"
+                v-model="expire"
+                @input="checkInput"
               />
             </div>
           </div>
-          <button
-            class="btn btn-success mx-auto mt-3 w-75 d-flex justify-content-center align-items-center gap-3"
-            @click="postTicket"
-          >
-            jo'natish
-            <div class="spinner spinner-border fs-6" v-if="spin"></div>
-          </button>
 
-          <n-modal v-model:show="showModal">
-            <n-card
-              style="
-                width: 600px;
-                background-color: #20b2aa;
-                color: white !important;
-              "
-              title=" "
-              :bordered="false"
-              size="huge"
-              role="dialog"
-              aria-modal="true"
-            >
-              <template #header-extra v-show = "showQrCode">
-                <span class="text-white fs-4">
-                  Kiritilgan telefon raqamiga sms kod yuborildi! </span
-                ><i class="fas fa-check-double text-white"></i>
-              </template>
-            </n-card>
-          </n-modal>
+          <div class="col-md-7 col-12">
+            <div class="row justify-content-md-center">
+              <div
+                class="col-12 col-md-9  mx-auto mt-2 rounded-3"
+                id="paycard"
+               
+              >
+                <input
+                  type="text"
+                  disabled
+                  :value="cardNumber"
+                  class="form-control shadow-none m-2 mx-0 mx-sm-3 p-0 px-3 bg-transparent border-0 text-white fs-3"
+                  placeholder="860031294576767"
+                />
+
+                <div class="d-flex w-100 m-auto">
+                  <div>
+                    <input
+                      id="form12"
+                      type="text"
+                      ref="disExpire"
+                      :value="expire"
+                      placeholder="MM/YY"
+                      class="form-control w-50  mx-sm-4 text-white p-1 rounded-3 border bg-transparent"
+                      disabled
+                    />
+                  </div>
+                </div>
+              </div>
+              <button
+              type="submit"
+                class="btn btn-success mx-auto mt-3 w-75 d-flex justify-content-center align-items-center gap-3"
+                @click.prevent="postTicket"
+              >
+                jo'natish
+                <div class="spinner spinner-border fs-6" v-if="spin"></div>
+              </button>
+
+              <n-modal v-model:show="showModal">
+                <n-card
+                  style="
+                    width: 600px;
+                    background-color: #20b2aa;
+                    color: white !important;
+                  "
+                  title=" "
+                  :bordered="false"
+                  size="huge"
+                  role="dialog"
+                  aria-modal="true"
+                >
+                  <template #header-extra v-show="showQrCode">
+                    <span class="text-white fs-4">
+                      Kiritilgan telefon raqamiga sms kod yuborildi! </span
+                    ><i class="fas fa-check-double text-white"></i>
+                  </template>
+                </n-card>
+              </n-modal>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -103,19 +140,18 @@
         </div>
       </Transition>
 
-     
-       <img :src="imgLink" alt=""  class="img-fluid w-75 m-auto d-block">
-   
-       <div ref = 'qr'>
-       
-       </div>
-  
+      <img :src="imgLink" alt="" class="img-fluid w- m-auto d-block" />
+
+      <div ref="qr">
+      
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import html2canvas from 'html2canvas';
+import { useRouter } from "vue-router";
+import html2canvas from "html2canvas";
 import { useCounterStore } from "../../stores/counter.js";
 import { ref, onMounted, watch } from "vue";
 import Navigation from "../Navigation.vue";
@@ -123,8 +159,8 @@ import axios from "axios";
 import { usePDF } from "vue3-pdfmake";
 
 const pdf = usePDF();
-let imageData = ref(null)
-let newData = ref(null)
+let imageData = ref(null);
+let newData = ref(null);
 
 let store = useCounterStore();
 let cardNumber = ref("");
@@ -134,13 +170,12 @@ store.increment().then((response) => {
 });
 let expires = ref("");
 
-const phone = ref("");
-let fullName = ref("");
+let Fname = ref("");
 let expire = ref("");
 let spin = ref(false);
 let loadAccess = ref(false);
 let hideCards = ref(true);
-
+let fullName = ref("");
 let cardToken = ref("");
 let receiptId = ref("");
 let qrCodeId = ref("");
@@ -149,26 +184,22 @@ let down = ref("");
 let qr = ref("");
 let codes = ref("");
 let imgLink = ref("");
+let rote = useRouter()
+let showQrCode = ref(true);
 
-let showQrCode = ref(true)
-
-
-
+onMounted(() => {
+  Fname.value.focus();
+});
 
 let showModal = ref(false);
 let postTicket = () => {
   spin.value = true;
 
-  if (
-    phone.value !== "" ||
-    fullName.value !== "" ||
-    expire.value !== "" ||
-    cardNumber.value !== ""
-  ) {
+  if (fullName.value !== "" || expire.value !== "" || cardNumber.value !== "") {
     axios
       .post(`https://bk.utickets.uz/api/Events/BuyTicket/${store.id}`, {
         fullName: fullName.value,
-        phoneNumber: phone.value,
+        phoneNumber: "",
         sector: store.secId,
         cardNumber: cardNumber.value,
         expire: expire.value,
@@ -201,8 +232,11 @@ let postTicket = () => {
 
 console.log(store.secId);
 
+let oneStepBack = ()=>{
+  rote.go(-1)
+}
+
 let postCode = async () => {
- 
   loadAccess.value = true;
   await axios
     .post(`https://bk.utickets.uz/api/Events/Pay`, {
@@ -216,20 +250,16 @@ let postCode = async () => {
         hideCards.value = false;
         loadAccess.value = false;
         qrCodeId.value = res.data.id;
-        console.log(`https://bk.utickets.uz/api/Events/GenQr/${res.data.id}`);
-        imgLink.value = `https://bk.utickets.uz/api/Events/GenQr/${res.data.id}`;
-   let resUrl = `https://bk.utickets.uz/api/Events/GenQr/${res.data.id}`
-        const url = window.URL.createObjectURL(new Blob([resUrl]));
-        const link = document.createElement("a");
-        link.href = url;
-        link.setAttribute("download", "file.png"); //or any other extension
-        qr.value.appendChild(link);
-       setTimeout(() => {
-
-        link.click();
-        showQrCode.value = false
-        window.print(resUrl)
-       }, 3000);
+        // console.log(`https://bk.utickets.uz/api/Events/GenQr/${res.data.id}`);
+    axios.get(`https://bk.utickets.uz/api/Events/GenQr/${res.data.id}`).then(el =>{
+      console.log(el);
+      imgLink.value ="data:image/png;base64,"+ el.data;
+   let a = document.createElement("a");
+   a.href = "data:image/png;base64,"+ el.data;
+   a.setAttribute('download', 'qr.png');
+   a.click();
+      
+    })
       }
     })
     .catch((err) => {
@@ -240,10 +270,16 @@ let postCode = async () => {
 };
 
 watch(cardNumber, (newVal) => {
-  if (cardNumber.value.length == 16) {
+  if (cardNumber.value.length >= 16) {
     expires.value.focus();
   }
 });
+
+let checkInput = () => {
+  if (event.target.value.length == 2) {
+    event.target.value = event.target.value + "/";
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -261,15 +297,17 @@ input[placeholder="860031294576767"] {
 }
 #paycard {
   background-image: url("../../assets/paycard.png");
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
   background-position: center;
-  padding-top: 140px;
+  padding-top: 160px;
   object-fit: cover;
   font-family: "Righteous", cursive;
+  height: 300px;
 }
 
 ::placeholder {
-  color: rgb(168, 168, 168);
+  color: rgb(255, 255, 255) !important;
 }
 
 input::-webkit-outer-spin-button,

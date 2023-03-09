@@ -5,9 +5,9 @@
         <Suspense>
           <component :is="Component"></component>
 
-          <template #fallback>
+          <!-- <template #fallback>
             <div class="spinner spinner-border"></div>
-          </template>
+          </template> -->
         </Suspense>
       </Transition>
     </template>

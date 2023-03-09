@@ -102,7 +102,7 @@
     Mavjud o'rinlar soni: <span class="badge bg-success">{{ sigim }}</span> o'rin
     <br>
     <router-link class="btn btn-dark bg-gradient float-end p-2 px-4 mt-2" style="clip-path:none" :to="{ name: 'register', params: { id: store.id } }"  @click="addSectorId(store.secId)" >
-    Xarid qilish <i class="fas fa-ticket-alt"></i>
+   Joy buyurtma qilish <i class="fas fa-ticket-alt"></i>
     </router-link>
    
     </n-card>
