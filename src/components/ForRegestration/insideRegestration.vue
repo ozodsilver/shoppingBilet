@@ -1,11 +1,13 @@
 <template>
   <Navigation></Navigation>
   <a href="#"></a>
-  <div class="container" style="height: 120vh">
+  <div class="container" style="height: 100vh">
   
 <button @click='oneStepBack' class="btn mt-2 btn-dark bg-gradient">
+
   <i class="fas fa-arrow-circle-left"></i>
 </button>
+<input type="text" style="visibility: hidden;" ref="fake">
     <h2 class="mt-5 text-muted">Ro'yxatdan o'tish</h2>
 
 
@@ -50,37 +52,32 @@
           </div>
 
           <div class="col-md-7 col-12">
-            <div class="row justify-content-md-center">
-              <div
-                class="col-12 col-md-9  mx-auto mt-2 rounded-3"
-                id="paycard"
-               
-              >
-                <input
+            <div class="row  justify-content-md-center">
+             
+<div class="w-75 bg-dark  bg-gradient rounded-3 d-flex align-items-center m-auto" style="height:250px">
+<div class="d-flex flex-column  justify-content-between" style="height: 160px;">
+  <input
                   type="text"
                   disabled
                   :value="cardNumber"
-                  class="form-control shadow-none m-2 mx-0 mx-sm-3 p-0 px-3 bg-transparent border-0 text-white fs-3"
+                  class="form-control shadow-none  bg-transparent border-0 text-white fs-3"
                   placeholder="860031294576767"
                 />
-
-                <div class="d-flex w-100 m-auto">
-                  <div>
                     <input
                       id="form12"
                       type="text"
                       ref="disExpire"
                       :value="expire"
                       placeholder="MM/YY"
-                      class="form-control w-50  mx-sm-4 text-white p-1 rounded-3 border bg-transparent"
+                      class="form-control w-50   text-white p-1 rounded-3 border bg-transparent"
                       disabled
-                    />
-                  </div>
-                </div>
-              </div>
+                    /> 
+</div> 
+</div>
+
               <button
               type="submit"
-                class="btn btn-success mx-auto mt-3 w-75 d-flex justify-content-center align-items-center gap-3"
+                class="btn btn-dark mx-auto mt-3 w-75 d-flex justify-content-center align-items-center gap-3"
                 @click.prevent="postTicket"
               >
                 jo'natish
@@ -186,9 +183,9 @@ let codes = ref("");
 let imgLink = ref("");
 let rote = useRouter()
 let showQrCode = ref(true);
-
+let fake = ref('')
 onMounted(() => {
-  Fname.value.focus();
+  fake.value.focus();
 });
 
 let showModal = ref(false);
@@ -293,17 +290,19 @@ input[placeholder="860031294576767"] {
   letter-spacing: 3px;
   font-family: "Varela Round", sans-serif;
   font-weight: bold;
-  margin-left: 20px;
+ 
 }
 #paycard {
   background-image: url("../../assets/paycard.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  padding-top: 160px;
+
+ position: relative;
+
   object-fit: cover;
   font-family: "Righteous", cursive;
-  height: 300px;
+
 }
 
 ::placeholder {

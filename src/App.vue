@@ -28,12 +28,7 @@ import { ref, onMounted } from "vue";
   font-family: "Inter", sans-serif;
 }
 
-html,
-body {
-  height: 100%;
-  /* background: rgb(58,180,148) !important;
-background: linear-gradient(215deg, rgba(58,180,148,0.06486344537815125) 0%, rgba(69,196,252,0.053658963585434205) 100%) !important; */
-}
+
 
 /* width */
 ::-webkit-scrollbar {
@@ -70,7 +65,7 @@ svg{
   transition: 0.2s;
 }
 
-.cls-4:nth-child(5){
+.cls-4:nth-child(9){
 fill:rgb(107, 107, 107) !important;
 }
 
