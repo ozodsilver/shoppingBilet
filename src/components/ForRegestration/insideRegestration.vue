@@ -4,7 +4,7 @@
     <h2 class="mt-5 text-muted">Ro'yxatdan o'tish</h2>
 
     <div class="row">
-      <div class="col-12 col-md-8 offset-md-2" v-if = '!show'>
+      <div class="col-12 col-md-8 offset-md-2" v-if="!show">
         <label for="form1" class="mt-3">Ism va Familiya</label>
         <input
           type="text"
@@ -52,7 +52,6 @@
             <div class="spinner spinner-border fs-6" v-if="spin"></div>
           </button>
 
-         
           <n-modal v-model:show="showModal">
             <n-card
               style="
@@ -73,47 +72,60 @@
               </template>
             </n-card>
           </n-modal>
-     
-        
         </div>
       </div>
 
       <Transition name="bounce">
+        <div
+          class="col-12 mt-4 position-relative d-flex flex-column align-items-center justify-content-center"
+          v-if="show"
+        >
+          <input
+            v-model="codes"
+            type="text"
+            class="form-control border w-50 mt-5"
+            placeholder="sms kodni kiriting"
+          />
+
+          <a
+            href="hello.txt"
+            download
+            ref="down"
+            class="btn btn-info mt-3 float-end d-flex align-items-center gap-2"
+            @click.prevent="postCode"
+          >
+            Tasdiqlash
             <div
-              class="col-12 mt-4 position-relative d-flex flex-column align-items-center justify-content-center"
-              v-if="show"
-            >
-              <input
-              v-model="codes"
-                type="text"
-                class="form-control border w-50 mt-5"
-                placeholder="sms kodni kiriting"
-              />
+              class="spinner spinner-border text-white"
+              v-if="loadAccess"
+            ></div>
+          </a>
+        </div>
+      </Transition>
 
-              <a href="hello.txt" download ref="down" class="btn btn-info mt-3 float-end d-flex align-items-center gap-2" @click.prevent="postCode">
-                Tasdiqlash
-                <div class="spinner spinner-border text-white" v-if = "loadAccess"></div>
-              </a>
-            </div>
-          </Transition>
-
-          <div ref = 'qr'>
-       <!-- <img src="" ref="qrCode" alt="" class="img-fluid d-block m-auto"> -->
+     
+       <img :src="imgLink" alt="" >
+   
+       <div ref = 'qr'>
+       
        </div>
+  
     </div>
   </div>
 </template>
 
 <script setup>
+import html2canvas from 'html2canvas';
 import { useCounterStore } from "../../stores/counter.js";
 import { ref, onMounted, watch } from "vue";
 import Navigation from "../Navigation.vue";
 import axios from "axios";
 import { usePDF } from "vue3-pdfmake";
 
-
-
 const pdf = usePDF();
+let imageData = ref(null)
+let newData = ref(null)
+
 let store = useCounterStore();
 let cardNumber = ref("");
 let show = ref(false);
@@ -133,9 +145,14 @@ let cardToken = ref("");
 let receiptId = ref("");
 let qrCodeId = ref("");
 let qrCode = ref("");
-let down = ref('')
-let qr = ref('')
-let codes = ref('')
+let down = ref("");
+let qr = ref("");
+let codes = ref("");
+let imgLink = ref("");
+
+let pdfs = ref('')
+
+
 
 
 let showModal = ref(false);
@@ -184,58 +201,41 @@ let postTicket = () => {
 
 console.log(store.secId);
 
-let postCode = () => {
-
-  loadAccess.value = true
-  axios
-    .post(`https://bk.utickets.uz/api/Events/Pay`,  {
+let postCode = async () => {
+ 
+  loadAccess.value = true;
+  await axios
+    .post(`https://bk.utickets.uz/api/Events/Pay`, {
       id: receiptId.value,
       token: cardToken.value,
       code: codes.value,
-    },
-   
-    )
+    })
     .then((res) => {
+      console.log(res.data);
       if (res.data) {
-        hideCards.value = false
-        loadAccess.value = false
+        hideCards.value = false;
+        loadAccess.value = false;
         qrCodeId.value = res.data.id;
-        // qrCode.value.src = `https://bk.utickets.uz/api/Events/GenQr/${res.data.id}`;
-
-        // const blob = new Blob([`https://bk.utickets.uz/api/Events/GenQr/${res.data.id}`], { type: 'image/png' })
-        // const link = document.createElement('a')
-        // link.href = URL.createObjectURL(blob)
-        // link.download = 'download'
-        // link.click()
-        // URL.revokeObjectURL(link.href)
-        // console.log(res.data);
-        // window.open(`https://bk.utickets.uz/api/Events/GenQr/${res.data.id}`, "Download")
-        console.log(res.data.id);
-let img = document.createElement('img')
-img.src = `https://bk.utickets.uz/api/Events/GenQr/${res.data.id}`
-img.setAttribute('class', 'd-block')
-img.setAttribute('class', 'm-auto')
-img.setAttribute('class', 'w-100')
-var url = `https://bk.utickets.uz/api/Events/GenQr/${res.data.id}.png`;
-var elem = document.createElement('a');
-elem.setAttribute('download', 'download');
-elem.appendChild(img)
-qr.value.appendChild(elem)
-    elem.href = url;
-    setTimeout(() => {
-      elem.click();
-    }, 600);
-
-
+        console.log(`https://bk.utickets.uz/api/Events/GenQr/${res.data.id}`);
+        imgLink.value = `https://bk.utickets.uz/api/Events/GenQr/${res.data.id}`;
+   let resUrl = `https://bk.utickets.uz/api/Events/GenQr/${res.data.id}`
+        const url = window.URL.createObjectURL(new Blob([resUrl]));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", "file.png"); //or any other extension
+        qr.value.appendChild(link);
+       setTimeout(() => {
+        
+        link.click();
+        window.print(resUrl)
+       }, 3000);
       }
-    }).catch(err =>{
+    })
+    .catch((err) => {
       console.log(err);
       alert("yaroqsiz Kod");
       loadAccess.value = false;
-    })
-
-
-
+    });
 };
 
 watch(cardNumber, (newVal) => {
@@ -294,8 +294,6 @@ input::-webkit-inner-spin-button {
     transform: scale(1);
   }
 }
-
-
 
 @import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
 
