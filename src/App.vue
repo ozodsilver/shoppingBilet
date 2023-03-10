@@ -26,10 +26,13 @@ import { ref, onMounted } from "vue";
   padding: 0;
   box-sizing: border-box;
   font-family: "Inter", sans-serif;
-  cursor:  url('./assets/cur.png') 1 0, auto !important; 
+  cursor: url("./assets/cur.png") 1 0, auto;
+  caret-color: rgb(33, 15, 231);
 }
 
-
+path:hover {
+  cursor: pointer;
+}
 
 /* width */
 ::-webkit-scrollbar {
@@ -62,24 +65,20 @@ import { ref, onMounted } from "vue";
 .v-leave-to {
   opacity: 0;
 }
-svg{
+svg {
   transition: 0.2s;
 }
 
-.cls-4:nth-child(9){
-fill:rgb(107, 107, 107) !important;
+.cls-4:nth-child(9) {
+  fill: rgb(107, 107, 107) !important;
 }
 
-#p4{
-fill:rgb(244, 153, 62) !important;
+#p4 {
+  fill: rgb(244, 153, 62) !important;
 }
-#p5{
-  fill:rgb(244, 153, 62) !important;
+#p5 {
+  fill: rgb(244, 153, 62) !important;
 }
-
-
-
-
 
 .cls-4 {
   opacity: 0.6;
@@ -98,10 +97,6 @@ svg:hover path {
   transition: 0.2s;
   stroke-width: 6;
 }
-
-
-
-
 
 @import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
 </style>

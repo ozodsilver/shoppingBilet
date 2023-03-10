@@ -1,4 +1,3 @@
-let base = 'https://bk.utickets.uz/';
-
-
+let base = 'https://test.utickets.uz/';
 export default base;
+

@@ -2,7 +2,10 @@
   <Navigation></Navigation>
   <a href="#"></a>
   <div class="container">
-    <button @click="oneStepBack" class="btn mt-2 btn-dark bg-gradient">
+    <button
+      @click="oneStepBack"
+      class="btn mt-2 rounded-pill btn-dark bg-gradient"
+    >
       <i class="fas fa-arrow-circle-left"></i>
     </button>
     <input type="text" style="visibility: hidden" ref="fake" />
@@ -26,7 +29,7 @@
               <label for="form12">Karta raqamingizni kiriting</label>
               <input
                 required
-                type="text"
+                type="number"
                 id="form12"
                 class="form-control border-secondary border rounded-pill"
                 v-model="cardNumber"
@@ -38,6 +41,7 @@
               <input
                 required
                 type="text"
+                placeholder="MM/YY"
                 id="form12"
                 class="form-control w-50 border-secondary border rounded-pill"
                 maxlength="5"
@@ -51,9 +55,10 @@
           <div class="col-lg-5 col-md-8 offset-0 col-11 m-auto">
             <div class="row justify-content-md-center">
               <div
-                class="bg-dark bg-gradient rounded-3 mt-3 d-flex align-items-center m-auto"
+                class="bg-dark bg-gradient rounded-3 mt-3 d-flex align-items-center m-auto ripple"
                 id="bgHumo"
                 style="height: 260px"
+                data-mdb-ripple-color="light"
               >
                 <div
                   class="d-flex flex-column justify-content-between"
@@ -143,9 +148,31 @@
         </div>
       </Transition>
 
-      <img :src="imgLink" alt="" class="img-fluid w- m-auto d-block" />
+      <img :src="imgLink" alt="" class="img-fluid w-50 m-auto d-block" />
 
-      <div ref="qr"></div>
+      <n-modal v-model:show="showModals" preset="dialog" title="Dialog"   >
+        <template #header>
+          <div>Diqqat!</div>
+        </template>
+        <div class="dialogModal">
+          QR code Qurilmangizga muvaffaqiyatli yuklab olindi.
+          <i class="far fa-check-circle text-success fs-6"></i> <br />
+          Ushbu QR codedan faqat bir marotaba foydalanish mumkin
+          <i class="fas fa-exclamation-circle text-warning"></i>
+          <br />
+          <span class="badge bg-success mt-3 fw-bold text-capitalize ">QR code ma'lumotlari</span> <br />
+
+Joy band qilingan: <span class="badge bg-dark ">{{ secName }}</span>  dan<br>
+Xarid amalga oshirilgan: <span class="badge bg-dark"> {{ NameFull }}</span> <br> tomonidan <br>
+
+
+
+        </div>
+
+        <template #action>
+          <div></div>
+        </template>
+      </n-modal>
     </div>
   </div>
 </template>
@@ -175,7 +202,7 @@ let fullName = ref("");
 let cardToken = ref("");
 let receiptId = ref("");
 let qrCodeId = ref("");
-
+let showModals = ref(false);
 let down = ref("");
 let qr = ref("");
 let codes = ref("");
@@ -185,6 +212,9 @@ let rote = useRouter();
 let fake = ref("");
 let validate = ref("");
 
+let secName = ref("");
+let NameFull = ref("");
+
 onMounted(() => {
   fake.value.focus();
 });
@@ -192,15 +222,14 @@ onMounted(() => {
 let showModal = ref(false);
 let postTicket = () => {
   spin.value = true;
- 
 
   if (fullName.value !== "" || expire.value !== "" || cardNumber.value !== "") {
     axios
-      .post(`https://bk.utickets.uz/api/Events/BuyTicket/${store.id}`, {
+      .post(`${window.base}api/Events/BuyTicket/${store.id}`, {
         fullName: fullName.value,
         phoneNumber: "",
         sector: store.secId,
-        cardNumber: cardNumber.value,
+        cardNumber: cardNumber.value.toString(),
         expire: expire.value,
       })
       .then((res) => {
@@ -238,7 +267,7 @@ let oneStepBack = () => {
 let postCode = async () => {
   loadAccess.value = true;
   await axios
-    .post(`https://bk.utickets.uz/api/Events/Pay`, {
+    .post(`${window.base}api/Events/Pay`, {
       id: receiptId.value,
       token: cardToken.value,
       code: codes.value,
@@ -249,9 +278,14 @@ let postCode = async () => {
         hideCards.value = false;
         loadAccess.value = false;
         qrCodeId.value = res.data.id;
-        // console.log(`https://bk.utickets.uz/api/Events/GenQr/${res.data.id}`);
+        showModals.value = true;
+
+        // QR code info for modal
+        secName.value = res.data.sectorName;
+      NameFull.value = res.data.fullName;
+       // QR code info for modal
         axios
-          .get(`https://bk.utickets.uz/api/Events/GenQr/${res.data.id}`)
+          .get(`${window.base}api/Events/GenQr/${res.data.id}`)
           .then((el) => {
             console.log(el);
             imgLink.value = "data:image/png;base64," + el.data;
@@ -315,7 +349,7 @@ input[placeholder="860031294576767"] {
 }
 
 ::placeholder {
-  color: rgb(255, 255, 255) !important;
+  color: rgb(221, 213, 213) !important;
 }
 
 input::-webkit-outer-spin-button,
@@ -340,6 +374,13 @@ input::-webkit-inner-spin-button {
   100% {
     transform: scale(1);
   }
+}
+
+.dialogModal{
+  background-image: url('../../assets/forBack.png') !important;
+   background-position: right 20px !important;
+    background-size: contain !important;
+    background-repeat: no-repeat;
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");

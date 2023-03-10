@@ -13,8 +13,7 @@ import App from "./App.vue";
 import router from "./router";
 import lang from "./i18n/index.js";
 import naive from "naive-ui";
-import { PDFPlugin } from 'vue3-pdfmake';
-
+import { PDFPlugin } from "vue3-pdfmake";
 
 const VueTelInputOptions = {
   mode: "international",

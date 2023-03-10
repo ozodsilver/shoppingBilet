@@ -56,26 +56,12 @@
 
             <router-link to="/reg">
               <button
-                class="w-100 m-auto d-block shadow bg-dark bg-gradient text-white rounded border-0 text-transform-lowercase"
+                class="w-100 m-auto d-flex justify-content-center align-items-center gap-3 shadow bg-dark bg-gradient text-white rounded border-0 text-transform-lowercase"
                 @click="addId(info.id)"
               >
               
-                Joy band qilish
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                  data-svg="cart"
-                >
-                  <circle fill="white" cx="7.3" cy="17.3" r="1.4"></circle>
-                  <circle fill="white" cx="13.3" cy="17.3" r="1.4"></circle>
-                  <polyline
-                    fill="white"
-                    stroke="#fff"
-                    points="0 2 3.2 4 5.3 12.5 16 12.5 18 6.5 8 6.5"
-                  ></polyline>
-                </svg>
+                 Xarid qilish
+                 <i class="fas fa-ticket-alt"></i>
               </button>
             </router-link>
           </div>

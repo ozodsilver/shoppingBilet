@@ -129,8 +129,9 @@
                 > -->
                 <path
                 @click="addSectorId(1, 'Sector 1')"
-                  class="cls-4"
+                  class="cls-4 ripple"
                   id="p1"
+                  data-mdb-ripple-color="light"
                   d="M210.72,220.93A277.54,277.54,0,0,1,263,169.17a4.06,4.06,0,0,0,.87-5.59l-74.26-104a4.06,4.06,0,0,0-5.43-1.1A391.78,391.78,0,0,0,78,155.63a4,4,0,0,0,1.08,5.84l88.15,56.15a4,4,0,0,0,5.52-1.14l5.52-8.11a4.05,4.05,0,0,1,5.62-1.07l21.34,14.52A4.05,4.05,0,0,0,210.72,220.93Z"
                 ></path>
                 <text x="20" transform="translate(-30,-30)"  @click="addSectorId(1, 'Sector 1')">
@@ -427,7 +428,7 @@ let showModal = ref(false)
 
 onMounted(() => {
   axios
-    .get(`https://bk.utickets.uz/api/Events/GetEvent/${store.id}`)
+    .get(`${window.base}api/Events/GetEvent/${store.id}`)
     .then((el) => {
       console.log(el);
       Object.assign(obj, el.data);
@@ -436,7 +437,7 @@ onMounted(() => {
 
   console.log(store.id);
   axios
-    .get(`https://bk.utickets.uz/api/Events/GetSectors/${store.id}`)
+    .get(`${window.base}api/Events/GetSectors/${store.id}`)
     .then((javob) => {
       console.log(javob);
       javob.data.forEach((response) => {
