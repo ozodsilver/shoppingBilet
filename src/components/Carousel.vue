@@ -12,7 +12,8 @@
           <img
             :src="image.image"
             alt=""
-            class="rounded-5 img-fluid"
+            class="rounded-5 img-fluid "
+            
           
           />
         </div>
@@ -30,7 +31,7 @@
       >
         <Slide v-for="(slide, index) in images" :key="slide">
           <div class="carousel__item" @click="slideTo(index)">
-            <img class="w-75 rounded-4" :src="slide.image" alt="" />
+            <img class="w-100 rounded-4" :src="slide.image" alt="" />
           </div>
         </Slide>
       </Carousel>

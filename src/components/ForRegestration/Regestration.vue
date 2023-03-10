@@ -38,7 +38,7 @@
                           " " +
                           new Date(obj.startsAt).getHours() +
                           ":" +
-                          new Date(obj.startsAt).getMinutes()
+                          new Date(obj.startsAt).getMinutes() 
                         }}
                       </small>
                     </abbr>

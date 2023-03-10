@@ -26,6 +26,7 @@ import { ref, onMounted } from "vue";
   padding: 0;
   box-sizing: border-box;
   font-family: "Inter", sans-serif;
+  cursor:  url('./assets/cur.png') 1 0, auto !important; 
 }
 
 
@@ -72,7 +73,7 @@ fill:rgb(107, 107, 107) !important;
 #p4{
 fill:rgb(244, 153, 62) !important;
 }
-#p6{
+#p5{
   fill:rgb(244, 153, 62) !important;
 }
 
@@ -97,6 +98,8 @@ svg:hover path {
   transition: 0.2s;
   stroke-width: 6;
 }
+
+
 
 
 

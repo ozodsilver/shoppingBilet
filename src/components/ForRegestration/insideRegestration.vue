@@ -1,23 +1,20 @@
 <template>
   <Navigation></Navigation>
   <a href="#"></a>
-  <div class="container" >
-  
-<button @click='oneStepBack' class="btn mt-2 btn-dark bg-gradient">
-
-  <i class="fas fa-arrow-circle-left"></i>
-</button>
-<input type="text" style="visibility: hidden;" ref="fake">
+  <div class="container">
+    <button @click="oneStepBack" class="btn mt-2 btn-dark bg-gradient">
+      <i class="fas fa-arrow-circle-left"></i>
+    </button>
+    <input type="text" style="visibility: hidden" ref="fake" />
     <h2 class="mt-5 text-muted">Ro'yxatdan o'tish</h2>
-
 
     <div class="row">
       <div class="col-12 col-md-12" v-if="!show">
         <div class="row">
-          <div class="col-sm-5 col-12">
+          <div class="col-lg-6 col-md-12 col-12">
             <label for="form1" class="mt-3">Ism va Familiya</label>
             <input
-            required
+              required
               type="text"
               class="form-control border border-secondary rounded-pill"
               id="form1"
@@ -28,7 +25,7 @@
             <div class="mt-3">
               <label for="form12">Karta raqamingizni kiriting</label>
               <input
-              required
+                required
                 type="text"
                 id="form12"
                 class="form-control border-secondary border rounded-pill"
@@ -39,7 +36,7 @@
             <div class="mt-3">
               <label for="form12">Amal qilish muddatini kiriting</label>
               <input
-              required
+                required
                 type="text"
                 id="form12"
                 class="form-control w-50 border-secondary border rounded-pill"
@@ -51,36 +48,44 @@
             </div>
           </div>
 
-          <div class="col-md-6 offset-sm-1 offset-0 col-12">
-            <div class="row  justify-content-md-center">
-             
-<div class="w-100 bg-dark  bg-gradient rounded-3 mt-3 d-flex align-items-center m-auto" style="height:250px">
-<div class="d-flex flex-column  justify-content-between" style="height: 160px;">
-  <input
-                  type="text"
-                  disabled
-                  :value="cardNumber"
-                  class="form-control shadow-none  bg-transparent border-0 text-white fs-3"
-                  placeholder="860031294576767"
-                />
+          <div class="col-lg-5 col-md-8 offset-0 col-11 m-auto">
+            <div class="row justify-content-md-center">
+              <div
+                class="bg-dark bg-gradient rounded-3 mt-3 d-flex align-items-center m-auto"
+                id="bgHumo"
+                style="height: 260px"
+              >
+                <div
+                  class="d-flex flex-column justify-content-between"
+                  style="height: 160px"
+                >
+                  <input
+                    type="text"
+                    disabled
+                    :value="cardNumber"
+                    class="form-control shadow-none bg-transparent border-0 text-white fs-3"
+                    placeholder="860031294576767"
+                  />
+                  <div class="d-flex">
                     <input
                       id="form12"
                       type="text"
                       ref="disExpire"
                       :value="expire"
                       placeholder="MM/YY"
-                      class="form-control w-50   text-white p-1 rounded-3 border bg-transparent"
+                      class="form-control w-50 text-white p-1 rounded-3 border bg-transparent"
                       disabled
-                    /> 
-</div> 
-</div>
+                    />
+                  </div>
+                </div>
+              </div>
 
               <button
-              type="submit"
-                class="btn btn-dark mx-auto mt-3 w-75 d-flex justify-content-center align-items-center gap-3"
+                type="submit"
+                class="btn btn-success mx-auto mt-3 w-75 d-flex justify-content-center align-items-center gap-3"
                 @click.prevent="postTicket"
               >
-                jo'natish
+                jo'natish <i class="fas fa-arrow-alt-circle-right"></i>
                 <div class="spinner spinner-border fs-6" v-if="spin"></div>
               </button>
 
@@ -97,7 +102,7 @@
                   role="dialog"
                   aria-modal="true"
                 >
-                  <template #header-extra v-show="showQrCode">
+                  <template #header-extra>
                     <span class="text-white fs-4">
                       Kiritilgan telefon raqamiga sms kod yuborildi! </span
                     ><i class="fas fa-check-double text-white"></i>
@@ -115,6 +120,7 @@
           v-if="show"
         >
           <input
+            ref="validate"
             v-model="codes"
             type="text"
             class="form-control border w-50 mt-5"
@@ -139,25 +145,18 @@
 
       <img :src="imgLink" alt="" class="img-fluid w- m-auto d-block" />
 
-      <div ref="qr">
-      
-      </div>
+      <div ref="qr"></div>
     </div>
   </div>
 </template>
 
 <script setup>
 import { useRouter } from "vue-router";
-import html2canvas from "html2canvas";
+
 import { useCounterStore } from "../../stores/counter.js";
 import { ref, onMounted, watch } from "vue";
 import Navigation from "../Navigation.vue";
 import axios from "axios";
-import { usePDF } from "vue3-pdfmake";
-
-const pdf = usePDF();
-let imageData = ref(null);
-let newData = ref(null);
 
 let store = useCounterStore();
 let cardNumber = ref("");
@@ -176,14 +175,16 @@ let fullName = ref("");
 let cardToken = ref("");
 let receiptId = ref("");
 let qrCodeId = ref("");
-let qrCode = ref("");
+
 let down = ref("");
 let qr = ref("");
 let codes = ref("");
 let imgLink = ref("");
-let rote = useRouter()
-let showQrCode = ref(true);
-let fake = ref('')
+let rote = useRouter();
+
+let fake = ref("");
+let validate = ref("");
+
 onMounted(() => {
   fake.value.focus();
 });
@@ -191,6 +192,7 @@ onMounted(() => {
 let showModal = ref(false);
 let postTicket = () => {
   spin.value = true;
+ 
 
   if (fullName.value !== "" || expire.value !== "" || cardNumber.value !== "") {
     axios
@@ -229,9 +231,9 @@ let postTicket = () => {
 
 console.log(store.secId);
 
-let oneStepBack = ()=>{
-  rote.go(-1)
-}
+let oneStepBack = () => {
+  rote.go(-1);
+};
 
 let postCode = async () => {
   loadAccess.value = true;
@@ -248,15 +250,16 @@ let postCode = async () => {
         loadAccess.value = false;
         qrCodeId.value = res.data.id;
         // console.log(`https://bk.utickets.uz/api/Events/GenQr/${res.data.id}`);
-    axios.get(`https://bk.utickets.uz/api/Events/GenQr/${res.data.id}`).then(el =>{
-      console.log(el);
-      imgLink.value ="data:image/png;base64,"+ el.data;
-   let a = document.createElement("a");
-   a.href = "data:image/png;base64,"+ el.data;
-   a.setAttribute('download', 'qr.png');
-   a.click();
-      
-    })
+        axios
+          .get(`https://bk.utickets.uz/api/Events/GenQr/${res.data.id}`)
+          .then((el) => {
+            console.log(el);
+            imgLink.value = "data:image/png;base64," + el.data;
+            let a = document.createElement("a");
+            a.href = "data:image/png;base64," + el.data;
+            a.setAttribute("download", "qr.png");
+            a.click();
+          });
       }
     })
     .catch((err) => {
@@ -290,19 +293,25 @@ input[placeholder="860031294576767"] {
   letter-spacing: 3px;
   font-family: "Varela Round", sans-serif;
   font-weight: bold;
- 
 }
 #paycard {
   background-image: url("../../assets/paycard.png");
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: 100px 200px !important;
 
- position: relative;
+  position: relative;
 
   object-fit: cover;
   font-family: "Righteous", cursive;
-
+}
+#bgHumo {
+  background-image: url("../../assets/paycard.png") !important;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center !important;
+  object-fit: cover !important;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif !important;
 }
 
 ::placeholder {
