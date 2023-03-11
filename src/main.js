@@ -7,7 +7,7 @@ import "vue3-tel-input/dist/vue3-tel-input.css";
 
 // global components
 import Footer from "./components/Footer.vue";
-import Navigation from "./components/Navigations.vue";
+// import Navigation from "./components/Navigations.vue";
 
 import App from "./App.vue";
 import router from "./router";
@@ -22,7 +22,7 @@ const VueTelInputOptions = {
 
 const app = createApp(App);
 window.base = base;
-app.component("Navigation", Navigation);
+// app.component("Navigation", Navigation);
 app.component("Footer", Footer);
 app.use(createPinia());
 app.use(PDFPlugin);
