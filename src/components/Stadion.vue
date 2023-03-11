@@ -43,16 +43,7 @@
             </a>
           </div>
           <div class="card-body p-0">
-            <n-gradient-text
-              :size="24"
-              :gradient="{
-                from: 'rgb(85, 85, 85)',
-                to: 'rgb(170, 170, 170)',
-              }"
-              class="my-3"
-            >
-              {{ info.name }}
-            </n-gradient-text>
+           <h6 class="my-3"> {{ info.name }}</h6>
 
             <router-link :to="{name:'Registration', params:{id:info.id}}">
               <button
