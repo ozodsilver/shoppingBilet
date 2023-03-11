@@ -54,14 +54,14 @@
               {{ info.name }}
             </n-gradient-text>
 
-            <router-link to="/reg">
+            <router-link :to="{name:'Registration', params:{id:info.id}}">
               <button
                 class="w-100 m-auto d-flex justify-content-center align-items-center gap-3 shadow bg-dark bg-gradient text-white rounded border-0 text-transform-lowercase"
-                @click="addId(info.id)"
+             
               >
               
                  Xarid qilish
-                 <i class="fas fa-ticket-alt"></i>
+                 <i class="fas fa-ticket-alt " style="color:#F4CA16"></i>
               </button>
             </router-link>
           </div>
@@ -83,9 +83,7 @@ let load = ref(true);
 let store = useCounterStore();
 
 // methods
-const addId = (id) => {
-  store.id = id;
-};
+
 
 onMounted(() => {
   axios

@@ -4,7 +4,7 @@
   <div class="container">
     <button
       @click="oneStepBack"
-      class="btn mt-2 rounded-pill btn-dark bg-gradient"
+      class="btn mt-5 rounded-pill btn-dark bg-gradient"
     >
       <i class="fas fa-arrow-circle-left"></i>
     </button>
@@ -36,19 +36,26 @@
               />
             </div>
 
-            <div class="mt-3">
+            <div class="mt-3 position-relative">
               <label for="form12">Amal qilish muddatini kiriting</label>
               <input
                 required
                 type="text"
                 placeholder="MM/YY"
                 id="form12"
-                class="form-control w-50 border-secondary border rounded-pill"
+                class="form-control border-secondary border rounded-pill position-relative"
                 maxlength="5"
                 ref="expires"
                 v-model="expire"
                 @input="checkInput"
               />
+              <button
+                class="btn btn-info p-1 px-3 text-capitalize position-absolute rounded-pill"
+                style="top: 31px; right: 7px"
+                @click="expires.value = ''"
+              >
+                reset
+              </button>
             </div>
           </div>
 
@@ -88,7 +95,7 @@
               <button
                 type="submit"
                 class="btn btn-success mx-auto mt-3 w-75 d-flex justify-content-center align-items-center gap-3"
-                @click.prevent="postTicket"
+                @click="postTicket"
               >
                 jo'natish <i class="fas fa-arrow-alt-circle-right"></i>
                 <div class="spinner spinner-border fs-6" v-if="spin"></div>
@@ -96,12 +103,9 @@
 
               <n-modal v-model:show="showModal">
                 <n-card
-                  style="
-                    width: 600px;
+                  style="width: 600px;
                     background-color: #20b2aa;
-                    color: white !important;
-                  "
-                  title=" "
+                    color: white !important;"
                   :bordered="false"
                   size="huge"
                   role="dialog"
@@ -119,7 +123,9 @@
         </div>
       </div>
 
+      <h5 class="mt-5" v-if = 'show'>SMS code ushbu telefon raqamiga yuborildi: <span class="badge bg-light shadow text-dark"> {{ telNum }}  <i class="fas fa-check-circle text-success"></i></span></h5>
       <Transition name="bounce">
+     
         <div
           class="col-12 mt-4 position-relative d-flex flex-column align-items-center justify-content-center"
           v-if="show"
@@ -150,7 +156,7 @@
 
       <img :src="imgLink" alt="" class="img-fluid w-50 m-auto d-block" />
 
-      <n-modal v-model:show="showModals" preset="dialog" title="Dialog"   >
+      <n-modal v-model:show="showModals" preset="dialog" title="Dialog">
         <template #header>
           <div>Diqqat!</div>
         </template>
@@ -160,13 +166,16 @@
           Ushbu QR codedan faqat bir marotaba foydalanish mumkin
           <i class="fas fa-exclamation-circle text-warning"></i>
           <br />
-          <span class="badge bg-success mt-3 fw-bold text-capitalize ">QR code ma'lumotlari</span> <br />
+          <span class="badge bg-success mt-3 fw-bold text-capitalize"
+            >QR code ma'lumotlari</span
+          >
+          <br />
 
-Joy band qilingan: <span class="badge bg-dark ">{{ secName }}</span>  dan<br>
-Xarid amalga oshirilgan: <span class="badge bg-dark"> {{ NameFull }}</span> <br> tomonidan <br>
-
-
-
+          Joy band qilingan:
+          <span class="badge bg-dark">{{ secName }}</span> dan<br />
+          Xarid amalga oshirilgan:
+          <span class="badge bg-dark"> {{ NameFull }}</span> <br />
+          tomonidan <br />
         </div>
 
         <template #action>
@@ -178,19 +187,17 @@ Xarid amalga oshirilgan: <span class="badge bg-dark"> {{ NameFull }}</span> <br>
 </template>
 
 <script setup>
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 
 import { useCounterStore } from "../../stores/counter.js";
 import { ref, onMounted, watch } from "vue";
-import Navigation from "../Navigation.vue";
+import Navigation from "../Navigations.vue";
 import axios from "axios";
 
 let store = useCounterStore();
 let cardNumber = ref("");
 let show = ref(false);
-store.increment().then((response) => {
-  console.log(response);
-});
+
 let expires = ref("");
 
 let Fname = ref("");
@@ -207,7 +214,11 @@ let down = ref("");
 let qr = ref("");
 let codes = ref("");
 let imgLink = ref("");
+
+// router
 let rote = useRouter();
+let route = useRoute();
+// router
 
 let fake = ref("");
 let validate = ref("");
@@ -215,8 +226,11 @@ let validate = ref("");
 let secName = ref("");
 let NameFull = ref("");
 
+let telNum = ref("");
+
 onMounted(() => {
   fake.value.focus();
+  console.log(route.params.id);
 });
 
 let showModal = ref(false);
@@ -225,27 +239,23 @@ let postTicket = () => {
 
   if (fullName.value !== "" || expire.value !== "" || cardNumber.value !== "") {
     axios
-      .post(`${window.base}api/Events/BuyTicket/${store.id}`, {
+      .post(`${window.base}api/Events/BuyTicket/${route.params.id}`, {
         fullName: fullName.value,
-        phoneNumber: "",
+        phoneNumber: "6757",
         sector: store.secId,
         cardNumber: cardNumber.value.toString(),
         expire: expire.value,
       })
       .then((res) => {
-        console.log(res);
         if (res.data) {
           show.value = true;
           spin.value = false;
           cardToken.value = res.data.cardToken;
           receiptId.value = res.data.receiptId;
-          setTimeout(() => {
-            showModal.value = true;
-          }, 20);
+          console.log(res);
 
-          setTimeout(() => {
-            showModal.value = false;
-          }, 2000);
+          telNum.value = res.data.phoneNumber;
+
         }
       })
       .catch((err) => {
@@ -273,6 +283,10 @@ let postCode = async () => {
       code: codes.value,
     })
     .then((res) => {
+      console.log(receiptId.value);
+      console.log(cardToken.value);
+      console.log(codes.value);
+
       console.log(res.data);
       if (res.data) {
         hideCards.value = false;
@@ -282,8 +296,9 @@ let postCode = async () => {
 
         // QR code info for modal
         secName.value = res.data.sectorName;
-      NameFull.value = res.data.fullName;
-       // QR code info for modal
+        NameFull.value = res.data.fullName;
+        // QR code info for modal
+        console.log(secName.value);
         axios
           .get(`${window.base}api/Events/GenQr/${res.data.id}`)
           .then((el) => {
@@ -304,8 +319,10 @@ let postCode = async () => {
 };
 
 watch(cardNumber, (newVal) => {
-  if (cardNumber.value.length >= 16) {
+  console.log(cardNumber.value.toString().length);
+  if (cardNumber.value.toString().length >= 16) {
     expires.value.focus();
+    console.log(expires.value);
   }
 });
 
@@ -376,11 +393,11 @@ input::-webkit-inner-spin-button {
   }
 }
 
-.dialogModal{
-  background-image: url('../../assets/forBack.png') !important;
-   background-position: right 20px !important;
-    background-size: contain !important;
-    background-repeat: no-repeat;
+.dialogModal {
+  background-image: url("../../assets/forBack.png") !important;
+  background-position: right 20px !important;
+  background-size: contain !important;
+  background-repeat: no-repeat;
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");

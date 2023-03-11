@@ -10,10 +10,5 @@ export const useCounterStore = defineStore('counter', {
     }
   },
 
-  actions: {
-    increment() {
-  let res = axios.get(`${window.base}api/Events/GetSectors/${this.id}`)
-    return res
-    }
-  },
+
 })

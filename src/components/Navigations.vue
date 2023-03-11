@@ -31,8 +31,9 @@
                 aria-current="page"
                 >
                 
-                {{ $t('navigation.home') }}
-                <i class="fas fa-home"></i>
+                <!-- {{ $t('navigation.home') }} -->
+                <!-- <i class="fas fa-home"></i> -->
+                <img src="../assets/UNIRED_LOGO_red.png" alt="" class="img-fluid "  style="width:40px">
               </router-link>
             </li>
 

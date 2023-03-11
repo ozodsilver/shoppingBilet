@@ -12,8 +12,10 @@ const router = createRouter({
       component: Home,
     },
     {
-      path: "/reg",
+      path: "/Registration/:id",
+      name:'Registration',
       component: Registration,
+      props:true
     },
 
     {

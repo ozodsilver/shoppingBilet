@@ -93,6 +93,11 @@ svg {
   transform: translate(0, -8px);
 }
 
+text:hover .cls-4{
+  fill: rgb(75, 23, 166) !important;
+  transform: translate(0, -8px) !important;
+}
+
 svg:hover path {
   transition: 0.2s;
   stroke-width: 6;

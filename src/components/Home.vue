@@ -7,7 +7,7 @@
 </template>
 
 <script setup>
-import Navigation from '../components/Navigation.vue'
+import Navigation from './Navigations.vue'
 import Carousel from '../components/Carousel.vue'
 import Stadion from '../components/Stadion.vue'
 import Footer from '../components/Footer.vue'

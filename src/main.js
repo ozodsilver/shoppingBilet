@@ -7,7 +7,7 @@ import "vue3-tel-input/dist/vue3-tel-input.css";
 
 // global components
 import Footer from "./components/Footer.vue";
-import Navigation from "./components/Navigation.vue";
+import Navigation from "./components/Navigations.vue";
 
 import App from "./App.vue";
 import router from "./router";
