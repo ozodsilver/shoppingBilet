@@ -4,20 +4,27 @@
   <div class="container">
     <button
       @click="oneStepBack"
-      class="btn mt-5 rounded-pill btn-dark bg-gradient"
+      class="btn mt-5 rounded-pill btn-info bg-gradient"
     >
       <i class="fas fa-arrow-circle-left"></i>
     </button>
+    <span
+      class="badge bg-info rounded-pill bg-gradient fs-6 ml-5 d-block float-end"
+      style="margin-top: 50px"
+    >
+      Sector {{ store.secId + 1 }}</span
+    >
     <input type="text" style="visibility: hidden" ref="fake" />
     <h2 class="mt-5 text-muted">Ro'yxatdan o'tish</h2>
 
     <div class="row">
       <div class="col-12 col-md-12" v-if="!show">
         <div class="row">
-          <div class="col-lg-6 col-md-12 col-12">
-            <label for="form1" class="mt-3">Ism va Familiya</label>
+          <div class="col-lg-5 col-md-12 col-12 m-auto">
+            <label class="mt-3">Ism va Familiya</label>
             <input
               required
+              placeholder="Ism va familiya"
               type="text"
               class="form-control border border-secondary rounded-pill"
               id="form1"
@@ -25,29 +32,36 @@
               ref="Fname"
             />
 
-            <div class="mt-3">
-              <label for="form12">Karta raqamingizni kiriting</label>
+            <div class="mt-3 position-relative">
+              <label>Karta raqamingizni kiriting</label>
               <input
                 required
-                type="number"
-                id="form12"
+                type="text"
+                placeholder="8600 **** **** 3241"
+                ref="cardVal"
                 class="form-control border-secondary border rounded-pill"
                 v-model="cardNumber"
               />
+
+              <button
+                class="btn btn-info p-1 px-3 text-capitalize position-absolute rounded-pill"
+                style="top: 31px; right: 7px"
+                @click="cardVal.value = ''"
+              >
+                reset
+              </button>
             </div>
 
             <div class="mt-3 position-relative">
-              <label for="form12">Amal qilish muddatini kiriting</label>
+              <label>Amal qilish muddatini kiriting</label>
               <input
                 required
                 type="text"
                 placeholder="MM/YY"
-                id="form12"
                 class="form-control border-secondary border rounded-pill position-relative"
                 maxlength="5"
                 ref="expires"
                 v-model="expire"
-                @input="checkInput"
               />
               <button
                 class="btn btn-info p-1 px-3 text-capitalize position-absolute rounded-pill"
@@ -57,30 +71,36 @@
                 reset
               </button>
             </div>
+
+            <a
+              href="https://cdn.payme.uz/terms/main.html?target=_blank"
+              target="_blank"
+              class="my-4 d-block"
+              >Payme offerta</a
+            >
           </div>
 
-          <div class="col-lg-5 col-md-8 offset-0 col-11 m-auto">
-            <div class="row justify-content-md-center">
+          <div class="col-auto m-auto">
+            <div class="row justify-content-center">
               <div
                 class="bg-dark bg-gradient rounded-3 mt-3 d-flex align-items-center m-auto ripple"
                 id="bgHumo"
-                style="height: 260px"
+                style="height: 240px; min-width: 240px; max-width: 410px"
                 data-mdb-ripple-color="light"
               >
                 <div
-                  class="d-flex flex-column justify-content-between"
+                  class="d-flex flex-column justify-content-around w-100"
                   style="height: 160px"
                 >
                   <input
                     type="text"
                     disabled
-                    :value="cardNumber"
+                   
                     class="form-control shadow-none bg-transparent border-0 text-white fs-3"
-                    placeholder="860031294576767"
-                  />
+                    :placeholder="cardNumber
+                  "/>
                   <div class="d-flex">
                     <input
-                      id="form12"
                       type="text"
                       ref="disExpire"
                       :value="expire"
@@ -94,7 +114,7 @@
 
               <button
                 type="submit"
-                class="btn btn-success mx-auto mt-3 w-75 d-flex justify-content-center align-items-center gap-3"
+                class="btn btn-success mx-auto my-3 w-50 d-flex justify-content-center align-items-center gap-3"
                 @click="postTicket"
               >
                 jo'natish <i class="fas fa-arrow-alt-circle-right"></i>
@@ -103,9 +123,11 @@
 
               <n-modal v-model:show="showModal">
                 <n-card
-                  style="width: 600px;
+                  style="
+                    width: 600px;
                     background-color: #20b2aa;
-                    color: white !important;"
+                    color: white !important;
+                  "
                   :bordered="false"
                   size="huge"
                   role="dialog"
@@ -123,9 +145,13 @@
         </div>
       </div>
 
-      <h5 class="mt-5" v-if = 'show'>SMS code ushbu telefon raqamiga yuborildi: <span class="badge bg-light shadow text-dark"> {{ telNum }}  <i class="fas fa-check-circle text-success"></i></span></h5>
+      <h5 class="mt-5" v-if="show">
+        SMS code ushbu telefon raqamiga yuborildi:
+        <span class="badge bg-light shadow text-dark">
+          {{ telNum }} <i class="fas fa-check-circle text-success"></i
+        ></span>
+      </h5>
       <Transition name="bounce">
-     
         <div
           class="col-12 mt-4 position-relative d-flex flex-column align-items-center justify-content-center"
           v-if="show"
@@ -161,7 +187,7 @@
           <div>Diqqat!</div>
         </template>
         <div class="dialogModal">
-          QR code Qurilmangizga muvaffaqiyatli yuklab olindi.
+          QR code qurilmangizga muvaffaqiyatli yuklab olindi.
           <i class="far fa-check-circle text-success fs-6"></i> <br />
           Ushbu QR codedan faqat bir marotaba foydalanish mumkin
           <i class="fas fa-exclamation-circle text-warning"></i>
@@ -177,10 +203,19 @@
           <span class="badge bg-dark"> {{ NameFull }}</span> <br />
           tomonidan <br />
         </div>
+      </n-modal>
 
-        <template #action>
-          <div></div>
-        </template>
+      <n-modal class="bg-danger text-white" v-model:show="showModal2">
+        <n-card
+          style="width: 600px"
+          title=""
+          :bordered="false"
+          size="huge"
+          role="dialog"
+          aria-modal="true"
+        >
+          Karta raqami yoki amal qilish muddati xato kiritilgan!
+        </n-card>
       </n-modal>
     </div>
   </div>
@@ -210,11 +245,11 @@ let cardToken = ref("");
 let receiptId = ref("");
 let qrCodeId = ref("");
 let showModals = ref(false);
+let showModal2 = ref(false);
 let down = ref("");
-let qr = ref("");
 let codes = ref("");
 let imgLink = ref("");
-
+let cardVal = ref("");
 // router
 let rote = useRouter();
 let route = useRoute();
@@ -230,7 +265,9 @@ let telNum = ref("");
 
 onMounted(() => {
   fake.value.focus();
-  console.log(route.params.id);
+  // console.log(route.params.id);
+  // console.log(store.secId);
+  
 });
 
 let showModal = ref(false);
@@ -243,7 +280,7 @@ let postTicket = () => {
         fullName: fullName.value,
         phoneNumber: "6757",
         sector: store.secId,
-        cardNumber: cardNumber.value.toString(),
+        cardNumber: cardNumber.value,
         expire: expire.value,
       })
       .then((res) => {
@@ -252,14 +289,14 @@ let postTicket = () => {
           spin.value = false;
           cardToken.value = res.data.cardToken;
           receiptId.value = res.data.receiptId;
-          console.log(res);
+          // console.log(res);
 
           telNum.value = res.data.phoneNumber;
-
         }
       })
       .catch((err) => {
-        alert("xatolik yuzaga keldi" + err);
+        showModal2.value = true;
+
         spin.value = false;
       });
   } else {
@@ -268,7 +305,7 @@ let postTicket = () => {
   }
 };
 
-console.log(store.secId);
+// console.log(store.secId);
 
 let oneStepBack = () => {
   rote.go(-1);
@@ -283,11 +320,11 @@ let postCode = async () => {
       code: codes.value,
     })
     .then((res) => {
-      console.log(receiptId.value);
-      console.log(cardToken.value);
-      console.log(codes.value);
+      // console.log(receiptId.value);
+      // console.log(cardToken.value);
+      // console.log(codes.value);
 
-      console.log(res.data);
+      // console.log(res.data);
       if (res.data) {
         hideCards.value = false;
         loadAccess.value = false;
@@ -298,11 +335,11 @@ let postCode = async () => {
         secName.value = res.data.sectorName;
         NameFull.value = res.data.fullName;
         // QR code info for modal
-        console.log(secName.value);
+        // console.log(secName.value);
         axios
           .get(`${window.base}api/Events/GenQr/${res.data.id}`)
           .then((el) => {
-            console.log(el);
+            // console.log(el);
             imgLink.value = "data:image/png;base64," + el.data;
             let a = document.createElement("a");
             a.href = "data:image/png;base64," + el.data;
@@ -312,25 +349,19 @@ let postCode = async () => {
       }
     })
     .catch((err) => {
-      console.log(err);
+      // console.log(err);
       alert("yaroqsiz Kod");
       loadAccess.value = false;
     });
 };
 
 watch(cardNumber, (newVal) => {
-  console.log(cardNumber.value.toString().length);
-  if (cardNumber.value.toString().length >= 16) {
+ 
+
+  if (cardNumber.value.length == 19) {
     expires.value.focus();
-    console.log(expires.value);
   }
 });
-
-let checkInput = () => {
-  if (event.target.value.length == 2) {
-    event.target.value = event.target.value + "/";
-  }
-};
 </script>
 
 <style lang="scss" scoped>

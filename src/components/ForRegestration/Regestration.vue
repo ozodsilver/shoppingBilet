@@ -24,7 +24,7 @@
                   </p>
                   <p class="card-text">
                     <i class="fas fa-exclamation-circle"></i>
-                    <span> Xarid qilinga bilet qaytarib olinmaydi!</span>
+                    <span> Xarid qilingan bilet qaytarib olinmaydi!</span>
                   </p>
 
                   <button
@@ -90,7 +90,7 @@
           <n-modal v-model:show="showModal">
             <n-card
               style="width: 600px"
-              title="Ushbu sektor haqida malumot"
+              title="Ushbu sector haqida ma'lumot"
               :bordered="false"
               size="huge"
               role="dialog"
@@ -103,32 +103,45 @@
                 <span class="badge bg-primary">{{ sectorName }}</span></span
               >
               <br />
-              Ticket Narxi:<span class="badge bg-primary px-4">{{ price }} </span> so'm
+              Ticket Narxi:<span class="badge bg-primary px-4"
+                >{{ price }}
+              </span>
+              so'm
               <br />
               Mavjud o'rinlar soni:
-              <span class="badge bg-success">{{ sigim }}</span> o'rin
+              <span
+                class="badge bg-success"
+                :class="{ 'bg-danger': sigim <= 0 ? true : '' }"
+                >{{ sigim }}</span
+              >
+              o'rin
               <br />
               <router-link
                 class="btn btn-dark bg-gradient float-end p-2 px-4 mt-2"
                 style="clip-path: none"
                 :to="{ name: 'register' }"
-               
                 :class="{ disable: dis }"
               >
                 Joy buyurtma qilish <i class="fas fa-ticket-alt"></i>
               </router-link>
               <h5 class="mt-3" :class="{ disable: !dis }">
-                Ushbu sectordan ticket sotib olish mumkin emas. <br>
-                Sectorda bo'sh o'rin mavjud emas!
+                Ushbu sectordan ticket sotib olish mumkin emas!
+                <i
+                  class="fas fa-exclamation-circle fa-3x text-warning position-absolute"
+                  style="right: 20px; bottom: 20px"
+                ></i>
+                <br />
               </h5>
             </n-card>
           </n-modal>
 
           <!-- modal -->
+          <Transition name="bounce">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
             viewBox="-150 -70 1727 899"
+            v-if = 'loade'
           >
             <g id="Слой_2" data-name="Слой 2">
               <g id="all">
@@ -494,6 +507,7 @@
               </g>
             </g>
           </svg>
+          </Transition>
         </div>
       </div>
     </div>
@@ -522,37 +536,42 @@ let showInfo = ref("");
 let showModal = ref(false);
 let dis = ref(false);
 let route = useRoute();
-let parId = route.params.id
+let parId = route.params.id;
+let loade = ref(false)
 
 onMounted(() => {
   axios.get(`${window.base}api/Events/GetEvent/${parId}`).then((el) => {
-    console.log(el);
+    // console.log(el);
     Object.assign(obj, el.data);
     imgUrl.value = `${window.base}api/Images/${obj.imageId}`;
-    
   });
-  console.log(route.params.id);
-
+  // console.log(route.params.id);
 
   axios.get(`${window.base}api/Events/GetSectors/${parId}`).then((javob) => {
-    console.log(javob);
+    // console.log(javob);
+  
     javob.data.forEach((response) => {
       places.value.push(response);
     });
   });
 
-
   axios.get(`${window.base}api/Events/GetSectors/${parId}`).then((response) => {
-    console.log(response);
-    response.data.forEach((el) => {
+    // console.log(response);
+    if(response.data){
+      loade.value = true
+      response.data.forEach((el) => {
       sectors.value.push(el);
     });
+    }
+   
+  }).catch(error =>{
+    alert(error)
   });
 });
 
 let addSectorId = (id, name) => {
   store.secId = id;
-  console.log(id);
+  // console.log(id);
   showModal.value = true;
   showInfo.value = true;
   sectors.value.forEach((el) => {
@@ -614,13 +633,9 @@ let addSectorId = (id, name) => {
   fill: #fff;
 }
 .cls-7 {
-  fill: rgb(174, 177, 177);
+  fill: rgb(142, 173, 142);
   opacity: 0.58;
   filter: drop-shadow(0 0 10pc black);
-}
-
-path:hover {
-  color: red;
 }
 
 .row .col-4 button {
@@ -649,17 +664,17 @@ path:hover {
   clip-path: none;
 }
 
+.backBall {
+  background-image: url("../../assets/backBall.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: right;
+}
+
 textPath {
   font-size: 55px !important;
   fill: rgb(255, 255, 255);
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-}
-
-.backBall {
-  background-image: url("../../assets/backBall.png") !important;
-  background-position: right top;
-  background-size: contain;
-  background-repeat: no-repeat;
 }
 
 .disable {
@@ -667,13 +682,34 @@ textPath {
 }
 
 .danger {
-  
-  background-color: #f65a2b;
-background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Cdefs%3E%3ClinearGradient id='a' x1='0' x2='0' y1='1' y2='0' gradientTransform='rotate(103,0.5,0.5)'%3E%3Cstop offset='0' stop-color='%230FF'/%3E%3Cstop offset='1' stop-color='%23CEF6FF'/%3E%3C/linearGradient%3E%3ClinearGradient id='b' x1='0' x2='0' y1='0' y2='1' gradientTransform='rotate(167,0.5,0.5)'%3E%3Cstop offset='0' stop-color='%23F00'/%3E%3Cstop offset='1' stop-color='%23DBFFD4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg fill='%23FFF' fill-opacity='0' stroke-miterlimit='10'%3E%3Cg stroke='url(%23a)' stroke-width='3.3'%3E%3Cpath transform='translate(-143.15 20.4) rotate(9.45 1409 581) scale(1.002182)' d='M1409 581 1450.35 511 1490 581z'/%3E%3Ccircle stroke-width='1.1' transform='translate(-128 95) rotate(17.5 800 450) scale(1.025593)' cx='500' cy='100' r='40'/%3E%3Cpath transform='translate(50.300000000000004 -186) rotate(164 401 736) scale(1.025593)' d='M400.86 735.5h-83.73c0-23.12 18.74-41.87 41.87-41.87S400.86 712.38 400.86 735.5z'/%3E%3C/g%3E%3Cg stroke='url(%23b)' stroke-width='1'%3E%3Cpath transform='translate(570 -16) rotate(4 150 345) scale(0.9473940000000001)' d='M149.8 345.2 118.4 389.8 149.8 434.4 181.2 389.8z'/%3E%3Crect stroke-width='2.2' transform='translate(-259 -248.5) rotate(183.60000000000002 1089 759)' x='1039' y='709' width='100' height='100'/%3E%3Cpath transform='translate(-446.8 137.2) rotate(30.599999999999998 1400 132) scale(0.89)' d='M1426.8 132.4 1405.7 168.8 1363.7 168.8 1342.7 132.4 1363.7 96 1405.7 96z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") !important;
+  background-size: cover;
+  background-position: right top;
+  background-size: contain;
+  background: rgb(240, 215, 231);
+  background: linear-gradient(
+    90deg,
+    rgb(230, 205, 178) 0%,
+    rgba(230, 212, 209, 0.9192051820728291) 90%
+  );
+}
 
-background-size: cover;
-background-position: right top;
-background-size: contain;
-  color: white;
+
+
+.bounce-enter-active {
+  animation: bounce-in 0.5s;
+}
+.bounce-leave-active {
+  animation: bounce-in 0.5s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 </style>

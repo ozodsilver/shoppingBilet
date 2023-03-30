@@ -21,6 +21,9 @@ import { ref, onMounted } from "vue";
 </script>
 
 <style>
+#app{
+  height:100vh
+}
 * {
   margin: 0;
   padding: 0;
@@ -73,17 +76,17 @@ svg {
   fill: rgb(107, 107, 107) !important;
 }
 
-#p4 {
+#p12 {
   fill: rgb(244, 153, 62) !important;
 }
-#p5 {
+#p15 {
   fill: rgb(244, 153, 62) !important;
 }
 
 .cls-4 {
   opacity: 0.6;
   fill: rgb(79, 218, 167) !important;
-  filter: drop-shadow(3px 5px 15px rgb(148, 145, 145));
+  filter: drop-shadow(3px 5px 15px rgb(146, 198, 155));
   stroke: rgb(255, 255, 255);
   transition: 0.2s;
 }
@@ -93,10 +96,6 @@ svg {
   transform: translate(0, -8px);
 }
 
-text:hover .cls-4{
-  fill: rgb(75, 23, 166) !important;
-  transform: translate(0, -8px) !important;
-}
 
 svg:hover path {
   transition: 0.2s;

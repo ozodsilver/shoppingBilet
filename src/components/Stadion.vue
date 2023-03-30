@@ -1,7 +1,6 @@
 <template id="stadion">
   <div class="container">
     <h2 class="mt-5">{{ $t("select") }}</h2>
-  
   </div>
 
   <div
@@ -16,7 +15,7 @@
     <div class="row">
       <div class="col-12 col-md-4 mt-0" v-for="info in infos">
         <div
-          class="card border p-4 py-4  mt-3 pb-5 border-light shadow-lg position-relative"
+          class="card border p-4 py-5 mt-3 pb-5 border-light shadow-lg position-relative"
         >
           <div
             class="bg-image hover-overlay ripple"
@@ -43,16 +42,16 @@
             </a>
           </div>
           <div class="card-body p-0">
-           <h6 class="my-3"> {{ info.name }}</h6>
+            <h6 class="my-3">{{ info.name }}</h6>
 
-            <router-link :to="{name:'Registration', params:{id:info.id}}">
+            <router-link
+              :to="{ name: 'Registration', params: { id: info.id } }"
+            >
               <button
                 class="w-100 m-auto d-flex justify-content-center align-items-center gap-3 shadow bg-dark bg-gradient text-white rounded border-0 text-transform-lowercase"
-             
               >
-              
-                 Xarid qilish
-                 <i class="fas fa-ticket-alt " style="color:#F4CA16"></i>
+                Xarid qilish
+                <i class="fas fa-ticket-alt" style="color: #f4ca16"></i>
               </button>
             </router-link>
           </div>
@@ -75,7 +74,6 @@ let store = useCounterStore();
 
 // methods
 
-
 onMounted(() => {
   axios
     .get(`${window.base}api/Events/`, {
@@ -84,7 +82,7 @@ onMounted(() => {
       },
     })
     .then((res) => {
-      console.log(res);
+      // console.log(res);
 
       res.data.forEach((el) => {
         infos.push(el);
@@ -108,14 +106,10 @@ let sendInfo = () => {
     rgba(69, 196, 252, 0.053658963585434205) 100%
   );
   font-family: "Mandali", sans-serif !important;
-
-
 }
-.card{
+.card {
   overflow: hidden;
 }
-
-
 
 button {
   height: 2em;
@@ -144,42 +138,7 @@ button:hover {
   animation: squeeze3124 0.9s both;
 }
 
-@keyframes squeeze3124 {
-  0% {
-    -webkit-transform: scale3d(1, 1, 1);
-    transform: scale3d(1, 1, 1);
-  }
 
-  30% {
-    -webkit-transform: scale3d(1.25, 0.75, 1);
-    transform: scale3d(1.25, 0.75, 1);
-  }
-
-  40% {
-    -webkit-transform: scale3d(0.75, 1.25, 1);
-    transform: scale3d(0.75, 1.25, 1);
-  }
-
-  50% {
-    -webkit-transform: scale3d(1.15, 0.85, 1);
-    transform: scale3d(1.15, 0.85, 1);
-  }
-
-  65% {
-    -webkit-transform: scale3d(0.95, 1.05, 1);
-    transform: scale3d(0.95, 1.05, 1);
-  }
-
-  75% {
-    -webkit-transform: scale3d(1.05, 0.95, 1);
-    transform: scale3d(1.05, 0.95, 1);
-  }
-
-  100% {
-    -webkit-transform: scale3d(1, 1, 1);
-    transform: scale3d(1, 1, 1);
-  }
-}
 /* Normal Usage */
 .spinner:before {
   transform: rotateX(60deg) rotateY(45deg) rotateZ(45deg);

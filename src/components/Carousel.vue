@@ -1,48 +1,21 @@
 <template>
   <div class="rounded-2 np mt-4" >
-    <Carousel
-      id="gallery"
-      :items-to-show="1"
-      v-model="currentSlide"
-      :autoplay="6000"
-      :wrap-around="true"
-    >
-      <Slide v-for="image in images" :key="image">
-        <div class="carousel__item">
-          <img
-            :src="image.image"
-            alt=""
-            class="rounded-5 img-fluid "
-            
-          
-          />
-        </div>
-      </Slide>
-    </Carousel>
+    <Carousel :itemsToShow="2" :wrapAround="true" :transition="500">
+    <Slide v-for="image in img" :key="image.id">
+   <img :src="`https://test.utickets.uz/api/Images/${image.id}`" alt="" class="img-fluid  " style="border-radius: 30px 0px;" >
 
-    <div class="container-fluid">
-      <Carousel
-        id="thumbnails"
-        :items-to-show="4"
-        :wrap-around="true"
-        v-model="currentSlide"
-        ref="carousel"
-        class="mt-3"
-      >
-        <Slide v-for="(slide, index) in images" :key="slide">
-          <div class="carousel__item" @click="slideTo(index)">
-            <img class="w-100 rounded-4" :src="slide.image" alt="" />
-          </div>
-        </Slide>
-      </Carousel>
-    </div>
+    </Slide>
+
+   
+  </Carousel>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 import { defineComponent } from "vue";
-import { Carousel, Slide } from "vue3-carousel";
-
+import { Carousel, Pagination, Slide } from 'vue3-carousel'
+import { onMounted,ref } from 'vue';
 import "vue3-carousel/dist/carousel.css";
 
 export default defineComponent({
@@ -50,7 +23,7 @@ export default defineComponent({
   components: {
     Carousel,
     Slide,
-    Navigation,
+    Pagination,
   },
   data: () => ({
     currentSlide: 0,
@@ -62,49 +35,61 @@ export default defineComponent({
   },
 
   setup() {
-    let images = [
-    
-  
-      {
-        id: 2,
-        image: new URL(
-          "../assets/kLnBxAyZJXIaGzrtm51a1JbTSGOn0zDI.png",
-          import.meta.url
-        ).href,
-      },
+    let img = ref([])
 
-      {
-        id: 2,
-        image: new URL(
-          "../assets/fadFC2C0PNifwHU8JsYWcv7pJUVce5ej.png",
-          import.meta.url
-        ).href,
-      },
-    ];
-    return { images };
+    onMounted(()=>{
+      axios.get(`${window.base}api/PhotoWheel`).then(el =>{
+    console.log(el.data);
+    el.data.forEach(el =>{
+      img.value.push(el)
+    })
+  })
+    })
+
+
+    return { img };
   },
 });
 </script>
 
 <style>
-.carousel__item {
-  width: 100%;
+.carousel__slide {
+  padding: 5px;
+}
 
-  color: var(--vc-clr-white);
-  font-size: 20px;
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.carousel__viewport {
+  perspective: 2000px;
+}
+
+.carousel__track {
+  transform-style: preserve-3d;
+}
+
+.carousel__slide--sliding {
+  transition: 0.5s;
 }
 
 .carousel__slide {
-  padding: 10px;
+  opacity: 0.9;
+  transform: rotateY(-20deg) scale(0.7);
 }
 
-.carousel__prev,
-.carousel__next {
-  box-sizing: content-box;
-  color: rgb(0, 0, 0) !important;
+.carousel__slide--active ~ .carousel__slide {
+  transform: rotateY(20deg) scale(0.8);
+}
+
+.carousel__slide--prev {
+  opacity: 1;
+  transform: rotateY(-10deg) scale(0.85);
+}
+
+.carousel__slide--next {
+  opacity: 1;
+  transform: rotateY(10deg) scale(0.85);
+}
+
+.carousel__slide--active {
+  opacity: 1;
+  transform: rotateY(0) scale(1.1);
 }
 </style>
